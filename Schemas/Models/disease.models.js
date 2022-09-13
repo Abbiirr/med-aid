@@ -10,11 +10,8 @@ const diseaseSchema = new mongoose.Schema({
     diseaseType: {
         type: String
     },
-    symptoms: [{
-        symptom:{
-            type: String
-        }
-    }]
+    //symptom needs a different schema
+    symptoms: [String]
 })
 
 module.exports = mongoose.model("diseases_schema",diseaseSchema)

@@ -1,0 +1,23 @@
+{
+  "name": "med-aid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dbDevStart": "nodemon Server/dbcntl.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abbiirr/med-aid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abbiirr/med-aid/issues"
+  },
+  "homepage": "https://github.com/Abbiirr/med-aid#readme",
+  "dependencies": {
+    "mongoose": "^6.6.0"
+  }
+}
