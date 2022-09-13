@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Abbiirr/med-aid#readme",
   "dependencies": {
-    "mongoose": "^6.6.0"
+    "mongoose": "^6.6.0",
+    "nodemon": "^2.0.19"
   }
 }
