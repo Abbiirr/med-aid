@@ -1,9 +1,10 @@
 const asyncHandler = require('express-async-Handler')
 
 const doctor_schema = require('../models/doctor.models')
+const patient_schema = require("../models/patient.models");
 
 
-//--------- main med-aid get set delete update------------------------
+//--------- main med-aid get set delete update for doctors------------------------
 const getDoctors= asyncHandler (async (req, res) => {
     const doctors = await doctor_schema.find()   
     
@@ -40,7 +41,6 @@ const deleteDoctor = asyncHandler (async (req, res) => {
 });
 
 //------------------------------------------------------------------------------
-
 
 module.exports = {
     getDoctors,
