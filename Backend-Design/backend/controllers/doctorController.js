@@ -1,7 +1,8 @@
 const asyncHandler = require('express-async-Handler')
+const { body, validationResult } = require("express-validator");
 
 const doctor_schema = require('../models/doctor.models')
-const patient_schema = require("../models/patient.models");
+
 
 
 //--------- main med-aid get set delete update for doctors------------------------
@@ -12,11 +13,20 @@ const getDoctors= asyncHandler (async (req, res) => {
 });
 
 const setDoctor = asyncHandler (async (req, res) => {
+
+    const errors = validationResult(req)
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+    }
+
     const doctor = await doctor_schema.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         contact: req.body.contact,
+        birthDate: req.body.birthDate,
+        password: req.body.password
     })
 
     console.log(req.body);

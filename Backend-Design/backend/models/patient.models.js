@@ -20,19 +20,19 @@ const patientSchema = new mongoose.Schema({
   // gender: {
   //     type: String
   // },
-  // age: {
-  //     type: Number
-  // },
+  birthDate: {
+      type: Date
+  },
   // weight: {
   //     type: Number
   // },
   // bloodGroup: {
   //     type: String
   // },
-  // password: {
-  //     type: String,
-  //     required: true
-  // }
+  password: {
+      type: String,
+      required: true
+  }
 });
 
 module.exports = mongoose.model("patient_schema",patientSchema)

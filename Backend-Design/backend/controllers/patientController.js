@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-Handler");
+const { body, validationResult } = require("express-validator");
 
 const patient_schema = require("../models/patient.models");
 
@@ -10,9 +11,18 @@ const getPatients = asyncHandler(async (req, res) => {
 });
 
 const setPatient = asyncHandler(async (req, res) => {
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   const patient = await patient_schema.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    birthDate: req.body.birthDate,
+    password: req.body.password
   });
 
   console.log(req.body);

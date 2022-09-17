@@ -1,8 +1,8 @@
 # This is a doc for database validation 
 
 # schemas
-    >> doctor (+) [contact no, email, birth date format, password, username]
-    >> patient (+) [contact no, email, birth date format, password, username]
+    >> doctor (+) [contact no, email, birth date format, password]
+    >> patient (+) [contact no, email, birth date format, password]
     >> medicalInfo
     >> appointment (+) [ appointment date, appointment slot, availability]
     >> prescription
@@ -31,4 +31,19 @@ https://express-validator.github.io/docs/
 
 
 ### Contact number
-Need to validate with country code and digits, starting and number of digits
+    minlength: 11
+    and Used isContact() function to validate   
+
+### email
+    validating email using .isEmail() function inside routes.
+
+
+### date formatting
+    body("birthDate").isDate({ format: "YYYY-MM-DD" }),
+
+### password
+    minLength: 5,
+    minLowercase: 1,
+    minUppercase: 1,
+    minNumbers: 1,
+ 

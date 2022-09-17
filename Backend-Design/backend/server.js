@@ -10,10 +10,11 @@ connectDB();
 const app = express();
 
 app.use(express.json());
+//app.use(expressValidator());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/doctor', require('./routes/doctorRoutes'))
-app.use("/Patient", require("./routes/PatientRoutes"));
+app.use('/Patient', require('./routes/PatientRoutes'));
 
 app.listen(port, () => {
     console.log('listening on port ' + port);

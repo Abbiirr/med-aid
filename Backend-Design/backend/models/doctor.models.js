@@ -16,13 +16,13 @@ const doctorSchema = new mongoose.Schema({
     },
     contact: {
         type: String
-    }
+    },
     // gender: {
     //     type: String
     // },
-    // age: {
-    //     type: Number
-    // },
+    birthDate: {
+        type: Date
+    },
     // specialities:[{
     //     speciality:{
     //         type: String
@@ -39,10 +39,10 @@ const doctorSchema = new mongoose.Schema({
     //         type: Date
     //     }
     // }],
-    // password: {
-    //     type: String,
-    //     required: true
-    // }
+    password: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = mongoose.model("doctor_schema",doctorSchema)
