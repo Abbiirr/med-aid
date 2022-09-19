@@ -10,6 +10,9 @@ const diseaseSchema = mongoose.Schema({
     diseaseType: {
         type: String
     },
+    symptoms : [{
+        type: String
+    }]
     //symptom needs a different schema
     //symptoms: [String]
 })
