@@ -2,6 +2,8 @@ Doctor (done)
 Patient (done)
 
 Disease (done)
+Symptoms (done)
+Specialty (done)
 
 Appointment (done)
 
@@ -15,8 +17,9 @@ DiagnosticCenter (done)
 ----------------------------------------------------------------
 Not sure  if these should be schemas or not 
 
-Symptoms --> list of symptoms in object form ex: {headache, fever, ...}
-Specialty -- > list of Specialty in object form ex: {medicine, psychology, ...}
+>> Symptoms --> list of symptoms in object form ex: {headache, fever, ...}
+>> Specialty -- > list of Specialty in object form ex: {medicine, psychology, ...}
+
 AppointmentCenter
 Drug
 InventoryOfDrugs
