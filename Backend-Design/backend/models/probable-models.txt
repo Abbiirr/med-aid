@@ -1,14 +1,15 @@
-Doctor
-Patient 
+Doctor (done)
+Patient (done)
 
-Disease
+Disease (done)
 
-Appointment 
+Appointment (done)
 
-Prescription
+Prescription (done)
+MedicalInfo (done)
 
-MedicineShop 
-DiagnosticCenter
+MedicineShop (done)
+DiagnosticCenter (done)
 
 
 ----------------------------------------------------------------
@@ -16,10 +17,13 @@ Not sure  if these should be schemas or not
 
 Symptoms --> list of symptoms in object form ex: {headache, fever, ...}
 Specialty -- > list of Specialty in object form ex: {medicine, psychology, ...}
-MedicalInfo
 AppointmentCenter
 Drug
 InventoryOfDrugs
 Test
 ListOfTests 
 ProneDisease
+
+
+
+// Akinator --> we can use the concept of Akinator.
