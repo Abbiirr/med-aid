@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const diseaseSchema = mongoose.Schema({
+const symptomSchema = mongoose.Schema({
     name: {
         type: String
     },
@@ -9,4 +9,18 @@ const diseaseSchema = mongoose.Schema({
     },
 })
 
-module.exports = mongoose.model('disease_schema', diseaseSchema)
+module.exports = mongoose.model('symptom_schema', symptomSchema)
+
+/**
+  
+{
+    "name": "Fever",
+    id: "corona", "malaria"
+}
+
+{
+    "name": "Cough",
+    id: "corona", "malaria", "flu"
+}
+
+**/
