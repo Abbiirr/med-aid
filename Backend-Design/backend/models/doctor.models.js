@@ -25,7 +25,8 @@ const doctorSchema = new mongoose.Schema({
   // },
   specialty: {
     type: String,
-  }
+    required: true,
+  },
   // chamberAddress: {
   //     type: String
   // },

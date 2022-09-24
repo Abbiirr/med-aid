@@ -10,15 +10,15 @@ router.get(
 
 router.post(
   "/",
-  body("email").isEmail().normalizeEmail(),
-  body("contact").isLength({ min: 11 }).isMobilePhone(),
-  body("birthDate").isDate({ format: "YYYY-MM-DD" }),
-  body("password").isLength({
-    minLength: 5,
-    minLowercase: 1,
-    minUppercase: 1,
-    minNumbers: 1,
-  }),
+  // body("email").isEmail().normalizeEmail(),
+  // body("contact").isLength({ min: 11 }).isMobilePhone(),
+  // body("birthDate").isDate({ format: "YYYY-MM-DD" }),
+  // body("password").isLength({
+  //   minLength: 5,
+  //   minLowercase: 1,
+  //   minUppercase: 1,
+  //   minNumbers: 1,
+  // }),
 
   setDoctor
 );
