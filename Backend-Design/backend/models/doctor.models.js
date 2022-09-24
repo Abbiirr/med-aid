@@ -1,36 +1,31 @@
 const mongoose = require("mongoose");
 
 const doctorSchema = new mongoose.Schema({
-  specialty: {
-    type: String,
-  },
   firstName: {
     type: String,
     required: true,
   },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  contact: {
-    type: String,
-  },
+  // lastName: {
+  //   type: String,
+  //   required: true,
+  // },
+  // email: {
+  //   type: String,
+  //   required: true,
+  //   unique: true,
+  // },
+  // contact: {
+  //   type: String,
+  // },
   // gender: {
   //     type: String
   // },
-  birthDate: {
-    type: Date,
-  },
-  // specialities:[{
-  //     speciality:{
-  //         type: String
-  //     }
-  // }],
+  // birthDate: {
+  //   type: Date,
+  // },
+  specialty: {
+    type: String,
+  }
   // chamberAddress: {
   //     type: String
   // },
@@ -42,10 +37,10 @@ const doctorSchema = new mongoose.Schema({
   //         type: Date
   //     }
   // }],
-  password: {
-    type: String,
-    required: true,
-  },
+  // password: {
+  //   type: String,
+  //   required: true,
+  // },
 });
 
 module.exports = mongoose.model("doctor_schema", doctorSchema);

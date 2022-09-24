@@ -22,11 +22,12 @@ const setDoctor = asyncHandler (async (req, res) => {
 
     const doctor = await doctor_schema.create({
         firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        contact: req.body.contact,
-        birthDate: req.body.birthDate,
-        password: req.body.password
+        //lastName: req.body.lastName,
+        //email: req.body.email,
+        //contact: req.body.contact,
+        //birthDate: req.body.birthDate,
+        specialty: req.body.specialty,
+        //password: req.body.password
     })
 
     console.log(req.body);
@@ -34,12 +35,17 @@ const setDoctor = asyncHandler (async (req, res) => {
 });
 
 const putDoctor = asyncHandler (async (req, res) => {
-    const doctor = await doctor_schema.findByIdAndUpdate(req.params.id, {
+    const doctor = await doctor_schema.findByIdAndUpdate(
+      req.params.id,
+      {
         firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        contact: req.body.contact,
-    }, {new: true})
+        //lastName: req.body.lastName,
+        //email: req.body.email,
+        //contact: req.body.contact,
+        specialty: req.body.specialty
+      },
+      { new: true }
+    );
 
     res.json(doctor);
 });

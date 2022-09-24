@@ -4,12 +4,12 @@ const diseaseSchema = mongoose.Schema({
   name: {
     type: String,
   },
-  variant: {
-    type: String,
-  },
-  diseaseType: {
-    type: String,
-  },
+  // variant: {
+  //   type: String,
+  // },
+  // diseaseType: {
+  //   type: String,
+  // },
   specialty: {
     type: String,
   },
