@@ -4,7 +4,7 @@ const disease_schema = require("../models/disease.models");
 
 //
 
-//--------- main med-aid get set delete update for doctors------------------------
+//--------- main med-aid get set delete update for disease------------------------
 const getDiseases= asyncHandler (async (req, res) => {
     const diseases = await disease_schema.find()   
     

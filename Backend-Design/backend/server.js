@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/doctor', require('./routes/doctorRoutes'));
 app.use('/patient', require('./routes/PatientRoutes'));
 app.use('/disease', require('./routes/diseaseRoutes'));
+app.use("/search", require("./routes/searchRoutes"));
 
 app.listen(port, () => {
     console.log('listening on port ' + port);
