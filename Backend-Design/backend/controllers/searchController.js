@@ -36,7 +36,7 @@ const getResults = asyncHandler(async (req, res) => {
     console.log(symArray);
     console.log(specialtyArray);
     console.log(doctors);
-    console.log(diseases);
+    //console.log(diseases);
 
     res.json(doctors);
 
