@@ -13,22 +13,19 @@ const getResults = asyncHandler(async (req, res) => {
     let symptoms = (req.query.symptoms);
 
     //getting the specialties
-    //let specialties = (req.query.specialties);
+    let specialty = (req.query.specialty);
 
     //getting the diseases
-    //let diseases = (req.query.diseases);
+    let disease_name = (req.query.name);
 
     //getting the diseases based on symptoms
     const diseases = await disease_schema.find({ 
-        symptoms: { $regex: symptoms, $options: "i" } 
-        // set er moddhe rakhlo
+        //symptoms: { $regex: symptoms, $options: "i" } 
+        $or : [{ symptoms: { $regex: `${symptoms}`, $options: "i" }},
+        { specialty: { $regex: `${specialty}`, $options: "i" }},
+        { name: { $regex: `${disease_name}`, $options: "i" }}]
+        
     });
-
-    //getting the diseases based on specialties
-
-
-    // getting the diseases based on diseases
-
 
     // adding the symptoms to the set
     // adding the specialties to the set
