@@ -4,24 +4,34 @@ const doctor_schema = require("../models/doctor.models");
 
 //--------- main med-aid search------------------------
 
-// @desc    Get search results
-// @route   GET /api/search
-// @access  Public
-
 let symArray = new Set();
 let specialtyArray = new Set();
 
 const getResults = asyncHandler(async (req, res) => {
 
-    //const symArray = new Set();
-    
+    // getting the symptoms
     let symptoms = (req.query.symptoms);
 
+    //getting the specialties
+    //let specialties = (req.query.specialties);
+
+    //getting the diseases
+    //let diseases = (req.query.diseases);
+
+    //getting the diseases based on symptoms
     const diseases = await disease_schema.find({ 
         symptoms: { $regex: symptoms, $options: "i" } 
         // set er moddhe rakhlo
     });
 
+    //getting the diseases based on specialties
+
+
+    // getting the diseases based on diseases
+
+
+    // adding the symptoms to the set
+    // adding the specialties to the set
     diseases.forEach(function (item) {
       //console.log(item.name);
       symArray.add(item.name);
@@ -29,6 +39,7 @@ const getResults = asyncHandler(async (req, res) => {
 
     });
 
+    // finding the doctors based on the specoalities
     const doctors = await doctor_schema.find({
       specialty: { $in: Array.from(specialtyArray) }
     });
@@ -42,9 +53,6 @@ const getResults = asyncHandler(async (req, res) => {
 
 });
 
-// @desc    Reload search results
-// @route   GET /api/search/reload
-// @access  Public
 
 const reloadSearch = asyncHandler(async (req, res) => {
 
