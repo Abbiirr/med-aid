@@ -1,7 +1,20 @@
-##PROJECT NAME: MED-AID
+## Project Name
+### **Med-Aid**
 
-##TEAM:
-    1. Arman Hossain Dipu
-    2. Azmayen Fayek Sabil
-    3. Abir Hossain
+# Team
+
+- Arman Hossain Dipu
+- Azmayen Fayek Sabil
+- Abir Hossain
+
+## Technologies
+> Frontend
+- ReactJS
+> Backend
+- NodeJS
+- ExpressJS
+> Database
+- MongoDB
+> Testing
+- Jest
 
