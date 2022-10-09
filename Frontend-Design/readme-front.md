@@ -1,0 +1,1 @@
+asset contains static files , like default images.
