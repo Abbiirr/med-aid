@@ -10,7 +10,7 @@ const getAppointments = asyncHandler(async (req, res) => {
   res.json(appointments);
 });
 
-const setappointment = asyncHandler(async (req, res) => {
+const setAppointment = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -29,7 +29,7 @@ const setappointment = asyncHandler(async (req, res) => {
   res.json(appointment);
 });
 
-const putappointment = asyncHandler(async (req, res) => {
+const putAppointment = asyncHandler(async (req, res) => {
   const appointment = await appointment_schema.findByIdAndUpdate(
     req.params.id,
     {
@@ -45,7 +45,7 @@ const putappointment = asyncHandler(async (req, res) => {
   res.json(appointment);
 });
 
-const deleteappointment = asyncHandler(async (req, res) => {
+const deleteAppointment = asyncHandler(async (req, res) => {
   const appointment = await appointment_schema.findByIdAndDelete(req.params.id);
   appointment.delete();
   res.json(appointment);
@@ -54,8 +54,8 @@ const deleteappointment = asyncHandler(async (req, res) => {
 //------------------------------------------------------------------------------
 
 module.exports = {
-  getappointments,
-  setappointment,
-  putappointment,
-  deleteappointment,
+  getAppointments,
+  setAppointment,
+  putAppointment,
+  deleteAppointment,
 };
