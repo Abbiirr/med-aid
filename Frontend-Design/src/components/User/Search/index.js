@@ -15,9 +15,9 @@ const Index = ({
     const [specialist, setSpecialist] = useState()
 
     const options = [
+        {value: 'Specialist' , label:'Specialist'},
         {value: 'Medicine' , label:'Medicine'},
-        {value: 'Phycologist' , label:'Phycologist'},
-        {value:"Cardiologist" , label:'Cardiologist'}
+        {value: 'Diagnostic' , label:'Diagnostic'}
     ]
 
 

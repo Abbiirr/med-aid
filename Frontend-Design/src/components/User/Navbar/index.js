@@ -30,7 +30,6 @@ const Index = () => {
                   </Link>
                 </div>
                 {/* Toggle BArs */}
-
                 <div className="ml-auto d-lg-none">
                   <Icon
                     icon={ic_menu}

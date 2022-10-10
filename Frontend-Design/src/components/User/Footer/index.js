@@ -25,11 +25,13 @@ const Index = () => {
                     </div>
                     <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center text-lg-left pr-lg-4">
                         <h5>Need Help?</h5>
+                        <br></br>
                         <Link to="/">support</Link>
                         <Link to="/">terms & conditions</Link>
                     </div>
                     <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center text-lg-left">
                         <h5>Contacts</h5>
+                        <br></br>
                         <ul>
                             <li>
                                 <a href="https://www.facebook.com/mamun.swe.277">
