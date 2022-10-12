@@ -4,7 +4,7 @@ const doctor_schema = require("../models/doctor.models");
 
 //--------- main med-aid search------------------------
 
-let symArray = new Set();
+let diseaseArray = new Set();
 let specialtyArray = new Set();
 
 const getResults = asyncHandler(async (req, res) => {
@@ -31,17 +31,17 @@ const getResults = asyncHandler(async (req, res) => {
     // adding the specialties to the set
     diseases.forEach(function (item) {
       //console.log(item.name);
-      symArray.add(item.name);
+      diseaseArray.add(item.name);
       specialtyArray.add(item.specialty);
 
     });
 
-    // finding the doctors based on the specoalities
+    // finding the doctors based on the specialty
     const doctors = await doctor_schema.find({
       specialty: { $in: Array.from(specialtyArray) }
     });
 
-    console.log(symArray);
+    console.log(diseaseArray);
     console.log(specialtyArray);
     console.log(doctors);
     //console.log(diseases);
@@ -53,7 +53,7 @@ const getResults = asyncHandler(async (req, res) => {
 
 const reloadSearch = asyncHandler(async (req, res) => {
 
-    symArray = new Set();
+    diseaseArray = new Set();
     specialtyArray = new Set();
     res.json("symArray and specialtyArray cleared");
 });
