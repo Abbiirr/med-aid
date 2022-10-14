@@ -6,6 +6,7 @@ const {
   setAppointment,
   putAppointment,
   deleteAppointment,
+  AppointmentRequests,
 } = require("../controllers/appointmentController");
 
 router.get("/", getAppointments);
@@ -22,7 +23,7 @@ router.post(
   //   minNumbers: 1,
   // }),
 
-  setAppointment
+  AppointmentRequests
 );
 
 router.put("/:id", putAppointment);

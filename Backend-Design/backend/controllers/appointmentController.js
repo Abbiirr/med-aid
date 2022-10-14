@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-Handler");
 const { body, validationResult } = require("express-validator");
 
 const appointment_schema = require("../models/appointment.models");
+const CheckId = require("../middleware/checkId");
 
 //--------- main med-aid get set delete update for appointments------------------------
 const getAppointments = asyncHandler(async (req, res) => {
@@ -9,6 +10,32 @@ const getAppointments = asyncHandler(async (req, res) => {
 
   res.json(appointments);
 });
+
+const AppointmentRequests = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await CheckId(id);
+
+    const results = await Appointment.find(
+      { doctor: id, status: "pending" },
+      { doctor: 0, createdAt: 0, updatedAt: 0 }
+    )
+      .populate("patientId", "_id")
+      .exec();
+    if (!results.length)
+      return res.status(404).json({
+        status: false,
+        message: "Request not found",
+      });
+
+    res.status(200).json({
+      status: true,
+      requests: results,
+    });
+  } catch (error) {
+    if (error) next(error);
+  }
+};
 
 const setAppointment = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
@@ -58,4 +85,5 @@ module.exports = {
   setAppointment,
   putAppointment,
   deleteAppointment,
+  AppointmentRequests,
 };
