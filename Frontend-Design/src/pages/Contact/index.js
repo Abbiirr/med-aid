@@ -117,7 +117,7 @@ const Index = () => {
                     </div>
                     <div className="pl-3">
                       <p>location</p>
-                      <small>123 Buisness Avenue, NYC</small>
+                      <small>IUT,Boardbazar, Gazipur</small>
                     </div>
                   </div>
                 </div>
@@ -265,7 +265,7 @@ const Index = () => {
             <div className="col-12 map-column">
               <iframe
                 title="Our locatin find in google map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.592234257487!2d90.32280281543704!3d23.8686092901661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9a9e728879b7600d!2sAshulia%20Model%20Town%20Park!5e0!3m2!1sen!2sbd!4v1600719678565!5m2!1sen!2sbd"
+                src="https://maps.google.com/maps?q=iut,&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="450"
                 frameBorder="0"
