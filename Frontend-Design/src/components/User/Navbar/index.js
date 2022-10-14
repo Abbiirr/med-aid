@@ -18,14 +18,8 @@ const Index = () => {
           <div className="row">
             <div className="col-12">
               <div className="d-flex">
-                {/*logo */}
-                <div className="logo">
-                  <Link to="/">
-                    <img src={Images.Logo} alt="..."/>
-                  </Link>
-                </div>
                 {/* Toggle BArs */}
-                <div className="ml-auto d-lg-none">
+                <div className="ml-auto d-lg-inline">
                   <Icon
                     icon={ic_menu}
                     size={25}
@@ -33,6 +27,13 @@ const Index = () => {
                     onClick={() => setShow(true)}
                   ></Icon>
                 </div>
+                {/*logo */}
+                <div className="logo">
+                  <Link to="/">
+                    <img src={Images.Logo} alt="..."/>
+                  </Link>
+                </div>
+              
                 {/* Menu bar backdrop */}
                 <div
                   className={
@@ -41,7 +42,7 @@ const Index = () => {
                       : "ml-auto page-links-menu-bar"
                   }
                 >
-                  <div className="menu-close d-lg-none">
+                  <div className="menu-close d-lg-inline">
                     <Icon
                       icon={ic_close}
                       size={35}
