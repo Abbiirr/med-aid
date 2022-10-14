@@ -7,6 +7,8 @@ import HomeIndex from "./pages/Home/index";
 import AboutIndex from "./pages/About/index";
 import ContactIndex from "./pages/Contact/index";
 import SearchResultIndex from "./pages/SearchResult/index";
+import Appointment from "./pages/appointment/appointment";
+
 
 import FourOFour from "./pages/FourOFour/index";
 
@@ -20,6 +22,7 @@ function App() {
             <Route exact path="/about-us" component={AboutIndex} />
             <Route exact path="/contact-us" component={ContactIndex} />
             <Route exact path="/search" component={SearchResultIndex} />
+            <Route exact path="/appointment" component={Appointment} />
 
             <Route path="*" component={FourOFour} />
           </Switch>
