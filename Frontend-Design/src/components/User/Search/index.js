@@ -7,9 +7,7 @@ import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
 
 
-const Index = ({
-    lat,lang
-}) =>{
+const Index = ({ lat,lang }) =>{
     const history= useHistory()
     const {register,handleSubmit,formState: { errors }} = useForm()
     const [specialist, setSpecialist] = useState()
