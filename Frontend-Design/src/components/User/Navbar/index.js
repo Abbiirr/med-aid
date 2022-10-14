@@ -8,13 +8,8 @@ import { Images } from "../../../utils/Images";
 
 const Index = () => {
   const [isShow, setShow] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token") || undefined);
-  console.log(token);
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
-    }
-  }, []);
+  var isLoggedin = false
+  useEffect(() => {}, []);
   
   return (
     <div className="custom-navnar">
@@ -26,7 +21,7 @@ const Index = () => {
                 {/*logo */}
                 <div className="logo">
                   <Link to="/">
-                    <img src={Images.Logo} />
+                    <img src={Images.Logo} alt="..."/>
                   </Link>
                 </div>
                 {/* Toggle BArs */}
@@ -80,7 +75,7 @@ const Index = () => {
                           contact
                         </NavLink>
                       </li>
-                      {token ? (
+                      {isLoggedin ? (
                         <li>
                           <NavLink
                             activeClassName="is-Active"

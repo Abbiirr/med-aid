@@ -4,11 +4,9 @@ import Select from 'react-select'
 import {Icon} from 'react-icons-kit';
 import {ic_search} from 'react-icons-kit/md'
 import {useForm} from 'react-hook-form'
-import {useHistory} from 'react-router-dom'
 
 
 const Index = ({ lat,lang }) =>{
-    const history= useHistory()
     const {register,handleSubmit,formState: { errors }} = useForm()
     const [specialist, setSpecialist] = useState()
 
@@ -25,8 +23,7 @@ const Index = ({ lat,lang }) =>{
     }
 
     const onSubmit = data =>{
-        history.push(`/search?lat=${lat}&lang=${lang}&deases=${data.deases}&specialist=${specialist || options[0].value}`)
-
+        //code here
     }
     return(
         <div className="search">
@@ -40,7 +37,7 @@ const Index = ({ lat,lang }) =>{
                                     <div className="flex-fill">
                                         <input
                                             type="text"
-                                            placeholder="Deases name"
+                                            placeholder="Your Symptoms"
                                             {...register('deases', { required: true })}
                                             className={errors.deases ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
                                         />
