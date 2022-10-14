@@ -7,7 +7,10 @@ const {
   putAppointment,
   deleteAppointment,
   AppointmentRequests,
+  SetAppointmentRequest,
+  GetAppointmentRequests,
 } = require("../controllers/appointmentController");
+const Authenticate = require("../middleware/permission");
 
 router.get("/", getAppointments);
 
@@ -23,11 +26,22 @@ router.post(
   //   minNumbers: 1,
   // }),
 
-  AppointmentRequests
+  SetAppointmentRequest
 );
 
 router.put("/:id", putAppointment);
 
 router.delete("/:id", deleteAppointment);
+
+router.get(
+  "/appointment/request/:id/index",
+  Authenticate.isPatient,
+  GetAppointmentRequests
+);
+router.post(
+  "/appointment/request",
+  Authenticate.isPatient,
+  SetAppointmentRequest
+);
 
 module.exports = router;
