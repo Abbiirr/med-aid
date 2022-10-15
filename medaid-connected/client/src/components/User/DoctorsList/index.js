@@ -64,6 +64,7 @@ const Index = ({ doctors, loading }) => {
                                         <h6>{doctor.name}</h6>
                                         <p className="text-capitalize">{doctor.specialist} Specialist</p>
                                         <p className="text-capitalize">{doctor.currentHospital}</p>
+                                        <p className="text-capitalize">{doctor._id}</p>
                                     </div>
                                 </div>
                             </div>

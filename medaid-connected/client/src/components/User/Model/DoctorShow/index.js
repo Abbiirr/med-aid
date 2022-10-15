@@ -9,6 +9,8 @@ import axios from "axios";
 //import { apiURL } from "../../../utils/apiURL";
 
 const Index = ({ show, doctor }) => {
+  //console.log(doctor);
+  let id = doctor._id;
   const token = localStorage.getItem("token");
   const [isAuth, setAuth] = useState({ message: null, status: false });
   const [showAppointment, setShowAppointment] = useState({
@@ -23,6 +25,9 @@ const Index = ({ show, doctor }) => {
     if (role === "patient") return true;
     return false;
   };
+
+  //------------ this portion is confusing----
+
   const getDoctors = async () => {
     // GET request using axios with error handling
     const response = await axios.get(
@@ -30,15 +35,18 @@ const Index = ({ show, doctor }) => {
     );
     console.log(response);
   };
+  
   doctor = getDoctors();
+
+  //------------ this portion is confusing-----
 
   // Handle appointment
   const handleAppointment = () => {
     if (token) {
       const patient = checkRole(token);
       if (patient) {
-        console.log(doctor._id);
-        setShowAppointment({ status: true, doctorId: doctor._id });
+        console.log(id);
+        setShowAppointment({ status: true, doctorId: id });
       } else {
         setAuth({
           message:
@@ -71,7 +79,7 @@ const Index = ({ show, doctor }) => {
           <button
             type="button"
             className="btn btn-light p-1 shadow-none rounded-circle"
-            //onClick={show}
+            onClick={show}
             //onClick={getDoctors}
           >
             <Icon icon={ic_clear} size={30} />
@@ -88,7 +96,7 @@ const Index = ({ show, doctor }) => {
             <br />
             <h5 className="mb-0 text-capitalize">{doctor.name}</h5>
             <p className="text-capitalize mb-0">
-              {doctor.specialist} Nothing {doctor._id}
+              {doctor.specialist} Nothing {id}
             </p>
             <p className="text-capitalize">{doctor.college}</p>
             {/* <Icon icon={ic_star} size={20} />
