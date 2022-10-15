@@ -57,11 +57,13 @@ const Index = ({ show, doctor }) => {
 
   const getDoctors = async () => {
     // GET request using axios with error handling
-    const response = await axios.get("http://localhost:4000/api/v1/doctor/getDoctors");
+    const response = await axios.get(
+      "http://localhost:4000/api/v1/doctor/getDoctors"
+    );
     console.log(response);
-  }
-  getDoctors();
-  
+  };
+  doctor = getDoctors();
+
   return (
     <div className="doctor-show shadow">
       <div className="info-container p-3">

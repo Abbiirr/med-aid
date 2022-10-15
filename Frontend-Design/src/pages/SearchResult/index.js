@@ -14,7 +14,9 @@ const Index = () => {
     //search doctors from database
     const searchDoctors = async () => {
       try {
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/users`);
+        const response = await axios.get(
+          `http://localhost:4000/api/v1/doctor/getDoctors`
+        );
         setDoctors(response.data);
       } catch (error) {
         if (error) console.log(console.response);
