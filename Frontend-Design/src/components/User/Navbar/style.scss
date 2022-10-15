@@ -9,6 +9,13 @@
     position: fixed;
 }
 
+.logoMenu ul{
+    li{
+        list-style: none;
+        display: inline-block;
+    }
+}
+
 .navbar ul {
     li{
         list-style: none;

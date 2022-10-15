@@ -20,8 +20,15 @@ function Index() {
                         <IconContext.Provider
                             value={{ color: 'black', size: '25px' }}
                         >
-                            <div>
-                            <FaIcons.FaBars onClick={showSidebar} />
+                            <div className='LogoMenu'>
+                                <ul>
+                                    <li>
+                                        <FaIcons.FaBars onClick={showSidebar} />
+                                    </li>
+                                    <li>
+                                        <p><h2><span>Med</span>Aid</h2></p>
+                                    </li>
+                                </ul>
                             </div>
                         </IconContext.Provider>
                     </Link>
@@ -79,6 +86,7 @@ function Index() {
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className='nav-menu-items' onClick={showSidebar}>
                         <li className='navbar-toggle'>
+                            
                             <Link to='#' className='menu-bars'>
                                 <IconContext.Provider
                                     value={{ color: 'black', size: '25px' }}
