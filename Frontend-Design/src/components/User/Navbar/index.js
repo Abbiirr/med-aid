@@ -1,113 +1,116 @@
-import React, { useState, useEffect } from "react";
-import "./style.scss";
-
-import { Icon } from "react-icons-kit";
+import React, { useState } from 'react';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
 import { Link, NavLink } from "react-router-dom";
-import { ic_menu, ic_close } from "react-icons-kit/md";
-import { Images } from "../../../utils/Images";
+import { SidebarData } from './SidebarData';
+import './style.scss';
+import { IconContext } from 'react-icons';
+import { BiHide } from "react-icons/bi";
 
-const Index = () => {
-  const [isShow, setShow] = useState(false);
-  var isLoggedin = false
-  useEffect(() => {}, []);
-  
-  return (
-    <div className="custom-navnar">
-      <div className="main-navbar">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="d-flex">
-                {/* Toggle BArs */}
-                <div className="ml-auto d-lg-none">
-                  <Icon
-                    icon={ic_menu}
-                    size={25}
-                    className="bars"
-                    onClick={() => setShow(true)}
-                  ></Icon>
-                </div>
-                {/*logo */}
-                <div className="logo">
-                  <Link to="/">
-                    <img src={Images.Logo} alt="..."/>
-                  </Link>
-                </div>
-              
-                {/* Menu bar backdrop */}
-                <div
-                  className={
-                    isShow
-                      ? "ml-auto page-links-menu-bar show-backdrop"
-                      : "ml-auto page-links-menu-bar"
-                  }
-                >
-                  <div className="menu-close d-lg-inline">
-                    <Icon
-                      icon={ic_close}
-                      size={35}
-                      className="close-icon"
-                      onClick={() => setShow(false)}
-                    />
-                  </div>
-                  {/*menu */}
-                  <div className={isShow ? "my-menu open-sidemenu" : "my-menu"}>
-                    <ul>
-                      <li>
-                        <NavLink activeClassName="is-Active" exact to="/">
-                          home
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          activeClassName="is-Active"
-                          exact
-                          to="/about-us"
+function Index() {
+    const [sidebar, setSidebar] = useState(false);
+    var isLoggedin = false
+    const showSidebar = () => setSidebar(!sidebar);
+
+    return (
+        <>
+            <IconContext.Provider value={{ color: '#fff' }}>
+                <div className='navbar'>
+                    <Link to='#' className='menu-bars'>
+                        <IconContext.Provider
+                            value={{ color: 'black', size: '25px' }}
                         >
-                          about
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          activeClassName="is-Active"
-                          exact
-                          to="/contact-us"
-                        >
-                          contact
-                        </NavLink>
-                      </li>
-                      {isLoggedin ? (
-                        <li>
-                          <NavLink
-                            activeClassName="is-Active"
-                            exact
-                            to="/login"
-                          >
-                            profile
-                          </NavLink>
+                            <div>
+                            <FaIcons.FaBars onClick={showSidebar} />
+                            </div>
+                        </IconContext.Provider>
+                    </Link>
+                    <div className="my-menu">
+                        <ul>
+                            <li>
+                                <NavLink activeClassName="is-Active" exact to="/">
+                                    home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    activeClassName="is-Active"
+                                    exact
+                                    to="/about-us"
+                                >
+                                    about
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    activeClassName="is-Active"
+                                    exact
+                                    to="/contact-us"
+                                >
+                                    contact
+                                </NavLink>
+                            </li>
+                            {isLoggedin ? (
+                                <li>
+                                    <NavLink
+                                        activeClassName="is-Active"
+                                        exact
+                                        to="/login"
+                                    >
+                                        profile
+                                    </NavLink>
+                                </li>
+                            ) : (
+                                <li>
+                                    <NavLink
+                                        activeClassName="is-Active"
+                                        exact
+                                        to="/login"
+                                    >
+                                        login
+                                    </NavLink>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                </div>
+
+
+                <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+                    <ul className='nav-menu-items' onClick={showSidebar}>
+                        <li className='navbar-toggle'>
+                            <Link to='#' className='menu-bars'>
+                                <IconContext.Provider
+                                    value={{ color: 'black', size: '25px' }}
+                                >
+                                    <div>
+                                        <BiHide />
+                                    </div>
+                                </IconContext.Provider>
+                            </Link>
                         </li>
-                      ) : (
-                        <li>
-                          <NavLink
-                            activeClassName="is-Active"
-                            exact
-                            to="/login"
-                          >
-                            login
-                          </NavLink>
-                        </li>
-                      )}
+                        {SidebarData.map((item, index) => {
+                            return (
+                                <li key={index} className={item.cName}>
+                                    <Link to={item.path}>
+                                        <IconContext.Provider
+                                            value={{ color: 'black', size: '25px' }}
+                                        >
+                                            <div>
+                                                {item.icon}
+                                            </div>
+                                        </IconContext.Provider>
+
+                                        <span>{item.title}</span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="break"></div>
-    </div>
-  );
-};
+                </nav>
+            </IconContext.Provider>
+        </>
+    );
+}
 
 export default Index;
