@@ -5,6 +5,8 @@ import jwt_decode from "jwt-decode";
 import { ic_clear } from "react-icons-kit/md";
 import AppointmentModal from "../GetAppointment/index";
 import AlertModal from "../Alert/AuthCheck/index";
+import axios from "axios";
+//import { apiURL } from "../../../utils/apiURL";
 
 const Index = ({ show, doctor }) => {
   const token = localStorage.getItem("token");
@@ -53,6 +55,13 @@ const Index = ({ show, doctor }) => {
     );
   }
 
+  const getDoctors = async () => {
+    // GET request using axios with error handling
+    const response = await axios.get("http://localhost:4000/api/v1/doctor/getDoctors");
+    console.log(response);
+  }
+  getDoctors();
+  
   return (
     <div className="doctor-show shadow">
       <div className="info-container p-3">
@@ -60,7 +69,8 @@ const Index = ({ show, doctor }) => {
           <button
             type="button"
             className="btn btn-light p-1 shadow-none rounded-circle"
-            onClick={show}
+            //onClick={show}
+            //onClick={getDoctors}
           >
             <Icon icon={ic_clear} size={30} />
           </button>
