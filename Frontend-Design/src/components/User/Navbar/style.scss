@@ -77,7 +77,8 @@
 ul {
   padding: 15px;
   margin-bottom: 0;
-  margin-left: 850px;
+  margin-left: 800px;
+  
 
   li {
     list-style: none;
@@ -139,8 +140,7 @@ ul {
     transition: 0.4s all;
 
     .is-Active {
-      color: #fff;
-      background: $primary-color;
+      color: $primary-color;
     }
   }
 }

@@ -1,31 +1,45 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import './style.scss'
 import Select from 'react-select'
-import {Icon} from 'react-icons-kit';
-import {ic_search} from 'react-icons-kit/md'
-import {useForm} from 'react-hook-form'
+import { Icon } from 'react-icons-kit';
+import { ic_search } from 'react-icons-kit/md'
+import { useForm } from 'react-hook-form'
+import AsyncSelect from 'react-select/async'
 
 
-const Index = ({ lat,lang }) =>{
-    const {register,handleSubmit,formState: { errors }} = useForm()
+const Index = ({ lat, lang }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm()
     const [specialist, setSpecialist] = useState()
 
     const options = [
-        {value: 'Specialist' , label:'Specialist'},
-        {value: 'Medicine' , label:'Medicine'},
-        {value: 'Diagnostic' , label:'Diagnostic'}
+        { value: 'Specialist', label: 'Specialist' },
+        { value: 'Medicine', label: 'Medicine' },
+        { value: 'Diagnostic', label: 'Diagnostic' }
     ]
 
 
-     //onchange Specialist select
-    const onChangeSpecialist= event =>{
+    //onchange Specialist select
+    const onChangeSpecialist = event => {
         setSpecialist(event.value)
     }
 
-    const onSubmit = data =>{
+    const onSubmit = data => {
         //code here
     }
-    return(
+
+    //get symptom data
+    //need to use asyncSelect
+    //Just implimenting multi-select
+    const aquaticCreatures = [
+        { label: 'Fever', value: 'Fever' },
+        { label: 'Cough', value: 'Cough' },
+        { label: 'Headache', value: 'Headache' },
+        { label: 'Vomitting', value: 'Vomitting' },
+        { label: 'Nausia', value: 'Nausia' },
+        { label: 'Cramp', value: 'Cramp' },
+    ];
+
+    return (
         <div className="search">
             <div className="container">
                 <div className="row">
@@ -35,10 +49,13 @@ const Index = ({ lat,lang }) =>{
 
                                 <div className="d-flex">
                                     <div className="flex-fill">
-                                        <input
-                                            type="text"
+                                        <Select
+                                            classNamePrefix="custom-aselect"
+                                            options={aquaticCreatures}
+                                            isMulti
                                             placeholder="Your Symptoms"
                                             {...register('deases', { required: true })}
+                                            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                                             className={errors.deases ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
                                         />
                                     </div>
