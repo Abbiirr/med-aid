@@ -19,7 +19,7 @@ const Index = () => {
             <div className="col-12">
               <div className="d-flex">
                 {/* Toggle BArs */}
-                <div className="ml-auto d-lg-inline">
+                <div className="ml-auto d-lg-none">
                   <Icon
                     icon={ic_menu}
                     size={25}

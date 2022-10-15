@@ -50,6 +50,7 @@ const Index = ({ lat, lang }) => {
                                 <div className="d-flex">
                                     <div className="flex-fill">
                                         <Select
+                                            maxMenuHeight={175}
                                             classNamePrefix="custom-aselect"
                                             options={aquaticCreatures}
                                             isMulti
