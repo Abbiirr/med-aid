@@ -18,6 +18,7 @@ app.use("/disease", require("./routes/diseaseRoutes"));
 app.use("/search", require("./routes/searchRoutes"));
 app.use("/appointment", require("./routes/appointmentRoutes"));
 app.use("/center", require("./routes/centerRoutes"));
+app.use("/auth", require("./routes/authRoutes"));
 
 app.listen(port, () => {
   console.log("listening on port " + port);
