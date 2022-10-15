@@ -16,7 +16,7 @@ const GetAppointment = ({ hidemodal, doctor }) => {
   const [patient, setPatient] = useState({});
   const [isLoading, setLoading] = useState(false);
   const [isShowForm, setShowForm] = useState(false);
-  const [success, setSucess] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [header] = useState({
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
@@ -36,6 +36,7 @@ const GetAppointment = ({ hidemodal, doctor }) => {
       let appointmentData = data;
       appointmentData.doctorId = doctor;
       appointmentData.patientId = patient._id;
+      console.log("doctor id is" + doctor);
 
       setLoading(true);
       const response = await axios.post(
@@ -43,9 +44,11 @@ const GetAppointment = ({ hidemodal, doctor }) => {
         appointmentData,
         header
       );
+      console.log(response.status);
       if (response.status === 201) {
         setLoading(false);
-        setSucess(true);
+        setSuccess(true);
+        console.log(success);
       }
     } catch (error) {
       if (error) {
