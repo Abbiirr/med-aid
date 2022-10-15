@@ -25,17 +25,20 @@ const StepFour = ({ responsestep, id }) => {
 
   const postLocation = async () => {
     try {
+      setLoading(false);
+      responsestep(5);
       const data = {
         longitude: longitude,
         latitude: latitude,
       };
 
       setLoading(true);
-      const token = `token ${localStorage.getItem('token')}`
+      const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(
         `${apiURL}/doctor/profile/${id}/update`,
-        data, {
-          headers: {authorization: token}
+        data,
+        {
+          headers: { authorization: token },
         }
       );
       if (response.status === 200) {

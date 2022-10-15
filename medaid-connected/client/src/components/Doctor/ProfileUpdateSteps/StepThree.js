@@ -15,16 +15,17 @@ const StepThree = ({ responsestep, id }) => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const token = `token ${localStorage.getItem('token')}`
+      const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(
         `${apiURL}/doctor/profile/${id}/update`,
-        data, {
-          headers: {authorization: token}
+        data,
+        {
+          headers: { authorization: token },
         }
       );
       if (response.status === 200) {
         setLoading(false);
-        responsestep(4);
+        responsestep(5);
       }
     } catch (error) {
       if (error) {
