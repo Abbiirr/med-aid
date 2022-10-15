@@ -23,12 +23,21 @@ const Index = ({ show, doctor }) => {
     if (role === "patient") return true;
     return false;
   };
+  const getDoctors = async () => {
+    // GET request using axios with error handling
+    const response = await axios.get(
+      "http://localhost:4000/api/v1/doctor/getDoctors"
+    );
+    console.log(response);
+  };
+  doctor = getDoctors();
 
   // Handle appointment
   const handleAppointment = () => {
     if (token) {
       const patient = checkRole(token);
       if (patient) {
+        console.log(doctor._id);
         setShowAppointment({ status: true, doctorId: doctor._id });
       } else {
         setAuth({
@@ -55,15 +64,6 @@ const Index = ({ show, doctor }) => {
     );
   }
 
-  const getDoctors = async () => {
-    // GET request using axios with error handling
-    const response = await axios.get(
-      "http://localhost:4000/api/v1/doctor/getDoctors"
-    );
-    console.log(response);
-  };
-  doctor = getDoctors();
-
   return (
     <div className="doctor-show shadow">
       <div className="info-container p-3">
@@ -87,7 +87,9 @@ const Index = ({ show, doctor }) => {
             </div>
             <br />
             <h5 className="mb-0 text-capitalize">{doctor.name}</h5>
-            <p className="text-capitalize mb-0">{doctor.specialist} Nothing</p>
+            <p className="text-capitalize mb-0">
+              {doctor.specialist} Nothing {doctor._id}
+            </p>
             <p className="text-capitalize">{doctor.college}</p>
             {/* <Icon icon={ic_star} size={20} />
                         <Icon icon={ic_star} size={20} />
