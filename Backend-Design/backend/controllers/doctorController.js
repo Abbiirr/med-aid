@@ -49,6 +49,7 @@ const putDoctor = asyncHandler (async (req, res) => {
 
     res.json(doctor);
 });
+ 
 
 const deleteDoctor = asyncHandler (async (req, res) => {
     const doctor = await doctor_schema.findByIdAndDelete(req.params.id)
