@@ -19,15 +19,15 @@ const Index = () => {
   const [isLoading, setLoading] = useState(false);
 
     //fetch Doctors
-  const fetchDoctors = async () => {
-    try {
-      const response = await axios.get(`${apiURL}/doctor/getDoctors`);
-      setDoctor(response.data.doctor);
-      setLoading(false);
-    } catch (error) {
-      if (error) console.log(console.response);
-    }
-  };
+  // const fetchDoctors = async () => {
+  //   try {
+  //     const response = await axios.get(`${apiURL}/doctor/getDoctors`);
+  //     setDoctor(response.data.doctor);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     if (error) console.log(console.response);
+  //   }
+  // };
 
   useEffect(() => {
     const geo = navigator.geolocation;
@@ -39,8 +39,8 @@ const Index = () => {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
     });
-    setLoading(true)
-    fetchDoctors();
+    setLoading(false)
+    //fetchDoctors();
     //console.log(doctor);
   }, []);
 
@@ -73,7 +73,7 @@ const Index = () => {
             </div>
           </div>
 
-          <DoctorListComponent doctors={doctor} loading={isLoading} />
+          {/* <DoctorListComponent doctors={doctor} loading={isLoading} /> */}
         </div>
         {/* service  */}
         <div className="service">

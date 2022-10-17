@@ -13,6 +13,8 @@ const Index = ({
     const history= useHistory()
     const {register,handleSubmit,formState: { errors }} = useForm()
     const [specialist, setSpecialist] = useState()
+    
+    const [symptom, setSymptom] = useState("");
 
     const options = [
         { value: 'Specialist', label: 'Specialist' },
@@ -23,8 +25,9 @@ const Index = ({
 
      //onchange Specialist select
     const onChangeSpecialist= event =>{
-        setSpecialist(event.value)
+        setSpecialist(event.target.value)
     }
+
 
     const onSubmit = data =>{
 
@@ -34,7 +37,11 @@ const Index = ({
         //     deases: data.deases,
         //     specialist: specialist
         // }
-        history.push(`/search?lat=${lat}&lang=${lang}&disease=${data.disease}&specialist=${specialist || options[0].value}`)
+
+        setSymptom(data.symptom)
+        console.log(data.symptom)
+     
+        history.push(`/search?lat=${lat}&lang=${lang}&symptom=${data.symptom}&specialist=${specialist || options[0].value}`)
 
     }
 
@@ -66,9 +73,9 @@ const Index = ({
                                             options={aquaticCreatures}
                                             isMulti
                                             placeholder="Your Symptoms"
-                                            {...register('disease', { required: true })}
+                                            {...register('symptoms', { required: true })}
                                             components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-                                            className={errors.disease ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
+                                            className={errors.symptom ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
                                         />
                                     </div>
                                     <div>
