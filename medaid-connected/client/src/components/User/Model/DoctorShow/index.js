@@ -17,6 +17,7 @@ const Index = ({ show, doctor }) => {
     status: false,
     doctorId: null,
   });
+  //const [doctor, setDoctor] = useState();
 
   // Role check
   const checkRole = (token) => {
