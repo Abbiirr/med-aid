@@ -34,7 +34,7 @@ const Index = ({
         //     deases: data.deases,
         //     specialist: specialist
         // }
-        history.push(`/search?lat=${lat}&lang=${lang}&deases=${data.deases}&specialist=${specialist || options[0].value}`)
+        history.push(`/search?lat=${lat}&lang=${lang}&disease=${data.disease}&specialist=${specialist || options[0].value}`)
 
     }
 
@@ -66,9 +66,9 @@ const Index = ({
                                             options={aquaticCreatures}
                                             isMulti
                                             placeholder="Your Symptoms"
-                                            {...register('deases', { required: true })}
+                                            {...register('disease', { required: true })}
                                             components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-                                            className={errors.deases ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
+                                            className={errors.disease ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
                                         />
                                     </div>
                                     <div>
