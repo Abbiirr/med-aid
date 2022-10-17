@@ -5,7 +5,7 @@ import { apiURL } from "../../utils/apiURL";
 import NavbarComponent from "../../components/User/Navbar/index";
 import SearchComponent from "../../components/User/Search/index";
 import DoctorsListComponent from "../../components/User/DoctorsList/index";
-import FooterCompoent from "../../components/User/Footer/index";
+import FooterComponent from "../../components/User/Footer/index";
 
 const Index = () => {
   const [doctors, setDoctors] = useState([]);
@@ -43,9 +43,9 @@ const Index = () => {
         </div>
 
         {/* Results */}
-        <DoctorsListComponent doctors={doctors} />
+        <DoctorsListComponent doctors={doctors} loading={false} />
       </div>
-      <FooterCompoent />
+      <FooterComponent />
     </div>
   );
 };
