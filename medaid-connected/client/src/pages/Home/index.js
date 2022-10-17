@@ -4,10 +4,12 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { apiURL } from "../../utils/apiURL";
 import { Images } from "../../utils/Images";
+//import { FaHeartbeat } from "@react-icons/all-files/fa/FaHeartbeat";
+
 
 import NavbarComponent from "../../components/User/Navbar/index";
 import SearchComponent from "../../components/User/Search/index";
-import DoctorsListComponet from "../../components/User/DoctorsList/index";
+import DoctorListComponent from "../../components/User/DoctorsList/index";
 import FooterComponent from "../../components/User/Footer/index";
 
 const Index = () => {
@@ -48,7 +50,7 @@ const Index = () => {
           <div className="container">
             <div className="row">
               <div className="col-12 col-lg-6 content d-none d-lg-block">
-                <h1>Search Doctors</h1>
+                <h1>Search your Symptoms</h1>
                 <h5>Choose your nearest specialist</h5>
               </div>
               <div className="col-12 col-lg-6 image-column text-center">
@@ -63,21 +65,21 @@ const Index = () => {
           <div className="container mb-4">
             <div className="row">
               <div className="col-12 text-center">
-                <h2>Nearset Doctors</h2>
+                <h2>Nearest Doctors</h2>
               </div>
             </div>
           </div>
 
-          <DoctorsListComponet doctors={doctor} loading={isLoading} />
+          <DoctorListComponent doctors={doctor} loading={isLoading} />
         </div>
         {/* service  */}
         <div className="service">
           <div className="container">
             <div className="row">
               <div className="col-12 col-lg-6 text-center text-lg-left content">
-                <h1>We Provide</h1>
-                <h3>24/7 hour Service</h3>
-                <p>Lorem ipsum</p>
+                <h1>We Connect and Care</h1>
+                <h3>Easy HealthCare</h3>
+
                 <Link
                   to="/contact-us"
                   type="button"

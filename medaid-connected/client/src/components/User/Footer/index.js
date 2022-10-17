@@ -7,7 +7,7 @@ import {
     linkedin2,
     twitter
 } from 'react-icons-kit/icomoon'
-import {Images} from '../../../utils/Images'
+import { Images } from '../../../utils/Images'
 
 const Index = () => {
     return (
@@ -16,22 +16,24 @@ const Index = () => {
                 <div className="row">
                     <div className="col-12 col-lg-4 mb-4 mb-lg-0 pr-lg-4">
                         <div className="text-center text-lg-left">
-                            <Link to="/">
-                                <img src={Images.Logo} className="img-fluid" alt="..." />
-                            </Link>
+                            <ul>
+                                <li>
+                                    <p><h2><span>Med</span>Aid</h2></p>
+                                </li>
+                            </ul>
                             <br />
-                            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
+                            <p>MedAid is a website that Finds doctors based on symptoms, Book appointments, Buy medicines & see test prices</p>
                         </div>
                     </div>
                     <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center text-lg-left pr-lg-4">
                         <h5>Need Help?</h5>
+                        <br></br>
                         <Link to="/">support</Link>
-                        <Link to="/">helpline</Link>
-                        <Link to="/">privacy & policy</Link>
                         <Link to="/">terms & conditions</Link>
                     </div>
                     <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center text-lg-left">
                         <h5>Contacts</h5>
+                        <br></br>
                         <ul>
                             <li>
                                 <a href="https://www.facebook.com/mamun.swe.277">

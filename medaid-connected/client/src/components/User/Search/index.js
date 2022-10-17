@@ -15,9 +15,9 @@ const Index = ({
     const [specialist, setSpecialist] = useState()
 
     const options = [
-        {value: 'Medicine' , label:'Medicine'},
-        {value: 'Phycologist' , label:'Phycologist'},
-        {value:"Cardiologist" , label:'Cardiologist'}
+        { value: 'Specialist', label: 'Specialist' },
+        { value: 'Medicine', label: 'Medicine' },
+        { value: 'Diagnostic', label: 'Diagnostic' }
     ]
 
 
@@ -37,7 +37,20 @@ const Index = ({
         history.push(`/search?lat=${lat}&lang=${lang}&deases=${data.deases}&specialist=${specialist || options[0].value}`)
 
     }
-    return(
+
+    //get symptom data
+    //need to use asyncSelect
+    //Just implimenting multi-select
+    const aquaticCreatures = [
+        { label: 'Fever', value: 'Fever' },
+        { label: 'Cough', value: 'Cough' },
+        { label: 'Headache', value: 'Headache' },
+        { label: 'Vomitting', value: 'Vomitting' },
+        { label: 'Nausia', value: 'Nausia' },
+        { label: 'Cramp', value: 'Cramp' },
+    ];
+
+    return (
         <div className="search">
             <div className="container">
                 <div className="row">
@@ -47,10 +60,14 @@ const Index = ({
 
                                 <div className="d-flex">
                                     <div className="flex-fill">
-                                        <input
-                                            type="text"
-                                            placeholder="Deases name"
+                                        <Select
+                                            maxMenuHeight={175}
+                                            classNamePrefix="custom-aselect"
+                                            options={aquaticCreatures}
+                                            isMulti
+                                            placeholder="Your Symptoms"
                                             {...register('deases', { required: true })}
+                                            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                                             className={errors.deases ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
                                         />
                                     </div>
