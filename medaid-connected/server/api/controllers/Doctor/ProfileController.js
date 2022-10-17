@@ -59,8 +59,6 @@ const updateProfile = async (req, res, next) => {
       country,
       city,
       currentAddress,
-      latitude,
-      longitude,
       day,
       startTime,
       endTime,

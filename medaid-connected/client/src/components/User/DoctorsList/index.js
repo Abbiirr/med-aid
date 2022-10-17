@@ -14,7 +14,7 @@ const Index = ({ doctors, loading }) => {
     const closeShow = () => setShow(false)
 
     // Show Doctor Info
-    const shwoDoctorInfo = data => {
+    const showDoctorInfo = data => {
         setShow(true)
         setDoctor(data)
     }
@@ -55,7 +55,7 @@ const Index = ({ doctors, loading }) => {
                             <div className="card doctor-card">
                                 <div
                                     className="card-body"
-                                    onClick={() => shwoDoctorInfo(doctor)}
+                                    onClick={() => showDoctorInfo(doctor)}
                                 >
                                     <div className="img-box rounded-circle">
                                         <img src={Images.Doctor} className="img-fluid" alt="..." />
@@ -64,6 +64,7 @@ const Index = ({ doctors, loading }) => {
                                         <h6>{doctor.name}</h6>
                                         <p className="text-capitalize">{doctor.specialist} Specialist</p>
                                         <p className="text-capitalize">{doctor.currentHospital}</p>
+                                        <p className="text-capitalize">{doctor._id}</p>
                                     </div>
                                 </div>
                             </div>

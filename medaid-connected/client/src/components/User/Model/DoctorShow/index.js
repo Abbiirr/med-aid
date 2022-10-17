@@ -5,8 +5,12 @@ import jwt_decode from "jwt-decode";
 import { ic_clear } from "react-icons-kit/md";
 import AppointmentModal from "../GetAppointment/index";
 import AlertModal from "../Alert/AuthCheck/index";
+import axios from "axios";
+//import { apiURL } from "../../../utils/apiURL";
 
 const Index = ({ show, doctor }) => {
+  //console.log(doctor);
+  let id = doctor._id;
   const token = localStorage.getItem("token");
   const [isAuth, setAuth] = useState({ message: null, status: false });
   const [showAppointment, setShowAppointment] = useState({
@@ -22,12 +26,27 @@ const Index = ({ show, doctor }) => {
     return false;
   };
 
+  //------------ this portion is confusing----
+
+  const getDoctors = async () => {
+    // GET request using axios with error handling
+    const response = await axios.get(
+      "http://localhost:4000/api/v1/doctor/getDoctors"
+    );
+    console.log(response);
+  };
+  
+  doctor = getDoctors();
+
+  //------------ this portion is confusing-----
+
   // Handle appointment
   const handleAppointment = () => {
     if (token) {
       const patient = checkRole(token);
       if (patient) {
-        setShowAppointment({ status: true, doctorId: doctor._id });
+        console.log(id);
+        setShowAppointment({ status: true, doctorId: id });
       } else {
         setAuth({
           message:
@@ -61,6 +80,7 @@ const Index = ({ show, doctor }) => {
             type="button"
             className="btn btn-light p-1 shadow-none rounded-circle"
             onClick={show}
+            //onClick={getDoctors}
           >
             <Icon icon={ic_clear} size={30} />
           </button>
@@ -75,7 +95,9 @@ const Index = ({ show, doctor }) => {
             </div>
             <br />
             <h5 className="mb-0 text-capitalize">{doctor.name}</h5>
-            <p className="text-capitalize mb-0">{doctor.specialist} Nothing</p>
+            <p className="text-capitalize mb-0">
+              {doctor.specialist} Nothing {id}
+            </p>
             <p className="text-capitalize">{doctor.college}</p>
             {/* <Icon icon={ic_star} size={20} />
                         <Icon icon={ic_star} size={20} />

@@ -11,13 +11,13 @@
         font-family: "Roboto", sans-serif;
 
         @media (min-width: 992px) {
-          font-size: 70px;
+          font-size: 60px;
         }
       }
 
       h5 {
         font-weight: 300;
-        font-size: 16px;
+        font-size: 30px;
         font-family: "Roboto", sans-serif;
       }
 
@@ -28,10 +28,10 @@
 
     .image-column {
       img {
-        width: 300px;
+        width: 350px;
 
-        @media (min-width: 576px) {
-          width: 500px;
+        @media (min-width: 376px) {
+          width: 350px;
         }
       }
     }
@@ -58,12 +58,13 @@
 
     .content {
       h1 {
+        color: #000;
+        font-weight: 600;
         margin-bottom: 0;
-        font-weight: 900;
         font-family: "Roboto", sans-serif;
 
         @media (min-width: 992px) {
-          font-size: 60px;
+          font-size: 50px;
         }
       }
 
@@ -85,7 +86,7 @@
         font-weight: 900;
         padding: 7px 30px;
         border-radius: 25px;
-        background: $secondary-color;
+        background: $primary-color;
         font-family: "Roboto", sans-serif;
       }
 

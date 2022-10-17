@@ -4,6 +4,7 @@ import axios from "axios"
 import {Link} from "react-router-dom"
 import { apiURL } from "../../utils/apiURL";
 import {Images} from "../../utils/Images"
+import { FaHeartbeat } from "@react-icons/all-files/fa/FaHeartbeat";
 
 import NavbarComponent from "../../components/User/Navbar/index"
 import SearchComponent from "../../components/User/Search/index"
@@ -76,7 +77,8 @@ const Index = () => {
               <div className="row">
                 <div className="col-12 col-lg-6 text-center text-lg-left content">
                   <h1>We Connect and Care</h1>
-                  <h3>Easy HealthCare</h3>
+                  <h3>Easy HealthCare <FaHeartbeat/></h3>
+
                   <Link
                     to="/contact-us"
                     type="button"
