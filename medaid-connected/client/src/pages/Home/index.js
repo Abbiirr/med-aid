@@ -21,7 +21,7 @@ const Index = () => {
     //fetch Doctors
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get(`${apiURL}/client/doctors`);
+      const response = await axios.get(`${apiURL}/doctor/getDoctors`);
       setDoctor(response.data.doctor);
       setLoading(false);
     } catch (error) {
@@ -41,7 +41,10 @@ const Index = () => {
     });
     setLoading(true)
     fetchDoctors();
+    //console.log(doctor);
   }, []);
+
+
   return (
     <>
       <div className="home">

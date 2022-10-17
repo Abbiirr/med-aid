@@ -15,6 +15,7 @@ function Index() {
     const [isShow, setShow] = useState(false);
     const [token, setToken] = useState(localStorage.getItem("token") || undefined);
     console.log(token);
+    
     useEffect(() => {
         if (localStorage.getItem("token")) {
             setToken(localStorage.getItem("token"));
@@ -35,7 +36,7 @@ function Index() {
                                         <FaIcons.FaBars onClick={showSidebar} />
                                     </li>
                                     <li>
-                                        <p><h2><span>Med</span>Aid</h2></p>
+                                        <p><h2><span><b>Med</b></span>Aid</h2></p>
                                     </li>
                                 </ul>
                             </div>
