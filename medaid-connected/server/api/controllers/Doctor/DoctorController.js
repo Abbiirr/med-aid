@@ -1,4 +1,6 @@
 const Doctor = require('../../../models/Doctor');
+const disease_schema = require('../../../models/Disease');
+
 
 
 let diseaseArray = new Set();
@@ -41,7 +43,7 @@ const getDoctorsResult = async (req, res) => {
     });
 
     // finding the doctors based on the specialty
-    const doctors = await doctor_schema.find({
+    const doctors = await Doctor.find({
       specialty: { $in: Array.from(specialtyArray) }
     });
 

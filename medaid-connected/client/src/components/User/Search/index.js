@@ -6,10 +6,9 @@ import {ic_search} from 'react-icons-kit/md'
 import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
 
+//http://localhost:4000/api/v1/doctor/getDoctorsResult
 
-const Index = ({
-    lat,lang
-}) =>{
+const Index = () =>{
     const history= useHistory()
     const {register,handleSubmit,formState: { errors }} = useForm()
     const [specialist, setSpecialist] = useState()
@@ -32,16 +31,17 @@ const Index = ({
     const onSubmit = data =>{
 
          // const newData = {
-        //     lattitude: lat,
+        //     latitude: lat,
         //     longitude: lang,
-        //     deases: data.deases,
+        //     disease: data.disease,
         //     specialist: specialist
         // }
 
         //setSymptom(data.symptom)
         console.log(data.symptom)
+        console.log(specialist)
      
-        history.push(`/search?lat=${lat}&lang=${lang}&symptom=${data.symptom}&specialist=${specialist || options[0].value}`)
+        history.push(`/search?symptom=${data.symptom}&specialist=${specialist || options[0].value}`)
 
     }
 

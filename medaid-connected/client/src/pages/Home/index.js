@@ -62,7 +62,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-        <SearchComponent lat={latitude} lang={longitude} />,
+        <SearchComponent />,
         {/* Nearest or suggested Doctor */}
         <div className="suggested-doctors">
           <div className="container mb-4">

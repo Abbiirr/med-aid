@@ -7,6 +7,8 @@ import SearchComponent from "../../components/User/Search/index";
 import DoctorsListComponent from "../../components/User/DoctorsList/index";
 import FooterComponent from "../../components/User/Footer/index";
 
+//http://localhost:4000/api/v1/doctor/getDoctorsResult
+
 const Index = () => {
   //use a variable to store the search query
   const [doctors, setDoctors] = useState([]);
@@ -20,11 +22,13 @@ const Index = () => {
         );
         setDoctors(response.data);
       } catch (error) {
-        if (error) console.log(console.response);
+        if (error) console.log("error");
       }
     };
     searchDoctors();
   }, []);
+
+
   return (
     <div>
       <NavbarComponent />
