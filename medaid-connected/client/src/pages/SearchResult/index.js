@@ -8,6 +8,7 @@ import DoctorsListComponent from "../../components/User/DoctorsList/index";
 import FooterComponent from "../../components/User/Footer/index";
 
 const Index = () => {
+  //use a variable to store the search query
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {

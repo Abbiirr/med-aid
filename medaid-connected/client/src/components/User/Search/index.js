@@ -25,7 +25,7 @@ const Index = ({
 
      //onchange Specialist select
     const onChangeSpecialist= event =>{
-        setSpecialist(event.target.value)
+        setSpecialist(event.value)
     }
 
 
@@ -38,7 +38,7 @@ const Index = ({
         //     specialist: specialist
         // }
 
-        setSymptom(data.symptom)
+        //setSymptom(data.symptom)
         console.log(data.symptom)
      
         history.push(`/search?lat=${lat}&lang=${lang}&symptom=${data.symptom}&specialist=${specialist || options[0].value}`)
@@ -67,14 +67,13 @@ const Index = ({
 
                                 <div className="d-flex">
                                     <div className="flex-fill">
-                                        <Select
+                                        <input
                                             maxMenuHeight={175}
                                             classNamePrefix="custom-aselect"
                                             options={aquaticCreatures}
                                             isMulti
                                             placeholder="Your Symptoms"
-                                            {...register('symptoms', { required: true })}
-                                            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
+                                            {...register('symptom', { required: true })}
                                             className={errors.symptom ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
                                         />
                                     </div>
