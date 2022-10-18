@@ -20,6 +20,7 @@ const getDoctorsResult = async (req, res) => {
 
     //getting the specialties
     let specialty = (req.query.specialty);
+    let specialist = (req.query.specialist);
 
     //getting the diseases
     let disease_name = (req.query.name);
@@ -29,9 +30,13 @@ const getDoctorsResult = async (req, res) => {
         //symptoms: { $regex: symptoms, $options: "i" } 
         $or : [{ symptoms: { $regex: `${symptoms}`, $options: "i" }},
         { specialty: { $regex: `${specialty}`, $options: "i" }},
-        { name: { $regex: `${disease_name}`, $options: "i" }}]
+        { name: { $regex: `${disease_name}`, $options: "i" }},
+        { specialist: {$regex: `${specialist}`, $options: "i" }}]
         
     });
+
+
+    console.log(specialty)
 
     // adding the symptoms to the set
     // adding the specialties to the set
@@ -39,17 +44,24 @@ const getDoctorsResult = async (req, res) => {
       //console.log(item.name);
       diseaseArray.add(item.name);
       specialtyArray.add(item.specialty);
+      //specialtyArray.add(item.specialist);
 
     });
 
     // finding the doctors based on the specialty
     const doctors = await Doctor.find({
-      specialty: { $in: Array.from(specialtyArray) }
+      specialist: { $in: Array.from(specialtyArray) }
     });
+
+    // finding the doctors based on the specialty
+    // const doctors = await Doctor.find({
+    //   specialist: { $in: Array.from(specialtyArray) }
+    // });
+
 
     console.log(diseaseArray);
     console.log(specialtyArray);
-    console.log(doctors);
+    //console.log(doctors);
     //console.log(diseases);
 
     res.json(doctors);
