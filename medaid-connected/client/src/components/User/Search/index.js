@@ -1,10 +1,11 @@
-import React,{useState} from 'react';
+import React, { useEffect, useState } from "react";
 import './style.scss'
 import Select from 'react-select'
 import {Icon} from 'react-icons-kit';
 import {ic_search} from 'react-icons-kit/md'
 import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
+import axios from "axios";
 
 //http://localhost:4000/api/v1/doctor/getDoctorsResult
 
@@ -12,7 +13,8 @@ const Index = () =>{
     const history= useHistory()
     const {register,handleSubmit,formState: { errors }} = useForm()
     const [specialist, setSpecialist] = useState()
-    
+
+    const [doctors, setDoctors] = useState([]);
     const [symptom, setSymptom] = useState("");
 
     const options = [
@@ -27,6 +29,7 @@ const Index = () =>{
         setSpecialist(event.value)
     }
 
+    let search 
 
     const onSubmit = data =>{
 
@@ -40,8 +43,22 @@ const Index = () =>{
         //setSymptom(data.symptom)
         console.log(data.symptom)
         console.log(specialist)
+        search = data.symptom
      
-        history.push(`/search?symptom=${data.symptom}&specialist=${specialist || options[0].value}`)
+        history.push(`/search?symptoms=${data.symptom}&specialist=${specialist || options[0].value}`)
+        
+        // const searchDoctors = async () => {
+        //     try {
+        //       const response = await axios.get(
+        //         `http://localhost:4000/api/v1/doctor/getDoctorsResult/?symptoms=${data.symptom}`
+        //       );
+        //       setDoctors(response.data);
+        //     } catch (error) {
+        //       if (error) console.log("error");
+        //     }
+        //   };
+        //   searchDoctors();
+        //   console.log(doctors)
 
     }
 

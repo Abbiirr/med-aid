@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { apiURL } from "../../utils/apiURL";
+import queryString from 'query-string'
+import { useLocation } from 'react-router';
 
 import NavbarComponent from "../../components/User/Navbar/index";
 import SearchComponent from "../../components/User/Search/index";
@@ -13,12 +15,17 @@ const Index = () => {
   //use a variable to store the search query
   const [doctors, setDoctors] = useState([]);
 
+  const location = useLocation();
+  const value=queryString.parse(location.search);
+  const symptoms=value.symptoms;
+  console.log(symptoms)
+
   useEffect(() => {
     //search doctors
     const searchDoctors = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/doctor/getDoctors`
+          `http://localhost:4000/api/v1/doctor/getDoctorsResult?symptoms=${symptoms}`
         );
         setDoctors(response.data);
       } catch (error) {

@@ -14,7 +14,7 @@ function Index() {
 
     const [isShow, setShow] = useState(false);
     const [token, setToken] = useState(localStorage.getItem("token") || undefined);
-    console.log(token);
+    //console.log(token);
     
     useEffect(() => {
         if (localStorage.getItem("token")) {
