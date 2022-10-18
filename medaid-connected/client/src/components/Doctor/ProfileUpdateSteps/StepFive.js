@@ -14,6 +14,7 @@ const StepFive = ({ responsestep, id }) => {
 
   const onSubmit = async (data) => {
     try {
+      console.log(id);
       setLoading(true);
       const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(

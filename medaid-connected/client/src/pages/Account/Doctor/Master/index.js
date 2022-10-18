@@ -118,8 +118,8 @@ const Master = () => {
               ) : step === 3 ? (
                 <StepThree responsestep={updateResponse} id={id} />
               ) : step === 4 ? (
-                <StepFour responsestep={updateResponse} id={id} />
-              ) : step === 5 ? (
+                //   <StepFour responsestep={updateResponse} id={id} />
+                // ) : step === 5 ? (
                 <StepFive responsestep={updateResponse} id={id} />
               ) : null}
 

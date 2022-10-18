@@ -25,7 +25,7 @@ const StepThree = ({ responsestep, id }) => {
       );
       if (response.status === 200) {
         setLoading(false);
-        responsestep(5);
+        responsestep(4);
       }
     } catch (error) {
       if (error) {

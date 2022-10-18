@@ -10,41 +10,42 @@ const StepFour = ({ responsestep, id }) => {
   const [longitude, setLongitude] = useState(null);
   const [latitude, setLatitude] = useState(null);
 
-  useEffect(() => {
-    const geo = navigator.geolocation;
-    if (!geo) {
-      alert("Geolocation is not supported");
-      return;
-    }
+  // useEffect(() => {
+  //   const geo = navigator.geolocation;
+  //   if (!geo) {
+  //     alert("Geolocation is not supported");
+  //     return;
+  //   }
 
-    navigator.geolocation.getCurrentPosition(function (position) {
-      setLongitude(position.coords.latitude);
-      setLatitude(position.coords.longitude);
-    });
-  }, []);
+  //   navigator.geolocation.getCurrentPosition(function (position) {
+  //     setLongitude(position.coords.latitude);
+  //     setLatitude(position.coords.longitude);
+  //   });
+  // },
+  // []);
 
   const postLocation = async () => {
     try {
       setLoading(false);
       responsestep(5);
-      const data = {
-        longitude: longitude,
-        latitude: latitude,
-      };
+      // const data = {
+      //   longitude: longitude,
+      //   latitude: latitude,
+      // };
 
-      setLoading(true);
-      const token = `token ${localStorage.getItem("token")}`;
-      const response = await axios.post(
-        `${apiURL}/doctor/profile/${id}/update`,
-        data,
-        {
-          headers: { authorization: token },
-        }
-      );
-      if (response.status === 200) {
-        setLoading(false);
-        responsestep(5);
-      }
+      // setLoading(true);
+      // const token = `token ${localStorage.getItem("token")}`;
+      // const response = await axios.post(
+      //   `${apiURL}/doctor/profile/${id}/update`,
+      //   data,
+      //   {
+      //     headers: { authorization: token },
+      //   }
+      // );
+      // if (response.status === 200) {
+      //   setLoading(false);
+      //   responsestep(5);
+      // }
     } catch (error) {
       if (error) {
         setLoading(false);
@@ -63,7 +64,7 @@ const StepFour = ({ responsestep, id }) => {
         >
           <Icon icon={ic_location_on} size={50} />
         </button>
-        {isLoading ? <p>Saving location...</p> : <p>Pick your location</p>}
+        {isLoading ? <p>Can't save location yet</p> : <p>Click to continue</p>}
       </div>
     </div>
   );
