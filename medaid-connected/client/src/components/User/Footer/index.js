@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { Icon } from 'react-icons-kit'
 import {
     facebook,
-    linkedin2,
-    twitter
+    mail,
+    whatsapp
 } from 'react-icons-kit/icomoon'
 import { Images } from '../../../utils/Images'
 
@@ -36,18 +36,18 @@ const Index = () => {
                         <br></br>
                         <ul>
                             <li>
-                                <a href="https://www.facebook.com/mamun.swe.277">
+                                <a href="https://www.facebook.com/">
                                     <Icon icon={facebook} size={18} />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.linkedin.com/in/mamun-swe">
-                                    <Icon icon={linkedin2} size={18} />
+                                <a href="https://www.gmail.com/">
+                                    <Icon icon={mail} size={18} />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://twitter.com">
-                                    <Icon icon={twitter} size={18} />
+                                <a href="https://whatsapp.com">
+                                    <Icon icon={whatsapp} size={18} />
                                 </a>
                             </li>
                         </ul>
