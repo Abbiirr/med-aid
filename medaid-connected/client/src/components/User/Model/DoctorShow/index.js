@@ -8,6 +8,8 @@ import AlertModal from "../Alert/AuthCheck/index";
 import axios from "axios";
 //import { apiURL } from "../../../utils/apiURL";
 
+//import doctorlist and use doctor 
+//use that variable to get the query and use it[] in getDoctors
 const Index = ({ show, doctor }) => {
   //console.log(doctor);
   let id = doctor._id;
@@ -17,6 +19,7 @@ const Index = ({ show, doctor }) => {
     status: false,
     doctorId: null,
   });
+  //const [doctor, setDoctor] = useState();
 
   // Role check
   const checkRole = (token) => {

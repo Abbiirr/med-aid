@@ -20,8 +20,6 @@ import PrivateRoute from "./components/PrivateRoute/index";
 
 // //Chat
 
-import ChatIndex from "./pages/Chat/index";
-
 import FourOFour from "./pages/FourOFour/index";
 
 function App() {
@@ -51,9 +49,9 @@ function App() {
 
             {/* Council Master */}
             {/* <Route exact path="/messages/:reciverId/:appointmentId"> */}
-            <Route exact path="/messages">
+            {/* <Route exact path="/messages">
               <ChatIndex />
-            </Route>
+            </Route> */}
 
             {/* Admin Master */}
             <PrivateRoute exact path="/admin" role="super_admin">
