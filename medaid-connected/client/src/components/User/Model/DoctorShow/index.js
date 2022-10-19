@@ -6,6 +6,7 @@ import { ic_clear } from "react-icons-kit/md";
 import AppointmentModal from "../GetAppointment/index";
 import AlertModal from "../Alert/AuthCheck/index";
 import axios from "axios";
+import { Images } from "../../../../utils/Images";
 //import { apiURL } from "../../../utils/apiURL";
 
 //import doctorlist and use doctor
@@ -101,7 +102,11 @@ const Index = ({ show, doctor }) => {
           {/* Basic Info */}
           <div className="text-center">
             <div className="img-box rounded-circle">
-              <img src={thisDoctor.image} className="img-fluid" alt="..." />
+              {doctor.image ? (
+                <img src={doctor.image} className="img-fluid" alt="..." />
+              ) : (
+                <img src={Images.Doctor} className="img-fluid" alt="..." />
+              )}
             </div>
             <br />
             <h5 className="mb-0 text-capitalize">{doctor.name}</h5>
