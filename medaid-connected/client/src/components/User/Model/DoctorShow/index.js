@@ -8,10 +8,17 @@ import AlertModal from "../Alert/AuthCheck/index";
 import axios from "axios";
 //import { apiURL } from "../../../utils/apiURL";
 
-//import doctorlist and use doctor 
+//import doctorlist and use doctor
 //use that variable to get the query and use it[] in getDoctors
 const Index = ({ show, doctor }) => {
   //console.log(doctor);
+  let thisDoctor = {
+    id: doctor._id,
+    name: doctor.name,
+    image: doctor.image,
+    college: doctor.college,
+    currentHospital: doctor.currentHospital,
+  };
   let id = doctor._id;
   const token = localStorage.getItem("token");
   const [isAuth, setAuth] = useState({ message: null, status: false });
@@ -38,7 +45,7 @@ const Index = ({ show, doctor }) => {
     );
     console.log(response);
   };
-  
+
   doctor = getDoctors();
 
   //------------ this portion is confusing-----
@@ -94,14 +101,15 @@ const Index = ({ show, doctor }) => {
           {/* Basic Info */}
           <div className="text-center">
             <div className="img-box rounded-circle">
-              <img src={doctor.image} className="img-fluid" alt="..." />
+              <img src={thisDoctor.image} className="img-fluid" alt="..." />
             </div>
             <br />
             <h5 className="mb-0 text-capitalize">{doctor.name}</h5>
             <p className="text-capitalize mb-0">
-              {doctor.specialist} Nothing {id}
+              {thisDoctor.specialist}
+              {/* Nothing */}
             </p>
-            <p className="text-capitalize">{doctor.college}</p>
+            <p className="text-capitalize">{thisDoctor.college}</p>
             {/* <Icon icon={ic_star} size={20} />
                         <Icon icon={ic_star} size={20} />
                         <Icon icon={ic_star} size={20} />
@@ -111,7 +119,7 @@ const Index = ({ show, doctor }) => {
           {/* Current Hospital */}
           <div className="mt-3">
             <h6 className="mb-0">Current Hospital</h6>
-            <p>{doctor.currentHospital}l</p>
+            <p>{thisDoctor.currentHospital}</p>
           </div>
           {/* Schedule */}
           <div className="mt-3">
