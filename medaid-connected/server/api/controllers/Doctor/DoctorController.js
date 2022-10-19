@@ -17,6 +17,7 @@ const getDoctorsResult = async (req, res) => {
 
     // getting the symptoms
     let symptoms = (req.query.symptoms);
+    console.log(symptoms);
 
     //getting the specialties
     let specialty = (req.query.specialty);
@@ -60,7 +61,7 @@ const getDoctorsResult = async (req, res) => {
     // });
 
 
-    console.log(diseaseArray);
+    //console.log(diseaseArray);
     console.log(specialtyArray);
     //console.log(doctors);
     //console.log(diseases);
