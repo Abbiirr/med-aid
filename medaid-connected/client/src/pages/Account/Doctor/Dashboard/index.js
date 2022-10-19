@@ -50,7 +50,7 @@ const Index = () => {
           <div className="col-12 col-lg-6 mb-3">
             <div className="card border-0">
               <div className="card-body">
-                <Bar
+                {/* <Bar
                   data={data}
                   width={800}
                   height={400}
@@ -66,11 +66,11 @@ const Index = () => {
                       position: "bottom",
                     },
                   }}
-                />
+                /> */}
               </div>
             </div>
           </div>
-          <div className="col-12 col-lg-6">
+          {/* <div className="col-12 col-lg-6">
             <div className="row">
               <div className="col-6 mb-3 pl-lg-0 pr-0">
                 <div className="card border-0" style={{ height: 150 }}>
@@ -113,7 +113,7 @@ const Index = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
