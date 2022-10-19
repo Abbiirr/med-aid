@@ -152,8 +152,6 @@ const GetAppointment = ({ hidemodal, doctor }) => {
                       <input
                         type="number"
                         name="age"
-                        max="150"
-                        min="0"
                         defaultValue={patient ? patient.age : null}
                         {...register("age", { required: "Age is required" })}
                         className="form-control shadow-none"
@@ -176,8 +174,6 @@ const GetAppointment = ({ hidemodal, doctor }) => {
                       <input
                         type="number"
                         name="weight"
-                        max="640"
-                        min="1"
                         defaultValue={patient ? patient.weight : null}
                         {...register("weight", {
                           required: "Weight is required",
@@ -202,8 +198,6 @@ const GetAppointment = ({ hidemodal, doctor }) => {
                       <input
                         type="number"
                         name="height"
-                        max="9"
-                        min="0"
                         defaultValue={patient ? patient.height : null}
                         {...register("height", {
                           required: "Height is required",
