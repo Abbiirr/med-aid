@@ -18,10 +18,11 @@ const Index = () => {
   const location = useLocation();
   const value=queryString.parse(location.search);
   const symptoms=value.symptoms;
-  console.log(symptoms)
+  //console.log(symptoms)
 
   useEffect(() => {
     //search doctors
+    console.log(symptoms)
     const searchDoctors = async () => {
       try {
         const response = await axios.get(

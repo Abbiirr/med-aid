@@ -36,7 +36,8 @@ const getDoctorsResult = async (req, res) => {
     });
 
 
-    console.log(specialty)
+    //console.log(diseases)
+    console.log(diseases)
 
     // adding the symptoms to the set
     // adding the specialties to the set

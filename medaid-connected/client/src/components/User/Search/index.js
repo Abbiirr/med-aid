@@ -41,8 +41,8 @@ const Index = () =>{
         // }
 
         //setSymptom(data.symptom)
-        console.log(data.symptom)
-        console.log(specialist)
+        //console.log(data.symptom)
+        //console.log(specialist)
         search = data.symptom
      
         history.push(`/search?symptoms=${data.symptom}&specialist=${specialist || options[0].value}`)
