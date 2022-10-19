@@ -11,7 +11,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 toast.configure({ autoClose: 2000 });
 const Index = ({ user }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [previewURL, setPreviewURL] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [isUpload, setUpload] = useState(false);
@@ -125,7 +129,9 @@ const Index = ({ user }) => {
                           type="text"
                           name="name"
                           defaultValue={user ? user.name : null}
-                          {...register("name", { required: "Name is required" })}
+                          {...register("name", {
+                            required: "Name is required",
+                          })}
                           className="form-control shadow-none"
                           placeholder="Name"
                         />
@@ -160,6 +166,8 @@ const Index = ({ user }) => {
                         <input
                           type="number"
                           name="age"
+                          max="150"
+                          min="0"
                           defaultValue={user ? user.age : null}
                           {...register("age", { required: "Age is required" })}
                           className="form-control shadow-none"
@@ -181,8 +189,12 @@ const Index = ({ user }) => {
                         <input
                           type="text"
                           name="height"
+                          max="9"
+                          min="0"
                           defaultValue={user ? user.height : null}
-                          {...register("height", { required: "Height is required" })}
+                          {...register("height", {
+                            required: "Height is required",
+                          })}
                           className="form-control shadow-none"
                         />
                       </div>
@@ -202,8 +214,12 @@ const Index = ({ user }) => {
                         <input
                           type="number"
                           name="weight"
+                          max="640"
+                          min="1"
                           defaultValue={user ? user.weight : null}
-                          {...register("weight", { required: "Weight is required" })}
+                          {...register("weight", {
+                            required: "Weight is required",
+                          })}
                           className="form-control shadow-none"
                           placeholder="Weight (Kg)"
                         />
@@ -227,7 +243,9 @@ const Index = ({ user }) => {
                           type="text"
                           name="bloodPressure"
                           defaultValue={user ? user.bloodPressure : null}
-                          {...register("bloodPressure", { required: "Blood pressure is required" })}
+                          {...register("bloodPressure", {
+                            required: "Blood pressure is required",
+                          })}
                           className="form-control shadow-none"
                         />
                       </div>
