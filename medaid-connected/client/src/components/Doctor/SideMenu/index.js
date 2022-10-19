@@ -73,6 +73,15 @@ const Index = ({ doctor, editdialog }) => {
           exact
           activeClassName="is-Active"
           className="btn btn-block shadow-none"
+          to="/"
+        >
+          <Icon icon={ic_apps} size={20} />
+          <span>Home</span>
+        </NavLink>
+        <NavLink
+          exact
+          activeClassName="is-Active"
+          className="btn btn-block shadow-none"
           to="/doctor/"
         >
           <Icon icon={ic_apps} size={20} />
