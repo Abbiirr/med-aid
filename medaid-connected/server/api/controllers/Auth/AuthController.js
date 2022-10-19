@@ -129,7 +129,7 @@ const Login = async (req, res, next) => {
           const token = await jwt.sign(
             { id: account._id, name: account.name, role: account.role },
             "SECRET",
-            { expiresIn: "1d" }
+            { expiresIn: "365d" }
           );
 
           // Update JWT token
