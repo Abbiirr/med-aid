@@ -25,7 +25,7 @@ DOCTOR:
                         >> /profile/:id/update          --> (middleWare/permission) AuthController.isDoctor, 
                                                             (doctor) ProfileController.updateProfile
                         >> /getDoctors                  --> (doctor) DoctorController.getDoctors
-                        >> /getDoctorsResult            --> (doctor) DoctorController.getDoctorsResult
+                        >> /getDoctorsResult            --> (doctor) DoctorController.getDoctorsResult (???)
                         >> /reload                      --> (doctor) DoctorController.reloadSearch
                         >> /appointment/:id/requests    --> (middleware/permission) AuthController.isDoctor, 
                                                             (doctor) AppointmentController.AppointmentRequests
@@ -47,6 +47,7 @@ PATIENT:
                                                                     (patient) AppointmentController.GetAppointmentRequests
                         >> /appointment/request                 --> (middleWare/permission) Authenticate.isPatient, 
                                                                     (patient) AppointmentController.SetAppointmentRequest
+                        >> /findDoctors                         --> (patient) searchDoctorsController.findNearestDoctors
 
 
 CLIENT:
