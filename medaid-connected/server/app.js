@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const morgan = require("morgan")
+const dotenv = require("dotenv").config();
 const bodyParser = require("body-parser")
 const mongoose = require('mongoose')
 const {MongoClient} = require('mongodb');
@@ -49,7 +50,7 @@ mongoose.connect(
   }
 );
 // App Port
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 8000
 app.listen(port, () => {
     console.log(`App running on ${port} port`)
 })

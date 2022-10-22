@@ -23,4 +23,6 @@ const diseaseSchema = mongoose.Schema({
   //symptoms: [String]
 });
 
-module.exports = mongoose.model("disease_schema", diseaseSchema);
+const Disease = mongoose.model("Disease", diseaseSchema);
+
+module.exports = Disease

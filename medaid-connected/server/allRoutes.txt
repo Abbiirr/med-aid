@@ -1,0 +1,56 @@
+main url : http://localhost:4000/
+
+AUTH: 
+    ..../api/v1/auth    
+                        >> /register   --> (auth) authController.Register
+                        >> /login      --> (auth) authController.Login
+                        >> /logout     --> (auth) authController.Logout
+                        >> /reset      --> (auth) authController.Reset
+
+ADMIN:
+    ..../api/v1/admin
+                        >> /auth/index  --> (admin) authController.Index []
+                        >> /auth/store  --> (admin) authController.Store [admin creation]
+                        >> /auth/login  --> (admin) authController.Login [admin login]
+                        >> /auth/logout --> (admin) authController.Logout [admin logout]
+
+                        >> /doctor                              --> (admin) doctorController.Index
+                        >> /doctor/:id/show                     --> (admin) doctorController.Show [admin sees all doctors]
+                        >> /doctor/:id/account/update/:status   --> (admin) doctorController.UpdateStatus [admin approves a doctor]
+
+
+DOCTOR:
+    ..../api/v1/doctor
+                        >> /me                          --> (doctor) ProfileController.ME
+                        >> /profile/:id/update          --> (middleWare/permission) AuthController.isDoctor, 
+                                                            (doctor) ProfileController.updateProfile
+                        >> /getDoctors                  --> (doctor) DoctorController.getDoctors
+                        >> /getDoctorsResult            --> (doctor) DoctorController.getDoctorsResult (???)
+                        >> /reload                      --> (doctor) DoctorController.reloadSearch
+                        >> /appointment/:id/requests    --> (middleware/permission) AuthController.isDoctor, 
+                                                            (doctor) AppointmentController.AppointmentRequests
+                        >> /appointment/:id/approved    --> (middleware/permission) AuthController.isDoctor, 
+                                                            (doctor) AppointmentController.ApprovedAppointments
+                        >> /appointment/approve         --> (middleware/permission) AuthController.isDoctor, 
+                                                            (doctor) AppointmentController.ApproveAppointment
+
+
+PATIENT:
+    ..../api/v1/patient
+                        >> /me                                  --> (middleWare/permission) Authenticate.isPatient, 
+                                                                    (patient) ProfileController.Me
+                        >> /profile/:id/update/bio              --> (middleWare/permission) Authenticate.isPatient, 
+                                                                    (patient) ProfileController.updateBio
+                        >> /profile/:id/update/photo            --> (middleWare/permission) Authenticate.isPatient, 
+                                                                    (patient) ProfileController.updatePhoto
+                        >> /appointment/request/:id/index       --> (middleWare/permission) Authenticate.isPatient, 
+                                                                    (patient) AppointmentController.GetAppointmentRequests
+                        >> /appointment/request                 --> (middleWare/permission) Authenticate.isPatient, 
+                                                                    (patient) AppointmentController.SetAppointmentRequest
+                        >> /findDoctors                         --> (patient) searchDoctorsController.findNearestDoctors
+
+
+CLIENT:
+    ..../api/v1/client
+                        >> /doctor  --> (client) ClientController.DoctorsIndex
+
