@@ -54,38 +54,8 @@ const Index = () => {
                     </div>
                 </div>
             </div>
-          </div>
-          <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center text-lg-left pr-lg-4">
-            <h5>Need Help?</h5>
-            <br></br>
-            <Link to="/">support</Link>
-            <Link to="/">terms & conditions</Link>
-          </div>
-          <div className="col-12 col-lg-4 mb-4 mb-lg-0 text-center text-lg-left">
-            <h5>Contacts</h5>
-            <br></br>
-            <ul>
-              <li>
-                <a href="https://www.facebook.com">
-                  <Icon icon={facebook} size={18} />
-                </a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com">
-                  <Icon icon={linkedin2} size={18} />
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com">
-                  <Icon icon={twitter} size={18} />
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Index;
