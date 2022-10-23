@@ -1,3 +1,5 @@
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -104,3 +106,4 @@ dist
 .tern-port
 frontend/package-lock.json
 Frontend-Design/package-lock.json
+.DS_Store
