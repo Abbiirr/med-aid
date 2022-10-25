@@ -9,7 +9,7 @@ import SearchComponent from "../../components/User/Search/index";
 import DoctorsListComponent from "../../components/User/DoctorsList/index";
 import FooterComponent from "../../components/User/Footer/index";
 
-//http://localhost:4000/api/v1/doctor/getDoctorsResult
+//http://localhost:4000/api/v1/patient/findDoctors?symptoms=sneezing
 
 const Index = () => {
   //use a variable to store the search query
@@ -26,7 +26,7 @@ const Index = () => {
     const searchDoctors = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/doctor/getDoctorsResult?symptoms=${symptoms}`
+          `http://localhost:4000/api/v1/patient/findDoctors?symptoms=${symptoms}`
         );
         setDoctors(response.data);
       } catch (error) {
