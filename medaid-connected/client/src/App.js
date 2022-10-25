@@ -11,6 +11,7 @@ import LoginIndex from "./pages/Auth/Login/index";
 import RegisterIndex from "./pages/Auth/Register/index";
 import ResetIndex from "./pages/Auth/Reset/index";
 import AdminLogin from "./pages/Auth/Admin/Login";
+import AllDoctors from "./pages/AllDoctors/doctorPage";
 
 // //Account
 import DoctorAccountMaster from "./pages/Account/Doctor/Master/index";
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/register" component={RegisterIndex} />
             <Route exact path="/reset" component={ResetIndex} />
             <Route exact path="/admin-login" component={AdminLogin} />
+            <Route exact path="/doctors" component={AllDoctors} />
 
             {/* Doctor Master */}
             <PrivateRoute path="/doctor" role="doctor">
