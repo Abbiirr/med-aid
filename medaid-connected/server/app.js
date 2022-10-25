@@ -21,13 +21,13 @@ app.use(
 );
 
 // Main Routes
-<<<<<<< Updated upstream
 const authRoute = require("./api/routes/auth");
 const doctorRoute = require("./api/routes/doctor");
 const patientRoute = require("./api/routes/patient");
 const adminRoute = require("./api/routes/admin");
 const clientRoute = require("./api/routes/client");
 const medicineRoute = require("./api/routes/medicineRoutes");
+const diseaseRoute = require('./api/routes/disease')
 
 // API URL's
 app.use("/api/v1/auth", authRoute);
@@ -36,28 +36,9 @@ app.use("/api/v1/patient", patientRoute);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/client", clientRoute);
 app.use("/api/v1/medicine", medicineRoute);
-=======
-const authRoute = require('./api/routes/auth')
-const doctorRoute = require('./api/routes/doctor')
-const patientRoute = require('./api/routes/patient')
-const adminRoute = require('./api/routes/admin')
-const clientRoute = require('./api/routes/client')
-const diseaseRoute = require('./api/routes/disease')
-
-// API URL's
-app.use('/api/v1/auth', authRoute)
-app.use('/api/v1/doctor', doctorRoute)
-app.use('/api/v1/patient', patientRoute)
-app.use('/api/v1/admin', adminRoute)
-app.use('/api/v1/client', clientRoute)
 app.use('/api/v1/disease', diseaseRoute)
 
 
-
-app.get('/', (req, res) => {
-    res.send("Hello I am node.js application")
-})
->>>>>>> Stashed changes
 
 app.get("/", (req, res) => {
   res.send("Hello I am node.js application");
