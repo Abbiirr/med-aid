@@ -26,8 +26,10 @@ const doctorRoute = require("./api/routes/doctor");
 const patientRoute = require("./api/routes/patient");
 const adminRoute = require("./api/routes/admin");
 const clientRoute = require("./api/routes/client");
-const medicineRoute = require("./api/routes/medicineRoutes");
+const medicineRoute = require("./api/routes/medicine");
 const diseaseRoute = require('./api/routes/disease')
+const prescriptionRoute = require("./api/routes/prescription");
+
 
 // API URL's
 app.use("/api/v1/auth", authRoute);
@@ -36,7 +38,8 @@ app.use("/api/v1/patient", patientRoute);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/client", clientRoute);
 app.use("/api/v1/medicine", medicineRoute);
-app.use('/api/v1/disease', diseaseRoute)
+app.use('/api/v1/disease', diseaseRoute);
+app.use('/api/v1/prescription', prescriptionRoute);
 
 
 
