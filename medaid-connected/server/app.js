@@ -39,7 +39,7 @@ app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/client", clientRoute);
 app.use("/api/v1/medicine", medicineRoute);
 app.use('/api/v1/disease', diseaseRoute);
-//app.use('/api/v1/prescription', prescriptionRoute);
+app.use('/api/v1/prescription', prescriptionRoute);
 
 
 

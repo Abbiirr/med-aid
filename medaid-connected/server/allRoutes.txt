@@ -54,3 +54,10 @@ CLIENT:
     ..../api/v1/client
                         >> /doctor  --> (client) ClientController.DoctorsIndex
 
+
+DISEASE:
+
+MEDICINE:
+
+PRESCRIPTION:
+
