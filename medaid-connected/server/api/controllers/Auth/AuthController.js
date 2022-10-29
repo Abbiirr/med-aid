@@ -2,6 +2,11 @@ const Doctor = require("../../../models/Doctor");
 const Patient = require("../../../models/Patient");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const Token = require("../../../models/Token");
+const sendEmail = require("../../utils/sendEmail");
+const crypto = require("crypto");
+
+let isDoctor = false;
 
 // Register Account
 const Register = async (req, res, next) => {
@@ -10,6 +15,8 @@ const Register = async (req, res, next) => {
 
     // Doctor Check
     if (role === "doctor") {
+      isDoctor = true
+
       const check = await Doctor.findOne({ email: email }).exec();
 
       if (check)
@@ -26,10 +33,23 @@ const Register = async (req, res, next) => {
         email: email,
         role: role,
         password: hashPassword,
+        verified: true
       });
 
       // Save information
       const saveAccount = await newAccount.save();
+
+      // const token = await new Token({
+      //   userId: saveAccount._id,
+      //   token: crypto.randomBytes(32).toString("hex"),
+      // }).save();
+      // const url = `http://localhost:4000/users/${saveAccount.id}/verify/${token.token}`;
+      // await sendEmail(saveAccount.email, "Verify Email", url);
+  
+      // res
+      //   .status(201)
+      //   .send({ message: "An Email sent to your account please verify" });
+
       if (saveAccount)
         return res.status(201).json({
           status: true,
@@ -39,13 +59,16 @@ const Register = async (req, res, next) => {
 
     // Patient Check
     if (role === "patient") {
+      isDoctor = false
+
       const check = await Patient.findOne({ email: email }).exec();
 
-      if (check)
+      if (check){
         return res.status(208).json({
           status: false,
           message: "This email already used.",
         });
+      }
 
       // Password Hash
       let hashPassword = await bcrypt.hash(password, 10);
@@ -55,10 +78,24 @@ const Register = async (req, res, next) => {
         email: email,
         role: role,
         password: hashPassword,
+        verified: true
       });
 
       // Save information
       const saveAccount = await newAccount.save();
+
+      // const token = await new Token({
+      //   userId: saveAccount._id,
+      //   token: crypto.randomBytes(32).toString("hex"),
+      // }).save();
+      // const url = `http://localhost:3000/${saveAccount.id}/verify/${token.token}`;
+      // console.log("running register")
+      // await sendEmail(saveAccount.email, "Verify Email", url);
+  
+      // res
+      //   .status(201)
+      //   .send({ message: "An Email sent to your account please verify" });
+
       if (saveAccount)
         return res.status(201).json({
           status: true,
@@ -78,6 +115,8 @@ const Login = async (req, res, next) => {
     // Doctor Check
     if (role === "doctor") {
       // Account find using email
+      isDoctor = true
+
       let account = await Doctor.findOne({ email }).exec();
 
       // Compare with password
@@ -98,17 +137,38 @@ const Login = async (req, res, next) => {
             { new: true }
           ).exec();
 
+          //---email verification start---
+
+          // if (!account.verified) {
+          //   let token = await Token.findOne({ userId: account._id });
+          //   if (!token) {
+          //     token = await new Token({
+          //       userId: account._id,
+          //       token: crypto.randomBytes(32).toString("hex"),
+          //     }).save();
+          //     const url = `http://localhost:4000/users/${account.id}/verify/${token.token}`;
+          //     await sendEmail(account.email, "Verify Email", url);
+          //   }
+      
+          //   return res
+          //     .status(400)
+          //     .send({ message: "An Email sent to your account please verify" });
+          // }
+
+          //---email verification end
+
           if (updateToken) {
             return res.status(200).json({
               status: true,
               token,
             });
           }
-          return res.status(404).json({
-            status: false,
-            message: "Invalid e-mail or password",
-          });
+      
+          //const emailtoken = account.generateAuthToken();
+          res.status(200).send({ data: token, message: "logged in successfully" });
+
         }
+
         return res.status(404).json({
           status: false,
           message: "Invalid e-mail or password",
@@ -118,6 +178,8 @@ const Login = async (req, res, next) => {
 
     // Patient Check
     if (role === "patient") {
+
+      isDoctor = false
       // Account find using email
       let account = await Patient.findOne({ email }).exec();
 
@@ -139,28 +201,44 @@ const Login = async (req, res, next) => {
             { new: true }
           ).exec();
 
+          //---email verification start---
+
+          // if (!account.verified) {
+          //   let token = await Token.findOne({ userId: account._id });
+          //   if (!token) {
+          //     token = await new Token({
+          //       userId: account._id,
+          //       token: crypto.randomBytes(32).toString("hex"),
+          //     }).save();
+          //     const url = `http://localhost:3000/users/${account._id}/verify/${token.token}`;
+          //     await sendEmail(account.email, "Verify Email", url);
+          //   }
+      
+          //   return res
+          //     .status(400)
+          //     .send({ message: "An Email sent to your account please verify" });
+          // }
+
+          //---email verification end
+      
           if (updateToken) {
             return res.status(200).json({
               status: true,
               token,
             });
           }
-          return res.status(404).json({
-            status: false,
-            message: "Invalid e-mail or password",
-          });
+
+          //const emailtoken = account.generateAuthToken();
+          res.status(200).send({ data: token, message: "logged in successfully" });
+          
         }
-        return res.status(404).json({
+        res.status(404).json({
           status: false,
           message: "Invalid e-mail or password",
         });
       }
     }
 
-    res.status(404).json({
-      status: false,
-      message: "Invalid e-mail or password",
-    });
   } catch (error) {
     if (error) next(error);
   }
@@ -186,6 +264,7 @@ const Logout = async (req, res, next) => {
 
     // Doctor Logout
     if (decode.role === "doctor") {
+      isDoctor = true
       // Find account using account id and role
       let account = await Doctor.findOne({
         $and: [{ _id: decode.id }, { role: decode.role }],
@@ -217,6 +296,7 @@ const Logout = async (req, res, next) => {
 
     // Patient Logout
     if (decode.role === "patient") {
+      isDoctor = false
       // Find account using account id and role
       let account = await Patient.findOne({
         $and: [{ _id: decode.id }, { role: decode.role }],
@@ -255,9 +335,51 @@ const Logout = async (req, res, next) => {
   }
 };
 
+const verifyToken = async (req, res) => {
+  if(isDoctor){
+    try {
+      const doctor = await Doctor.findOne({ _id: req.params.id });
+      if (!doctor) return res.status(400).send({ message: "Invalid link" });
+
+      const token = await Token.findOne({
+        doctorId: doctor._id,
+        token: req.params.token,
+      });
+      if (!token) return res.status(400).send({ message: "Invalid link" });
+
+      await Doctor.updateOne({ _id: doctor._id, verified: true });
+      await token.remove();
+
+      res.status(200).send({ message: "Email verified successfully" });
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
+    }
+  }
+  else{
+    try{
+      const patient = await Patient.findOne({ _id: req.params.id });
+      if (!patient) return res.status(400).send({ message: "Invalid link" });
+
+      const token = await Token.findOne({
+        patientId: patient._id,
+        token: req.params.token,
+      });
+      if (!token) return res.status(400).send({ message: "Invalid link" });
+
+      await Patient.updateOne({ _id: patient._id, verified: true });
+      await token.remove();
+
+      res.status(200).send({ message: "Email verified successfully" });
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
+    }
+  }
+};
+
 module.exports = {
   Register,
   Login,
   Reset,
   Logout,
+  verifyToken
 };

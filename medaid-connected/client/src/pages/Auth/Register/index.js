@@ -11,6 +11,7 @@ import Icon from "react-icons-kit";
 import { ic_done } from "react-icons-kit/md";
 
 toast.configure({ autoClose: 2000 });
+
 const Index = () => {
   const history = useHistory();
   const {
@@ -20,6 +21,7 @@ const Index = () => {
   } = useForm();
   const [accountType, setAccountType] = useState("patient");
   const [isLoading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const onSubmit = async (data) => {
     try {
@@ -34,6 +36,7 @@ const Index = () => {
       if (response.status === 201) {
         toast.success(response.data.message);
         setLoading(false);
+        setMsg(response.data.message)
         history.push("/login");
       }
 
@@ -128,7 +131,7 @@ const Index = () => {
                     {errors.email && errors.email.message}
                   </small>
                 ) : (
-                  <small>E-mail</small>
+                  <small></small>
                 )}
                 <input
                   type="text"
@@ -156,7 +159,7 @@ const Index = () => {
                     {errors.password && errors.password.message}
                   </small>
                 ) : (
-                  <small>Password</small>
+                  <small></small>
                 )}
                 <input
                   type="password"

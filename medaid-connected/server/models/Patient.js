@@ -68,7 +68,13 @@ const patientSchema = new Schema({
         type:String,
         trim:true,
         default:null
+    },
+    // for email authorization
+    verified: { 
+        type: Boolean, 
+        default: false 
     }
+    //-----
 },{
     timestamps:true
 })

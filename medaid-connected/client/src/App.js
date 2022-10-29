@@ -8,9 +8,11 @@ import ContentIndex from "./pages/Contact/index";
 import SearchResultIndex from "./pages/SearchResult/index";
 // //Auth
 import LoginIndex from "./pages/Auth/Login/index";
+//import EmailVerify from "./pages/Auth/EmailVerify/index";
 import RegisterIndex from "./pages/Auth/Register/index";
 import ResetIndex from "./pages/Auth/Reset/index";
 import AdminLogin from "./pages/Auth/Admin/Login";
+
 import AllDoctors from "./pages/AllDoctors/doctorPage";
 
 // //Account
@@ -33,6 +35,7 @@ function App() {
             <Route exact path="/about-us" component={AboutIndex} />
             <Route exact path="/contact-us" component={ContentIndex} />
             <Route exact path="/search" component={SearchResultIndex} />
+            {/* <Route exact path="/:id/verify/:token" element={<EmailVerify />} /> */}
             <Route exact path="/login" component={LoginIndex} />
             <Route exact path="/register" component={RegisterIndex} />
             <Route exact path="/reset" component={ResetIndex} />

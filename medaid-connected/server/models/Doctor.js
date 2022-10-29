@@ -105,6 +105,12 @@ const doctorSchema = new Schema({
         enum: ["approved", "pending", "submitted", "canceled"],
         default: "pending"
     },
+    // for email authorization
+    verified: { 
+        type: Boolean, 
+        default: false 
+    },
+    //-----
     updateRange: {
         type: Number,
         enum: [20, 40, 60, 80, 90, 100],

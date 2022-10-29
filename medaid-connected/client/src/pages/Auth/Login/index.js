@@ -130,7 +130,7 @@ const Login = () => {
             </div>
 
             {/* Account type message */}
-            <div className="account-type-message text-center px-2 px-sm-3">
+            <div className="account-type-message text-center px-2 px-sm-3 pb-2">
               <h6 className="mb-1 text-muted text-capitalize">
                 Hello {accountType}!
               </h6>
@@ -142,7 +142,7 @@ const Login = () => {
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* E-mail */}
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
                 <input
                   type="text"
                   name="email"
@@ -157,7 +157,7 @@ const Login = () => {
               </div>
 
               {/* Password */}
-              <div className="form-group mb-4">
+              <div className="form-group mb-3">
                 <input
                   type="password"
                   name="password"
@@ -174,7 +174,7 @@ const Login = () => {
               <div className="d-flex">
                 <div className="pt-2">
                   <p className="text-muted">
-                    No account? <Link to="/register">Register</Link>
+                    <span>No account?</span> <Link to="/register">Register</Link>
                   </p>
                 </div>
                 <div className="ml-auto">
