@@ -54,11 +54,6 @@ function Index() {
           <div className="my-menu">
             <ul>
               <li>
-                <NavLink activeClassName="is-Active" exact to="/">
-                  home
-                </NavLink>
-              </li>
-              <li>
                 <NavLink activeClassName="is-Active" exact to="/about-us">
                   about
                 </NavLink>
