@@ -1,134 +1,121 @@
 import React, { useState, useEffect } from "react";
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
-import { SidebarData } from './SidebarData';
-import './style.scss';
-import { IconContext } from 'react-icons';
+import { SidebarData } from "./SidebarData";
+import "./style.scss";
+import { IconContext } from "react-icons";
 import { BiHide } from "react-icons/bi";
 
 function Index() {
-    const [sidebar, setSidebar] = useState(false);
-    //var isLoggedin = false
-    const showSidebar = () => setSidebar(!sidebar);
+  const [sidebar, setSidebar] = useState(false);
+  //var isLoggedin = false
+  const showSidebar = () => setSidebar(!sidebar);
 
-    const [isShow, setShow] = useState(false);
-    const [token, setToken] = useState(localStorage.getItem("token") || undefined);
-    //console.log(token);
-    
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            setToken(localStorage.getItem("token"));
-        }
-    }, []);
+  const [isShow, setShow] = useState(false);
+  const [token, setToken] = useState(
+    localStorage.getItem("token") || undefined
+  );
+  //console.log(token);
 
-    return (
-        <>
-            <IconContext.Provider value={{ color: '#fff' }}>
-                <div className='navbar'>
-                    <Link to='#' className='menu-bars'>
-                        <IconContext.Provider
-                            value={{ color: 'black', size: '25px' }}
-                        >
-                            <div className='LogoMenu'>
-                                <ul>
-                                    <li>
-                                        <FaIcons.FaBars onClick={showSidebar} />
-                                    </li>
-                                    <li>
-                                        <p><h2><span><b>Med</b></span>Aid</h2></p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </IconContext.Provider>
-                    </Link>
-                    <div className="my-menu">
-                        <ul>
-                            <li>
-                                <NavLink activeClassName="is-Active" exact to="/">
-                                    home
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    activeClassName="is-Active"
-                                    exact
-                                    to="/about-us"
-                                >
-                                    about
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    activeClassName="is-Active"
-                                    exact
-                                    to="/contact-us"
-                                >
-                                    contact
-                                </NavLink>
-                            </li>
-                            {token ? (
-                                <li>
-                                    <NavLink
-                                    activeClassName="is-Active"
-                                    exact
-                                    to="/login"
-                                    >
-                                    profile
-                                    </NavLink>
-                                </li>
-                                ) : (
-                                <li>
-                                    <NavLink
-                                    activeClassName="is-Active"
-                                    exact
-                                    to="/login"
-                                    >
-                                    login
-                                    </NavLink>
-                                </li>
-                                )}
-                        </ul>
-                    </div>
-                </div>
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
 
-
-                <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-                    <ul className='nav-menu-items' onClick={showSidebar}>
-                        <li className='navbar-toggle'>
-                            
-                            <Link to='#' className='menu-bars'>
-                                <IconContext.Provider
-                                    value={{ color: 'black', size: '25px' }}
-                                >
-                                    <div>
-                                        <BiHide />
-                                    </div>
-                                </IconContext.Provider>
-                            </Link>
-                        </li>
-                        {SidebarData.map((item, index) => {
-                            return (
-                                <li key={index} className={item.cName}>
-                                    <Link to={item.path}>
-                                        <IconContext.Provider
-                                            value={{ color: 'black', size: '25px' }}
-                                        >
-                                            <div>
-                                                {item.icon}
-                                            </div>
-                                        </IconContext.Provider>
-
-                                        <span>{item.title}</span>
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </nav>
+  return (
+    <>
+      <IconContext.Provider value={{ color: "#fff" }}>
+        <div className="navbar">
+          <Link to="#" className="menu-bars">
+            <IconContext.Provider value={{ color: "black", size: "25px" }}>
+              <div className="LogoMenu">
+                <ul>
+                  <li>
+                    <FaIcons.FaBars onClick={showSidebar} />
+                  </li>
+                  <li>
+                    <NavLink activeClassName="is-Active" exact to="/">
+                      <p>
+                        <h2>
+                          <span>
+                            <b>Med</b>
+                          </span>
+                          Aid
+                        </h2>
+                      </p>
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
             </IconContext.Provider>
-        </>
-    );
+          </Link>
+          <div className="my-menu">
+            <ul>
+              <li>
+                <NavLink activeClassName="is-Active" exact to="/">
+                  home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink activeClassName="is-Active" exact to="/about-us">
+                  about
+                </NavLink>
+              </li>
+              <li>
+                <NavLink activeClassName="is-Active" exact to="/contact-us">
+                  contact
+                </NavLink>
+              </li>
+              {token ? (
+                <li>
+                  <NavLink activeClassName="is-Active" exact to="/login">
+                    profile
+                  </NavLink>
+                </li>
+              ) : (
+                <li>
+                  <NavLink activeClassName="is-Active" exact to="/login">
+                    login
+                  </NavLink>
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
+
+        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu-items" onClick={showSidebar}>
+            <li className="navbar-toggle">
+              <Link to="#" className="menu-bars">
+                <IconContext.Provider value={{ color: "black", size: "25px" }}>
+                  <div>
+                    <BiHide />
+                  </div>
+                </IconContext.Provider>
+              </Link>
+            </li>
+            {SidebarData.map((item, index) => {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    <IconContext.Provider
+                      value={{ color: "black", size: "25px" }}
+                    >
+                      <div>{item.icon}</div>
+                    </IconContext.Provider>
+
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </IconContext.Provider>
+    </>
+  );
 }
 
 export default Index;
