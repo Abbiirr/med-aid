@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./style.scss";
 import Icon from "react-icons-kit";
 import jwt_decode from "jwt-decode";
@@ -7,18 +7,22 @@ import AppointmentModal from "../GetAppointment/index";
 import AlertModal from "../Alert/AuthCheck/index";
 import axios from "axios";
 import { Images } from "../../../../utils/Images";
-//import { apiURL } from "../../../utils/apiURL";
+import { apiURL } from "../../../../utils/apiURL";
 
 //import doctorlist and use doctor
 //use that variable to get the query and use it[] in getDoctors
 const Index = ({ show, doctor }) => {
   //console.log(doctor);
+  const [councilHours, setCouncilHours] = useState([]);
   let thisDoctor = {
     id: doctor._id,
     name: doctor.name,
     image: doctor.image,
     college: doctor.college,
     currentHospital: doctor.currentHospital,
+    councilHour: doctor.councilHour,
+    thisCouncilHourId: doctor.councilHour,
+    thisCouncilHour: councilHours,
   };
   let id = doctor._id;
   const token = localStorage.getItem("token");
@@ -27,8 +31,36 @@ const Index = ({ show, doctor }) => {
     status: false,
     doctorId: null,
   });
-  //const [doctor, setDoctor] = useState();
 
+  const getCouncilHours = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
+
+        // header
+      );
+      if (response.status === 200) {
+        console.log("Council hours are found ");
+
+        setCouncilHours(response.data.results);
+        // console.log(councilHours);
+        // setLoading(false);
+      }
+    } catch (error) {
+      if (error) {
+        // setLoading(false);
+        console.log("Council hours are not found ");
+        console.log(error.response);
+      }
+    }
+  }, [thisDoctor.thisCouncilHourId]);
+  // getCouncilHours();
+
+  useEffect(() => {
+    getCouncilHours();
+  }, [thisDoctor.thisCouncilHourId, getCouncilHours]);
+  // const [doctor, setDoctor] = useState();
+  console.log(councilHours);
   // Role check
   const checkRole = (token) => {
     const decode = jwt_decode(token);
@@ -44,7 +76,7 @@ const Index = ({ show, doctor }) => {
     const response = await axios.get(
       "http://localhost:4000/api/v1/doctor/getDoctors"
     );
-    console.log(response);
+    // console.log(response);
   };
 
   doctor = getDoctors();
@@ -138,14 +170,25 @@ const Index = ({ show, doctor }) => {
                 </tr>
               </thead>
               <tbody>
-                {doctor.councilHour &&
-                  doctor.councilHour.map((item, i) => (
-                    <tr key={i}>
+                {thisDoctor.councilHour
+                  ? console.log(thisDoctor.councilHour._id)
+                  : console.log("Doctor not found")}
+                {/* {thisDoctor.councilHour &&
+                  thisDoctor.councilHour.map((item) => (
+                    <tr>
+                      <td key={item._id}>
+                        {item.schedule.day ? item.schedule.day : "nothing"}
+                      </td>
+                    </tr>
+                  ))} */}
+                {/* {
+                  ((item, i) => (
+                    <tr key={item._id}>
                       <th>{item.schedule.day}</th>
                       <th>{item.schedule.startTime}</th>
                       <th>{item.schedule.endTime}</th>
                     </tr>
-                  ))}
+                  ))} */}
               </tbody>
             </table>
           </div>
