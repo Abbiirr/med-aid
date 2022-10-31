@@ -32,6 +32,13 @@ const Index = ({ show, doctor }) => {
     doctorId: null,
   });
 
+  //---fetching council time data
+  let day;
+  let startTime;
+  let endTime;
+
+  //----------------------------------------------------------------
+
   const getCouncilHours = useCallback(async () => {
     try {
       const response = await axios.get(
@@ -39,12 +46,20 @@ const Index = ({ show, doctor }) => {
 
         // header
       );
+      
+      //console.log(response.data.requests[0].schedule);
+      // day = response.data.requests[0].schedule.day;
+      // startTime = response.data.requests[0].schedule.startTime;
+      // endTime = response.data.requests[0].schedule.endTime;
+
       if (response.status === 200) {
         console.log("Council hours are found ");
 
-        setCouncilHours(response.data.results);
+        setCouncilHours(response.data.requests[0].schedule);
+        //setCouncilHours(response.data.results);
         // console.log(councilHours);
         // setLoading(false);
+        //console.log(councilHours);
       }
     } catch (error) {
       if (error) {
@@ -189,6 +204,11 @@ const Index = ({ show, doctor }) => {
                       <th>{item.schedule.endTime}</th>
                     </tr>
                   ))} */}
+                  <tr>
+                      <td>{councilHours.day}</td>
+                      <td>{councilHours.startTime}</td>
+                      <td>{councilHours.endTime}</td>
+                  </tr>
               </tbody>
             </table>
           </div>
