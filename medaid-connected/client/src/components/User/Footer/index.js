@@ -7,7 +7,6 @@ import {
     mail,
     whatsapp
 } from 'react-icons-kit/icomoon'
-import { Images } from '../../../utils/Images'
 
 const Index = () => {
     return (
