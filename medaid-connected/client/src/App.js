@@ -14,6 +14,7 @@ import ResetIndex from "./pages/Auth/Reset/index";
 import AdminLogin from "./pages/Auth/Admin/Login";
 
 import AllDoctors from "./pages/AllDoctors/doctorPage";
+import Symptoms from "./pages/Symptoms/symptoms"
 
 // //Account
 import DoctorAccountMaster from "./pages/Account/Doctor/Master/index";
@@ -41,6 +42,7 @@ function App() {
             <Route exact path="/reset" component={ResetIndex} />
             <Route exact path="/admin-login" component={AdminLogin} />
             <Route exact path="/doctors" component={AllDoctors} />
+            <Route exact path="/symptoms" component={Symptoms} />
 
             {/* Doctor Master */}
             <PrivateRoute path="/doctor" role="doctor">
