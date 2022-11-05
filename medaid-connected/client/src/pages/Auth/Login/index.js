@@ -127,6 +127,30 @@ const Login = () => {
                   ) : null}
                 </div>
               </div>
+              <div className="flex-fill p-2">
+                <div
+                  className={
+                    accountType === "admin"
+                      ? "active account p-2"
+                      : "account p-2"
+                  }
+                  onClick={() => setAccountType("admin")}
+                >
+                  <img
+                    src={Images.AdminVector}
+                    className="img-fluid"
+                    alt="..."
+                  />
+                  <p>Admin</p>
+                  {accountType === "admin" ? (
+                    <Icon
+                      icon={ic_done}
+                      size={26}
+                      className="done-icon shadow"
+                    />
+                  ) : null}
+                </div>
+              </div>
             </div>
 
             {/* Account type message */}

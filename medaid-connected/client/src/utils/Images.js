@@ -6,6 +6,7 @@ import FourOFour from '../assets/static/404.png'
 import FakeUser from '../assets/static/vector.jpg'
 import DoctorVector from '../assets/static/doctor-vector.png'
 import PatientVector from '../assets/static/patient-vector.png'
+import AdminVector from '../assets/static/admin-vector.jpg'
 import PendingApproval from '../assets/static/pending.png'
 import Loading from '../assets/static/loader.gif'
 import Unlock from '../assets/static/unlock.png'
@@ -22,6 +23,7 @@ export const Images = {
     FakeUser,
     DoctorVector,
     PatientVector,
+    AdminVector,
     PendingApproval,
     Loading,
     Unlock,
