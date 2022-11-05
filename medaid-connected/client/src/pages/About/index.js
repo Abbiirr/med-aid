@@ -30,10 +30,13 @@ const Index = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h3>MedAid</h3>
-              <p>this is a doctor app</p>
-              <p>this is for dp1</p>
-              <p>Work in progress</p>
+              <h3>MedAid</h3><br></br>
+              <p>Many people have little to insight about Medical Treatment event flows.</p>
+              <p>Booking Appointments to a Doctor is confusing , specially considering
+                when Patients don't know which doctor to take council from.</p>
+              <p>Patients wait for hours mindlessly in serial to visit a doctor,
+                 not knowing when their time will actually come. Our Dynamic
+                Queue Solves this problem.</p>
               <p><a href="https://www.canva.com/design/DAFKIbUdQd0/o3qGIgirlud8VV-xSlQUsw/view?utm_content=DAFKIbUdQd0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">More Info..</a></p>
             </div>
           </div>
