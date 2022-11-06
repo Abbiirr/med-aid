@@ -5,7 +5,8 @@ import ScrollToTop from "./components/ScrollToTop/index";
 import HomeIndex from "./pages/Home/index";
 import AboutIndex from "./pages/About/index";
 import ContentIndex from "./pages/Contact/index";
-import SearchResultIndex from "./pages/SearchResult/index";
+//import SearchResultIndex from "./pages/SearchResult/index";
+import SearchResultIndex from "./components/SearchResult/index"
 // //Auth
 import LoginIndex from "./pages/Auth/Login/index";
 //import EmailVerify from "./pages/Auth/EmailVerify/index";
