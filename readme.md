@@ -18,5 +18,3 @@
 > Testing
 - Jest
 
-
-## Search Branch (frontend and backend)
