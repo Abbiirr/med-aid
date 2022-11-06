@@ -30,7 +30,7 @@
                 border-bottom-left-radius: 0;
             }
 
-            .custom-aselect__control {
+            .custom-select__control {
                 border:0px;
                 box-shadow: none;
             }
@@ -44,6 +44,17 @@
                 border-bottom-left-radius: 0;
                 border-top-right-radius: 25px;
                 border-bottom-right-radius: 25px;
+            }
+
+            .btn0 {
+                border: 0;
+                height: 45px;
+                border: 0;
+                background: $primary-color;
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
             }
         }
 

@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
 import './style.scss'
 import Select from 'react-select'
+import AsyncSelect from 'react-select/async';
 import {Icon} from 'react-icons-kit';
 import {ic_search} from 'react-icons-kit/md'
+import {cross} from 'react-icons-kit/icomoon/cross'
 import {useForm} from 'react-hook-form'
 import {useHistory} from 'react-router-dom'
 import axios from "axios";
 
-//http://localhost:4000/api/v1/doctor/getDoctorsResult
+//http://localhost:4000/api/v1/patient/findDoctors?
 
 const Index = () =>{
-    const history= useHistory()
-    const {register,handleSubmit,formState: { errors }} = useForm()
-    const [specialist, setSpecialist] = useState()
-
-    const [doctors, setDoctors] = useState([]);
-    const [symptom, setSymptom] = useState("");
 
     const options = [
         { value: 'Specialist', label: 'Specialist' },
@@ -23,48 +19,6 @@ const Index = () =>{
         { value: 'Diagnostic', label: 'Diagnostic' }
     ]
 
-
-     //onchange Specialist select
-    const onChangeSpecialist= event =>{
-        setSpecialist(event.value)
-    }
-
-    let search 
-
-    const onSubmit = data =>{
-
-         // const newData = {
-        //     latitude: lat,
-        //     longitude: lang,
-        //     disease: data.disease,
-        //     specialist: specialist
-        // }
-
-        //setSymptom(data.symptom)
-        //console.log(data.symptom)
-        //console.log(specialist)
-        search = data.symptom
-     
-        history.push(`/search?symptoms=${data.symptom}&specialist=${specialist || options[0].value}`)
-        
-        // const searchDoctors = async () => {
-        //     try {
-        //       const response = await axios.get(
-        //         `http://localhost:4000/api/v1/doctor/getDoctorsResult/?symptoms=${data.symptom}`
-        //       );
-        //       setDoctors(response.data);
-        //     } catch (error) {
-        //       if (error) console.log("error");
-        //     }
-        //   };
-        //   searchDoctors();
-        //   console.log(doctors)
-
-    }
-
-    //get symptom data
-    //need to use asyncSelect
-    //Just implimenting multi-select
     const aquaticCreatures = [
         { label: 'Fever', value: 'Fever' },
         { label: 'Cough', value: 'Cough' },
@@ -73,6 +27,33 @@ const Index = () =>{
         { label: 'Nausia', value: 'Nausia' },
         { label: 'Cramp', value: 'Cramp' },
     ];
+
+
+    const history= useHistory()
+    const {register,handleSubmit,formState: { errors }} = useForm()
+    
+    const [option, setOption] = useState(options[0])
+    const [doctors, setDoctors] = useState([]);
+    const [symptoms, setSymptoms] = useState([]);
+
+    useEffect(() => {
+        console.log(option)
+        
+    }, [option]);
+
+
+    const onSubmit = data =>{
+
+        history.push(`/search?symptoms=${data.symptom}&specialist=${option || options[0].value}`)
+
+    }
+
+    const reloadSearch = () => {
+        console.log('reload');
+        const response = axios.get(
+            `http://localhost:4000/api/v1/patient/reload`
+        );
+    };
 
     return (
         <div className="search">
@@ -86,23 +67,36 @@ const Index = () =>{
                                     <div className="flex-fill">
                                         <input
                                             maxMenuHeight={175}
-                                            classNamePrefix="custom-aselect"
+                                            classNamePrefix="custom-select"
+                                            //value={symptoms}
                                             options={aquaticCreatures}
                                             isMulti
                                             placeholder="Your Symptoms"
                                             {...register('symptom', { required: true })}
+                                            components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                                             className={errors.symptom ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
+                                            //onClick={() => setSymptoms(symptoms)}
                                         />
+                                    </div>
+                                    <div>
+                                        <button
+                                            type="reload"
+                                            className="btn0 shadow-none"
+                                            //onClick={reloadSearch}
+                                        >
+                                            <Icon icon={cross} size={15} />
+                                        </button>
                                     </div>
                                     <div>
                                         <Select
                                             classNamePrefix="custom-select"
+                                            value={option}
                                             styles={customStyles}
                                             placeholder={'Select Specialist'}
                                             components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                                             options={options}
                                             defaultValue={options[0]}
-                                            onChange={onChangeSpecialist}
+                                            //onClick={() => setOption(this.value)}
                                         />
                                     </div>
                                     <div>

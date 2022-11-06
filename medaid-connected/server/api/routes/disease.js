@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     getDiseases,
+    getSymptoms,
     setDisease,
     putDisease,
     deleteDisease,
@@ -11,6 +12,8 @@ const {
 //
 
 router.get("/", getDiseases);
+
+router.get("/symptoms", getSymptoms);
 
 router.post("/", setDisease);
 

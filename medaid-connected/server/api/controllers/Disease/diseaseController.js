@@ -5,8 +5,25 @@ const disease_schema = require('../../../models/Disease');
 //--------- main med-aid get set delete update for disease------------------------
 const getDiseases= async (req, res) => {
     const diseases = await disease_schema.find()   
-    
     res.json(diseases);
+};
+
+const getSymptoms= async (req, res) => {
+    const diseases = await disease_schema.find()
+    let symptomsArray = new Set();
+    
+    diseases.forEach(function (item) {
+        //item.symptoms.toString()
+        console.log(item.symptoms);
+        // item.symptoms.forEach(function (sym) {
+        //     symptomsArray.add(sym);
+        // });   
+    });
+
+    //console.log(symptomsArray);
+    symptomsArray = new Set();
+    res.json(symptomsArray);
+
 };
 
 const setDisease = async (req, res) => {
@@ -56,6 +73,7 @@ const deleteDisease = async (req, res) => {
 
 module.exports = {
     getDiseases,
+    getSymptoms,
     setDisease,
     putDisease,
     deleteDisease,
