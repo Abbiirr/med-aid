@@ -13,6 +13,12 @@ router.post(
   ProfileController.updateProfile
 );
 
+router.post(
+  "/profile/:id/councils/update",
+  AuthController.isDoctor,
+  DoctorController.updateCouncils
+);
+
 router.get("/getDoctors", DoctorController.getDoctors);
 router.get("/getDoctorsResult", DoctorController.getDoctorsResult);
 router.get("/reload", DoctorController.reloadSearch);
