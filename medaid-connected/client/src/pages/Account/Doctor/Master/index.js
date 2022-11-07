@@ -12,6 +12,7 @@ import ProfileUpdateModal from "../../../../components/Doctor/Model/ProfileUpdat
 import DashboardIndex from "../Dashboard/index";
 import AppointmentsIndex from "../Appointment/index";
 import RequestsIndex from "../Request/index";
+import CouncilHourUpdate from "../CouncilHours/index";
 
 import StepOne from "../../../../components/Doctor/ProfileUpdateSteps/StepOne";
 import StepTwo from "../../../../components/Doctor/ProfileUpdateSteps/StepTwo";
@@ -226,7 +227,13 @@ const Master = () => {
               component={AppointmentsIndex}
             />
             <Route exact path="/doctor/requests" component={RequestsIndex} />
+            <Route
+              exact
+              path="/doctor/councils"
+              component={CouncilHourUpdate}
+            />
           </Switch>
+          {/* <CouncilHourUpdate id={id} /> */}
         </div>
       </div>
 

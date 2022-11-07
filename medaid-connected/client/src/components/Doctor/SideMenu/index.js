@@ -106,6 +106,16 @@ const Index = ({ doctor, editdialog }) => {
           <span>Requests</span>
         </NavLink>
 
+        <NavLink
+          exact
+          activeClassName="is-Active"
+          className="btn btn-block shadow-none"
+          to="/doctor/councils"
+        >
+          <Icon icon={ic_info_outline} size={20} />
+          <span>Council Hours</span>
+        </NavLink>
+
         <button
           type="button"
           className="btn btn-block shadow-none"
