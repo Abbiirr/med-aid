@@ -89,6 +89,28 @@ const updateCouncils = async (req, res, next) => {
     if (error) next(error);
   }
 };
+
+const getCouncils = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { day, startTime, endTime } = req.body;
+
+    await CheckId(id);
+
+    // Find Profile
+    const doctor = await Doctor.findById({ _id: id }).exec();
+    if (!doctor) {
+      return res.status(404).json({
+        status: false,
+        message: "Doctor not found",
+      });
+    }
+
+    res.json(doctor.councilHour);
+  } catch (error) {
+    if (error) next(error);
+  }
+};
 const getDoctorsResult = async (req, res) => {
   // // getting the symptoms
   // let symptoms = (req.query.symptoms);
@@ -142,4 +164,5 @@ module.exports = {
   getDoctorsResult,
   reloadSearch,
   updateCouncils,
+  getCouncils,
 };

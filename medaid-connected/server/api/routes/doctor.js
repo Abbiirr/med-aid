@@ -38,6 +38,7 @@ router.put(
   AuthController.isDoctor,
   AppointmentController.ApproveAppointment
 );
-router.get("/councils/:id", CouncilHourController.getCouncilHours);
+router.get("/councils/:id", CouncilHourController.getCouncilHour);
+router.get("/:id/councils", DoctorController.getCouncils);
 
 module.exports = router;
