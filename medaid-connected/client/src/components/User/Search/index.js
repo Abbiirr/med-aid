@@ -60,12 +60,14 @@ const Index = () =>{
         // setOption([options[0]])
     }
 
-    // const reloadSearch = () => {
-    //     console.log('reload');
-    //     const response = axios.get(
-    //         `http://localhost:4000/api/v1/patient/reload`
-    //     );
-    // };
+    const reloadSearch = () => {
+        console.log('reload');
+        const response = axios.get(
+            `http://localhost:4000/api/v1/patient/reload`
+        );
+        
+        console.log("reload succesfull")
+    };
 
     return (
         <div className="search">
@@ -91,15 +93,15 @@ const Index = () =>{
                                             // className={errors.symptom ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
                                         />
                                     </div>
-                                    {/* <div>
+                                    <div>
                                         <button
                                             type="reload"
                                             className="btn0 shadow-none"
-                                            //onClick={reloadSearch}
+                                            onClick={reloadSearch}
                                         >
                                             <Icon icon={cross} size={15} />
                                         </button>
-                                    </div> */}
+                                    </div>
                                     <div>
                                         <Select
                                             classNamePrefix="custom-select"

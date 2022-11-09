@@ -3,12 +3,15 @@ const Disease = require('../../../models/Disease');
 
 let diseaseArray = new Set();
 let specialtyArray = new Set();
+let symptomsArray = [];
 
 
 const findNearestDoctors = async (req, res, next) => {
     // getting the symptoms
     let symptoms = (req.query.symptoms);
     console.log(symptoms);
+    var symptomsArray = symptoms.split(",");
+    console.log(symptomsArray);
 
     //getting the specialties
     //let specialty = (req.query.specialty);
@@ -18,17 +21,17 @@ const findNearestDoctors = async (req, res, next) => {
     //let disease_name = (req.query.name);
 
     //getting the diseases based on symptoms
-    const diseases = await Disease.find({ 
-        symptoms: { $regex: symptoms, $options: "i" } 
-        // $or : [{ symptoms: { $regex: `${symptoms}`, $options: "i" }},
-        // { specialty: { $regex: `${specialty}`, $options: "i" }},
-        // { name: { $regex: `${disease_name}`, $options: "i" }},
-        // { specialist: {$regex: `${specialist}`, $options: "i" }}]
-        
+    const diseases = await Disease.find({
+      symptoms: { $regex : symptoms, $options: "i" },
+      //symptoms: { $regex: symptoms, $options: "i" }
+      //symptoms: { $in: symptomsArray }
+      // $or : [{ symptoms: { $regex: `${symptoms}`, $options: "i" }},
+      // { specialty: { $regex: `${specialty}`, $options: "i" }},
+      // { name: { $regex: `${disease_name}`, $options: "i" }},
+      // { specialist: {$regex: `${specialist}`, $options: "i" }}]
     });
 
 
-    //console.log(diseases)
     console.log(diseases)
 
     // adding the symptoms to the set
@@ -53,7 +56,7 @@ const findNearestDoctors = async (req, res, next) => {
 
 
     //console.log(diseaseArray);
-    console.log(specialtyArray);
+    //console.log(specialtyArray);
     //console.log(doctors);
     //console.log(diseases);
 
