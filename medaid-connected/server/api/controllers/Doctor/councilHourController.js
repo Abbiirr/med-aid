@@ -2,7 +2,7 @@ const Council = require("../../../models/Council");
 const CheckId = require("../../middleware/CheckId");
 
 // Appointment Requests
-const getCouncilHours = async (req, res, next) => {
+const getCouncilHour = async (req, res, next) => {
   try {
     const { id } = req.params;
     console.log(req.params);
@@ -25,5 +25,5 @@ const getCouncilHours = async (req, res, next) => {
 };
 
 module.exports = {
-  getCouncilHours,
+  getCouncilHour,
 };

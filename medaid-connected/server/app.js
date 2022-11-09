@@ -27,10 +27,10 @@ const patientRoute = require("./api/routes/patient");
 const adminRoute = require("./api/routes/admin");
 const clientRoute = require("./api/routes/client");
 const medicineRoute = require("./api/routes/medicine");
-const diseaseRoute = require('./api/routes/disease')
+const diseaseRoute = require("./api/routes/disease");
 const prescriptionRoute = require("./api/routes/prescription");
 const diagnosticCenterRoute = require("./api/routes/diagnosticCenter");
-
+const councilsRoute = require("./api/routes/councilHourRoutes");
 
 // API URL's
 app.use("/api/v1/auth", authRoute);
@@ -39,11 +39,10 @@ app.use("/api/v1/patient", patientRoute);
 app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/client", clientRoute);
 app.use("/api/v1/medicine", medicineRoute);
-app.use('/api/v1/disease', diseaseRoute);
-app.use('/api/v1/prescription', prescriptionRoute);
-app.use('/api/v1/diagnosticCenter', diagnosticCenterRoute);
-
-
+app.use("/api/v1/disease", diseaseRoute);
+app.use("/api/v1/prescription", prescriptionRoute);
+app.use("/api/v1/diagnosticCenter", diagnosticCenterRoute);
+app.use("/api/v1/councils", councilsRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello I am node.js application");
