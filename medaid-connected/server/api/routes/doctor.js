@@ -13,6 +13,12 @@ router.post(
   ProfileController.updateProfile
 );
 
+router.post(
+  "/profile/:id/councils/update",
+  AuthController.isDoctor,
+  DoctorController.updateCouncils
+);
+
 router.get("/getDoctors", DoctorController.getDoctors);
 router.get("/getDoctorsResult", DoctorController.getDoctorsResult);
 router.get("/reload", DoctorController.reloadSearch);
@@ -32,6 +38,7 @@ router.put(
   AuthController.isDoctor,
   AppointmentController.ApproveAppointment
 );
-router.get("/councils/:id", CouncilHourController.getCouncilHours);
+router.get("/councils/:id", CouncilHourController.getCouncilHour);
+router.get("/:id/councils", DoctorController.getCouncils);
 
 module.exports = router;

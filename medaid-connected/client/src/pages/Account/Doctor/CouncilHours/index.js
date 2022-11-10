@@ -22,7 +22,7 @@ const CouncilHourUpdate = () => {
       setLoading(true);
       const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(
-        `${apiURL}/doctor/profile/${id}/update`,
+        `${apiURL}/doctor/profile/${id}/councils/update`,
         data,
         {
           headers: { authorization: token },

@@ -53,6 +53,15 @@ const Index = () =>{
         // setOption([options[0]])
     }
 
+    const reloadSearch = () => {
+        console.log('reload');
+        const response = axios.get(
+            `http://localhost:4000/api/v1/patient/reload`
+        );
+        
+        console.log("reload succesfull")
+    };
+
     return (
         <div className="search">
             <div className="container">
@@ -74,6 +83,17 @@ const Index = () =>{
                                             // have to make this field required to make the search work
                                         />
                                     </div>
+
+                                    <div>
+                                        <button
+                                            type="reload"
+                                            className="btn0 shadow-none"
+                                            onClick={reloadSearch}
+                                        >
+                                            <Icon icon={cross} size={15} />
+                                        </button>
+                                    </div>
+
                                     <div>
                                         <Select
                                             classNamePrefix="custom-select"
