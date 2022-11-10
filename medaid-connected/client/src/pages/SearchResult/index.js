@@ -22,7 +22,8 @@ const Index = () => {
 
   useEffect(() => {
     //search doctors
-    //console.log(symptoms)
+    console.log(symptoms)
+
     const searchDoctors = async () => {
       try {
         const response = await axios.get(

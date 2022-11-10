@@ -29,16 +29,8 @@ const Index = () =>{
 
 
     const history= useHistory()
-    // const {register,handleSubmit,formState: { errors }} = useForm()
 
     const [option, setOption] = useState([options[0]])
-    // const [doctors, setDoctors] = useState([]);
-    // const [symptoms, setSymptoms] = useState([]);
-
-    // const searchInputHandler = (e) =>{
-    //     setOption([...option, e.target.options]);
-    //     console.log(option)
-    // }
 
     // useEffect(() => {
     //     console.log(option)
@@ -54,18 +46,12 @@ const Index = () =>{
         }
         s = s.slice(0, -1);
 
-        console.log(selectedOptions)
-        console.log(s)
+        //console.log(selectedOptions)
+        //console.log(s)
+
         history.push(`/search?symptoms=${s}&specialist=${options[0] || options[0].value}`)
         // setOption([options[0]])
     }
-
-    // const reloadSearch = () => {
-    //     console.log('reload');
-    //     const response = axios.get(
-    //         `http://localhost:4000/api/v1/patient/reload`
-    //     );
-    // };
 
     return (
         <div className="search">
@@ -73,8 +59,7 @@ const Index = () =>{
                 <div className="row">
                     <div className="col-12">
                         <div className="card border-0 shadow">
-                            <form> {/*onSubmit={handleSubmit(onSubmit)}*/}
-
+                            <form>
                                 <div className="d-flex">
                                     <div className="flex-fill">
                                         <Select
@@ -86,20 +71,9 @@ const Index = () =>{
                                             isClearable={true}
                                             isSearchable={true}
                                             placeholder="Your Symptoms"
-                                            // {...register('symptom', { required: true })}
-                                            // components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
-                                            // className={errors.symptom ? "form-control shadow-none form-control-error" : "form-control shadow-none"}
+                                            // have to make this field required to make the search work
                                         />
                                     </div>
-                                    {/* <div>
-                                        <button
-                                            type="reload"
-                                            className="btn0 shadow-none"
-                                            //onClick={reloadSearch}
-                                        >
-                                            <Icon icon={cross} size={15} />
-                                        </button>
-                                    </div> */}
                                     <div>
                                         <Select
                                             classNamePrefix="custom-select"
@@ -109,7 +83,6 @@ const Index = () =>{
                                             components={{ DropdownIndicator: () => null, IndicatorSeparator: () => null }}
                                             options={options}
                                             defaultValue={options[0]}
-                                            //onClick={() => setOption(this.value)}
                                         />
                                     </div>
                                     <div>
