@@ -3,8 +3,11 @@ import "./style.scss";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { apiURL } from "../../../../utils/apiURL";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 
 const CouncilHourUpdate = () => {
+  const [value, onChange] = useState("10:00");
   const [id] = useState(localStorage.getItem("id"));
   const [header] = useState({
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -97,6 +100,7 @@ const CouncilHourUpdate = () => {
               <p>End time</p>
             )}
             <input
+              timeConstraints={{ minutes: { step: 15 } }}
               type="time"
               name="endTime"
               {...register("endTime", {
@@ -105,6 +109,14 @@ const CouncilHourUpdate = () => {
               className="form-control shadow-none"
             />
           </div>
+          {/* <DateTime timeConstraints={this.timeConstraints} /> */}
+
+          <Datetime
+            timeConstraints={{ minutes: { step: 15 } }}
+            dateFormat={false}
+            onChange={onChange}
+            value={value}
+          />
 
           <div className="col-12 text-right mt-3">
             <button
