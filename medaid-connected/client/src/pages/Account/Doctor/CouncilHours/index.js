@@ -7,6 +7,33 @@ import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 
 const CouncilHourUpdate = () => {
+  const options = [];
+  obj = {};
+  const splitTime = 15;
+
+  for (var i = 0; i < 96; i++) {
+    var obj = {};
+
+    var time = i * splitTime;
+    var [hour, minute] = [Math.floor(time / 60), time % 60];
+    var amOrPm = "AM";
+
+    if (hour < 10) hour = "0" + hour;
+    if (minute < 10) minute = "0" + minute;
+    // if(hour<10 && minute<10)
+    obj["value"] = `${hour}:${minute}`;
+
+    //checking if am or pm
+    if (hour >= 12) amOrPm = "PM";
+
+    //if pm transform to 12 hr format
+    if (amOrPm === "PM") hour = hour % 12;
+    if (hour == 0) hour = 12;
+
+    obj["label"] = `${hour}:${minute} ${amOrPm}`;
+
+    options.push(obj);
+  }
   const [value, onChange] = useState("10:00");
   const [id] = useState(localStorage.getItem("id"));
   const [header] = useState({
@@ -22,6 +49,7 @@ const CouncilHourUpdate = () => {
   const onSubmit = async (data) => {
     try {
       console.log(id);
+      console.log(data);
       setLoading(true);
       const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(
@@ -81,14 +109,25 @@ const CouncilHourUpdate = () => {
             ) : (
               <p>Start time</p>
             )}
-            <input
+            {/* <input
               type="time"
               name="startTime"
               {...register("startTime", {
                 required: "Start time is required",
               })}
               className="form-control shadow-none"
-            />
+            /> */}
+            <select
+              name="startTime"
+              {...register("startTime", {
+                required: "Start time is required",
+              })}
+              className="form-control shadow-none"
+            >
+              {options.map(({ value, label }, index) => (
+                <option value={value}>{label}</option>
+              ))}
+            </select>
           </div>
 
           <div className="col-12 col-lg-4">
@@ -100,7 +139,6 @@ const CouncilHourUpdate = () => {
               <p>End time</p>
             )}
             <input
-              timeConstraints={{ minutes: { step: 15 } }}
               type="time"
               name="endTime"
               {...register("endTime", {
@@ -110,13 +148,6 @@ const CouncilHourUpdate = () => {
             />
           </div>
           {/* <DateTime timeConstraints={this.timeConstraints} /> */}
-
-          <Datetime
-            timeConstraints={{ minutes: { step: 15 } }}
-            dateFormat={false}
-            onChange={onChange}
-            value={value}
-          />
 
           <div className="col-12 text-right mt-3">
             <button
