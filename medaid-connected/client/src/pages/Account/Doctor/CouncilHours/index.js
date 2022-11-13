@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./style.scss";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { apiURL } from "../../../../utils/apiURL";
-import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 
 const CouncilHourUpdate = () => {
@@ -50,6 +49,7 @@ const CouncilHourUpdate = () => {
     try {
       console.log(id);
       console.log(data);
+
       setLoading(true);
       const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(
@@ -109,14 +109,6 @@ const CouncilHourUpdate = () => {
             ) : (
               <p>Start time</p>
             )}
-            {/* <input
-              type="time"
-              name="startTime"
-              {...register("startTime", {
-                required: "Start time is required",
-              })}
-              className="form-control shadow-none"
-            /> */}
             <select
               name="startTime"
               {...register("startTime", {
@@ -138,14 +130,25 @@ const CouncilHourUpdate = () => {
             ) : (
               <p>End time</p>
             )}
-            <input
+            {/* <input
               type="time"
               name="endTime"
               {...register("endTime", {
                 required: "End time is required",
               })}
               className="form-control shadow-none"
-            />
+            /> */}
+            <select
+              name="endTime"
+              {...register("endTime", {
+                required: "End time is required",
+              })}
+              className="form-control shadow-none"
+            >
+              {options.map(({ value, label }, index) => (
+                <option value={value}>{label}</option>
+              ))}
+            </select>
           </div>
           {/* <DateTime timeConstraints={this.timeConstraints} /> */}
 
