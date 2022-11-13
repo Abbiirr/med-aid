@@ -6,7 +6,7 @@ import HomeIndex from "./pages/Home/index";
 import AboutIndex from "./pages/About/index";
 import ContentIndex from "./pages/Contact/index";
 //import SearchResultIndex from "./pages/SearchResult/index";
-import SearchResultIndex from "./components/SearchResult/index"
+import SearchResultIndex from "./components/SearchResult/index";
 // //Auth
 import LoginIndex from "./pages/Auth/Login/index";
 //import EmailVerify from "./pages/Auth/EmailVerify/index";
@@ -15,7 +15,8 @@ import ResetIndex from "./pages/Auth/Reset/index";
 import AdminLogin from "./pages/Auth/Admin/Login";
 
 import AllDoctors from "./pages/AllDoctors/doctorPage";
-import Symptoms from "./pages/Symptoms/symptoms"
+import Symptoms from "./pages/Symptoms/symptoms";
+import Medicine from "./pages/medicine/medicinePage";
 
 // //Account
 import DoctorAccountMaster from "./pages/Account/Doctor/Master/index";
@@ -44,6 +45,7 @@ function App() {
             <Route exact path="/admin-login" component={AdminLogin} />
             <Route exact path="/doctors" component={AllDoctors} />
             <Route exact path="/symptoms" component={Symptoms} />
+            <Route exact path="/medicine" component={Medicine} />
 
             {/* Doctor Master */}
             <PrivateRoute path="/doctor" role="doctor">
