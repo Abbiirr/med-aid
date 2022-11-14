@@ -20,6 +20,7 @@ const Index = () =>{
 
     const aquaticCreatures = [
         { label: 'Fever', value: 'Fever' },
+        { label: 'sneezing', value: 'sneezing' },
         { label: 'Cough', value: 'Cough' },
         { label: 'Headache', value: 'Headache' },
         { label: 'Vomiting', value: 'Vomiting' },
