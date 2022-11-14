@@ -5,6 +5,7 @@ let diseaseArray = new Set();
 let specialtyArray = new Set();
 let symptomsArray = [];
 
+
 const findNearestDoctors = async (req, res, next) => {
   // getting the symptoms
   let symptoms = req.query.symptoms;
