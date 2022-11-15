@@ -16,6 +16,7 @@ const CouncilHourUpdate = () => {
     var [hour, minute] = time.split(":");
     var value = parseInt(hour) * 60 + parseInt(minute);
     console.log(value);
+    return value;
   };
 
   const createTimeOptions = (start) => {
@@ -160,6 +161,12 @@ const CouncilHourUpdate = () => {
               name="endTime"
               {...register("endTime", {
                 required: "End time is required",
+                validate: {
+                  positive: () =>
+                    convertTimeToNumber(getValues("endTime")) >
+                      convertTimeToNumber(getValues("startTime")) ||
+                    "End Time must be greater than Start Time",
+                },
               })}
               className="form-control shadow-none"
             >
