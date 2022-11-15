@@ -5,6 +5,7 @@ import AsyncSelect from 'react-select/async';
 import {Icon} from 'react-icons-kit';
 import {ic_search} from 'react-icons-kit/md'
 import {cross} from 'react-icons-kit/icomoon/cross'
+import {redo} from 'react-icons-kit/icomoon/redo'
 import {useHistory} from 'react-router-dom'
 import axios from "axios";
 
@@ -20,6 +21,7 @@ const Index = () =>{
 
     const aquaticCreatures = [
         { label: 'Fever', value: 'Fever' },
+        { label: 'sneezing', value: 'sneezing' },
         { label: 'Cough', value: 'Cough' },
         { label: 'Headache', value: 'Headache' },
         { label: 'Vomiting', value: 'Vomiting' },
@@ -90,7 +92,7 @@ const Index = () =>{
                                             className="btn0 shadow-none"
                                             onClick={reloadSearch}
                                         >
-                                            <Icon icon={cross} size={15} />
+                                            <Icon icon={redo} size={15} />
                                         </button>
                                     </div>
 
