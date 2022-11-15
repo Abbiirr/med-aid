@@ -10,19 +10,18 @@ const getDiseases = async (req, res) => {
 
 const getSymptoms = async (req, res) => {
   const diseases = await disease_schema.find();
-  let symptomsArray = new Set();
+  // let symptomsArray = new Set();
 
-  diseases.forEach(function (item) {
-    //item.symptoms.toString()
-    console.log(item.symptoms);
-    // item.symptoms.forEach(function (sym) {
-    //     symptomsArray.add(sym);
-    // });
-  });
+  // diseases.forEach(function (item) {
+  //   //item.symptoms.toString()
+  //   //console.log(item.symptoms);
+  //   item.symptoms.forEach(function (sym) {
+  //       symptomsArray.add(sym);
+  //   });
+  // });
 
   //console.log(symptomsArray);
-  symptomsArray = new Set();
-  res.json(symptomsArray);
+  res.json(diseases);
 };
 
 const setDisease = async (req, res) => {

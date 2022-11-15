@@ -9,9 +9,44 @@ import {redo} from 'react-icons-kit/icomoon/redo'
 import {useHistory} from 'react-router-dom'
 import axios from "axios";
 
+
 //http://localhost:4000/api/v1/patient/findDoctors?
 
 const Index = () =>{
+
+    const [symptoms, setSymptoms] = useState([])
+    
+    useEffect(() => {
+        //search symptoms
+    
+        const searchSymptoms = async () => {
+          try {
+            const response = await axios.get(
+              `http://localhost:4000/api/v1/disease/symptoms`
+            );
+            //console.log(response.data);
+            let diseases = response.data
+
+            let symptomsArray = new Set();
+
+            diseases.forEach(function (item) {
+                //item.symptoms.toString()
+                //console.log(item.symptoms);
+                item.symptoms.forEach(function (sym) {
+                    symptomsArray.add(sym);
+                });
+            });
+
+            console.log(symptomsArray)
+            setSymptoms(symptomsArray);
+
+          } catch (error) {
+            if (error) console.log("error");
+          }
+        };
+        searchSymptoms();
+      }, []);
+    
 
     const options = [
         { value: 'Specialist', label: 'Specialist' },
@@ -19,16 +54,32 @@ const Index = () =>{
         { value: 'Diagnostic', label: 'Diagnostic' }
     ]
 
-    const aquaticCreatures = [
-        { label: 'Fever', value: 'Fever' },
-        { label: 'sneezing', value: 'sneezing' },
-        { label: 'Cough', value: 'Cough' },
-        { label: 'Headache', value: 'Headache' },
-        { label: 'Vomiting', value: 'Vomiting' },
-        { label: 'Nausea', value: 'Nausea' },
-        { label: 'Cramp', value: 'Cramp' },
-    ];
+    //const symptomOptions = symptoms;
+    //console.log(symptoms);
 
+    let symptomOptions = []
+
+    symptoms.forEach( function (item){
+        symptomOptions.push({
+            label: item,
+            value: item
+        })
+    })
+
+    console.log(symptomOptions);
+    
+
+    // const aquaticCreatures = [
+    //     { label: 'Fever', value: 'Fever' },
+    //     { label: 'sneezing', value: 'sneezing' },
+    //     { label: 'Cough', value: 'Cough' },
+    //     { label: 'Headache', value: 'Headache' },
+    //     { label: 'Vomiting', value: 'Vomiting' },
+    //     { label: 'Nausea', value: 'Nausea' },
+    //     { label: 'Cramp', value: 'Cramp' },
+    // ];
+
+    const aquaticCreatures = symptomOptions
 
     const history= useHistory()
 
@@ -78,6 +129,7 @@ const Index = () =>{
                                             maxMenuHeight={175}
                                             classNamePrefix="custom-select"
                                             options={aquaticCreatures}
+                                            //options={symptoms}
                                             isMulti
                                             isClearable={true}
                                             isSearchable={true}
