@@ -11,6 +11,11 @@ const CouncilHourUpdate = () => {
   const splitTime = 15;
 
   var start;
+  var buttonText = "Add";
+  const updateSubmitButton = (isLoading) => {
+    isLoading ? (buttonText = "Please Wait...") : (buttonText = "Add");
+    return buttonText;
+  };
 
   const convertTimeToNumber = (time) => {
     var [hour, minute] = time.split(":");
@@ -66,6 +71,7 @@ const CouncilHourUpdate = () => {
       console.log(data);
 
       setLoading(true);
+      updateSubmitButton(isLoading);
       const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(
         `${apiURL}/doctor/profile/${id}/councils/update`,
@@ -74,8 +80,9 @@ const CouncilHourUpdate = () => {
           headers: { authorization: token },
         }
       );
-      if (response.status === 200) {
+      if (response.status === 204) {
         setLoading(false);
+        updateSubmitButton(isLoading);
         // responsestep(5);
       }
     } catch (error) {
@@ -183,7 +190,8 @@ const CouncilHourUpdate = () => {
               className="btn shadow-none"
               disabled={isLoading}
             >
-              {isLoading ? <span>Please Wait...</span> : <span>Add</span>}
+              {/* {isLoading ? <span>Please Wait...</span> : <span>Add</span>} */}
+              <span>{buttonText}</span>
             </button>
           </div>
         </div>
