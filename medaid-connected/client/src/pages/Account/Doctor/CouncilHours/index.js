@@ -7,32 +7,45 @@ import "react-datetime/css/react-datetime.css";
 
 const CouncilHourUpdate = () => {
   const options = [];
-  obj = {};
+  // obj = {};
   const splitTime = 15;
 
-  for (var i = 0; i < 96; i++) {
-    var obj = {};
+  var start;
 
-    var time = i * splitTime;
-    var [hour, minute] = [Math.floor(time / 60), time % 60];
-    var amOrPm = "AM";
+  const convertTimeToNumber = (time) => {
+    var [hour, minute] = time.split(":");
+    var value = parseInt(hour) * 60 + parseInt(minute);
+    console.log(value);
+  };
 
-    if (hour < 10) hour = "0" + hour;
-    if (minute < 10) minute = "0" + minute;
-    // if(hour<10 && minute<10)
-    obj["value"] = `${hour}:${minute}`;
+  const createTimeOptions = (start) => {
+    convertTimeToNumber(start);
+    for (var i = 0; i < 96 - 0; i++) {
+      var obj = {};
 
-    //checking if am or pm
-    if (hour >= 12) amOrPm = "PM";
+      var time = i * splitTime;
+      var [hour, minute] = [Math.floor(time / 60), time % 60];
+      var amOrPm = "AM";
 
-    //if pm transform to 12 hr format
-    if (amOrPm === "PM") hour = hour % 12;
-    if (hour == 0) hour = 12;
+      if (hour < 10) hour = "0" + hour;
+      if (minute < 10) minute = "0" + minute;
+      // if(hour<10 && minute<10)
+      obj["value"] = `${hour}:${minute}`;
 
-    obj["label"] = `${hour}:${minute} ${amOrPm}`;
+      //checking if am or pm
+      if (hour >= 12) amOrPm = "PM";
 
-    options.push(obj);
-  }
+      //if pm transform to 12 hr format
+      if (amOrPm === "PM") hour = hour % 12;
+      if (hour == 0) hour = 12;
+
+      obj["label"] = `${hour}:${minute} ${amOrPm}`;
+
+      options.push(obj);
+    }
+  };
+  createTimeOptions("00:00");
+
   const [value, onChange] = useState("10:00");
   const [id] = useState(localStorage.getItem("id"));
   const [header] = useState({
@@ -41,8 +54,9 @@ const CouncilHourUpdate = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onTouched" });
   const [isLoading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
@@ -113,6 +127,10 @@ const CouncilHourUpdate = () => {
               name="startTime"
               {...register("startTime", {
                 required: "Start time is required",
+                onChange: () => {
+                  start = getValues("startTime");
+                  createTimeOptions(start);
+                },
               })}
               className="form-control shadow-none"
             >
