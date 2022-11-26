@@ -10,6 +10,8 @@ const Index = ({ doctors, loading }) => {
   const [staticArr] = useState([...Array(16).keys()]);
   const cardBody = createRef();
 
+  //console.log(doctors[0])
+
   const closeShow = () => setShow(false);
 
   // Show Doctor Info
@@ -61,13 +63,13 @@ const Index = ({ doctors, loading }) => {
                         <img
                           src={doctor.image}
                           className="img-fluid"
-                          alt="..."
+                          alt="doctor"
                         />
                       ) : (
                         <img
                           src={Images.Doctor}
                           className="img-fluid"
-                          alt="..."
+                          alt="not found"
                         />
                       )}
                     </div>

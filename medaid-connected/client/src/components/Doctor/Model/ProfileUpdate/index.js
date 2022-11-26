@@ -208,7 +208,7 @@ const ProfileUpdate = ({ editdialog }) => {
                     </div>
                   </div>
 
-                  <div className="col-12 my-3 text-center">
+                  <div className="col-12 my-30 text-center">
                     <input type="file" />
                     <br />
                     <button

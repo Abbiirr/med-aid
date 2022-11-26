@@ -16,12 +16,30 @@ const StepOne = ({ responsestep, id }) => {
   const [fileError, setFileError] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
   // Image onChange
-  const imageChangeHandeller = (event) => {
+  const imageChangeHandeller = async (event) => {
     let file = event.target.files[0];
+    //----
+    const base64 = await convertToBase64(file);
+    console.log(base64);
+    //----
     if (file) {
       setPreviewURL(URL.createObjectURL(event.target.files[0]));
       setSelectedFile(file);
+      //setSelectedFile({ ...postImage, myFile: base64 });
     }
   };
 
@@ -76,6 +94,7 @@ const StepOne = ({ responsestep, id }) => {
               <input
                 type="file"
                 className="upload"
+                accept=".jpeg, .png, .jpg"
                 onChange={imageChangeHandeller}
               />
               <p className="mb-0">Choose Image</p>

@@ -35,6 +35,8 @@ const doctorSchema = new Schema({
         type: String,
         trim: true,
         default: null
+        // data: Buffer,
+        // contentType: String
     },
     college: {
         type: String,

@@ -7,6 +7,7 @@ import Icon from "react-icons-kit";
 import { ic_dehaze } from "react-icons-kit/md";
 import { Images } from "../../../../utils/Images";
 
+
 import SideMenuComponent from "../../../../components/Doctor/SideMenu/index";
 import ProfileUpdateModal from "../../../../components/Doctor/Model/ProfileUpdate/index";
 import DashboardIndex from "../Dashboard/index";
