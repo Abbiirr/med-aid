@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { apiURL } from "../../utils/apiURL";
+//import { apiURL } from "../../utils/apiURL";
 import queryString from 'query-string'
 import { useLocation } from 'react-router';
 

@@ -24,9 +24,8 @@ import PatientAccountMaster from "./pages/Account/Patient/Master/index";
 import AdminMaster from "./pages/Account/Admin/Master/index";
 import PrivateRoute from "./components/PrivateRoute/index";
 
-// //Chat
-
 import FourOFour from "./pages/FourOFour/index";
+
 
 function App() {
   return (

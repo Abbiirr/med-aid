@@ -11,6 +11,10 @@ import { Images } from "../../../utils/Images";
 import Icon from "react-icons-kit";
 import { ic_done } from "react-icons-kit/md";
 
+import NavbarComponent from "../../../components/User/Navbar/index";  
+import FooterComponent from "../../../components/User/Footer/index";
+
+
 toast.configure({ autoClose: 2000 });
 const Login = () => {
   const history = useHistory();
@@ -70,151 +74,155 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="flex-center flex-column">
-        <div className="card shadow border-0 rounded-0">
-          <div className="card-header text-center bg-white border-0">
-            <h5 className="mb-0">Choose account type</h5>
-          </div>
-          <div className="card-body">
-            {/* Account type container */}
-            <div className="account-type-container d-flex">
-              <div className="flex-fill p-2">
-                <div
-                  className={
-                    accountType === "patient"
-                      ? "active account p-2"
-                      : "account p-2"
-                  }
-                  onClick={() => setAccountType("patient")}
-                >
-                  <img
-                    src={Images.PatientVector}
-                    className="img-fluid"
-                    alt="..."
-                  />
-                  <p>Patient</p>
-                  {accountType === "patient" ? (
-                    <Icon
-                      icon={ic_done}
-                      size={26}
-                      className="done-icon shadow"
-                    />
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex-fill p-2">
-                <div
-                  className={
-                    accountType === "doctor"
-                      ? "active account p-2"
-                      : "account p-2"
-                  }
-                  onClick={() => setAccountType("doctor")}
-                >
-                  <img
-                    src={Images.DoctorVector}
-                    className="img-fluid"
-                    alt="..."
-                  />
-                  <p>Doctor</p>
-                  {accountType === "doctor" ? (
-                    <Icon
-                      icon={ic_done}
-                      size={26}
-                      className="done-icon shadow"
-                    />
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex-fill p-2">
-                <div
-                  className={
-                    accountType === "admin"
-                      ? "active account p-2"
-                      : "account p-2"
-                  }
-                  onClick={() => setAccountType("admin")}
-                >
-                  <img
-                    src={Images.AdminVector}
-                    className="img-fluid"
-                    alt="..."
-                  />
-                  <p>Admin</p>
-                  {accountType === "admin" ? (
-                    <Icon
-                      icon={ic_done}
-                      size={26}
-                      className="done-icon shadow"
-                    />
-                  ) : null}
-                </div>
-              </div>
+    <div>
+      <NavbarComponent />
+      <div className="login">
+        <div className="flex-center flex-column">
+          <div className="card shadow border-0 rounded-0">
+            <div className="card-header text-center bg-white border-0">
+              <h5 className="mb-0">Choose account type</h5>
             </div>
-
-            {/* Account type message */}
-            <div className="account-type-message text-center px-2 px-sm-3 pb-2">
-              <h6 className="mb-1 text-muted text-capitalize">
-                Hello {accountType}!
-              </h6>
-              <h6 className="mb-0 text-muted">
-                Please fill out the form below to get started
-              </h6>
-            </div>
-
-            {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {/* E-mail */}
-              <div className="form-group mb-2">
-                <input
-                  type="text"
-                  name="email"
-                  {...register("email", { required: true })}
-                  className={
-                    errors.email
-                      ? "form-control shadow-none danger-border"
-                      : "form-control shadow-none"
-                  }
-                  placeholder="E-mail"
-                />
-              </div>
-
-              {/* Password */}
-              <div className="form-group mb-3">
-                <input
-                  type="password"
-                  name="password"
-                  {...register("password", { required: true })}
-                  className={
-                    errors.password
-                      ? "form-control shadow-none danger-border"
-                      : "form-control shadow-none"
-                  }
-                  placeholder="Password"
-                />
-              </div>
-
-              <div className="d-flex">
-                <div className="pt-2">
-                  <p className="text-muted">
-                    <span>No account?</span> <Link to="/register">Register</Link>
-                  </p>
-                </div>
-                <div className="ml-auto">
-                  <button
-                    type="submit"
-                    className="btn shadow-none"
-                    disabled={isLoading}
+            <div className="card-body">
+              {/* Account type container */}
+              <div className="account-type-container d-flex">
+                <div className="flex-fill p-2">
+                  <div
+                    className={
+                      accountType === "patient"
+                        ? "active account p-2"
+                        : "account p-2"
+                    }
+                    onClick={() => setAccountType("patient")}
                   >
-                    {isLoading ? <span>Logging...</span> : <span>Login</span>}
-                  </button>
+                    <img
+                      src={Images.PatientVector}
+                      className="img-fluid"
+                      alt="..."
+                    />
+                    <p>Patient</p>
+                    {accountType === "patient" ? (
+                      <Icon
+                        icon={ic_done}
+                        size={26}
+                        className="done-icon shadow"
+                      />
+                    ) : null}
+                  </div>
+                </div>
+                <div className="flex-fill p-2">
+                  <div
+                    className={
+                      accountType === "doctor"
+                        ? "active account p-2"
+                        : "account p-2"
+                    }
+                    onClick={() => setAccountType("doctor")}
+                  >
+                    <img
+                      src={Images.DoctorVector}
+                      className="img-fluid"
+                      alt="..."
+                    />
+                    <p>Doctor</p>
+                    {accountType === "doctor" ? (
+                      <Icon
+                        icon={ic_done}
+                        size={26}
+                        className="done-icon shadow"
+                      />
+                    ) : null}
+                  </div>
+                </div>
+                <div className="flex-fill p-2">
+                  <div
+                    className={
+                      accountType === "admin"
+                        ? "active account p-2"
+                        : "account p-2"
+                    }
+                    onClick={() => setAccountType("admin")}
+                  >
+                    <img
+                      src={Images.AdminVector}
+                      className="img-fluid"
+                      alt="..."
+                    />
+                    <p>Admin</p>
+                    {accountType === "admin" ? (
+                      <Icon
+                        icon={ic_done}
+                        size={26}
+                        className="done-icon shadow"
+                      />
+                    ) : null}
+                  </div>
                 </div>
               </div>
-            </form>
+
+              {/* Account type message */}
+              <div className="account-type-message text-center px-2 px-sm-3 pb-2">
+                <h6 className="mb-1 text-muted text-capitalize">
+                  Hello {accountType}!
+                </h6>
+                <h6 className="mb-0 text-muted">
+                  Please fill out the form below to get started
+                </h6>
+              </div>
+
+              {/* Form */}
+              <form onSubmit={handleSubmit(onSubmit)}>
+                {/* E-mail */}
+                <div className="form-group mb-2">
+                  <input
+                    type="text"
+                    name="email"
+                    {...register("email", { required: true })}
+                    className={
+                      errors.email
+                        ? "form-control shadow-none danger-border"
+                        : "form-control shadow-none"
+                    }
+                    placeholder="E-mail"
+                  />
+                </div>
+
+                {/* Password */}
+                <div className="form-group mb-3">
+                  <input
+                    type="password"
+                    name="password"
+                    {...register("password", { required: true })}
+                    className={
+                      errors.password
+                        ? "form-control shadow-none danger-border"
+                        : "form-control shadow-none"
+                    }
+                    placeholder="Password"
+                  />
+                </div>
+
+                <div className="d-flex">
+                  <div className="pt-2">
+                    <p className="text-muted">
+                      <span>No account?</span> <Link to="/register">Register</Link>
+                    </p>
+                  </div>
+                  <div className="ml-auto">
+                    <button
+                      type="submit"
+                      className="btn shadow-none"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? <span>Logging...</span> : <span>Login</span>}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
+      <FooterComponent/>
     </div>
   );
 };

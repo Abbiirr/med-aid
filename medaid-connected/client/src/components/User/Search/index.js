@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import './style.scss'
 import Select from 'react-select'
-import AsyncSelect from 'react-select/async';
+//import AsyncSelect from 'react-select/async';
 import {Icon} from 'react-icons-kit';
 import {ic_search} from 'react-icons-kit/md'
-import {cross} from 'react-icons-kit/icomoon/cross'
 import {redo} from 'react-icons-kit/icomoon/redo'
 import {useHistory} from 'react-router-dom'
 import axios from "axios";
