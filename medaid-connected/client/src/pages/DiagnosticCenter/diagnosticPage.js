@@ -6,28 +6,28 @@ import { useLocation } from "react-router";
 
 import NavbarComponent from "../../components/User/Navbar/index";
 // import SearchComponent from "../../components/User/Search/index";
-import MedicinesListComponent from "../../components/medicineList/medicineListComponent";
+import DiagnosticComponent from "../../components/diagnosticCenterList/diagnosticComponent";
 import FooterComponent from "../../components/User/Footer/index";
 
 const Index = () => {
   //use a variable to store the search query
-  const [medicines, setMedicines] = useState([]);
+  const [centers, setCenters] = useState([]);
 
   const location = useLocation();
   const value = queryString.parse(location.search);
 
   useEffect(() => {
-    const searchMedicines = async () => {
+    const searchCenters = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/medicine`
+          `http://localhost:4000/api/v1/diagnosticCenter`
         );
-        setMedicines(response.data);
+        setCenters(response.data);
       } catch (error) {
         if (error) console.log("error");
       }
     };
-    searchMedicines();
+    searchCenters();
   }, []);
 
   return (
@@ -40,14 +40,14 @@ const Index = () => {
             <div className="col-12 py-4"></div>
             <div className="col-12 py-4 py-lg-5 text-center">
               <h3 className="font-weight-bold mb-0">
-                Found {medicines ? medicines.length : null} medicines.
+                Found {centers ? centers.length : null} Centers.
               </h3>
             </div>
           </div>
         </div>
 
         {/* Results */}
-        <MedicinesListComponent medicines={medicines} loading={false} />
+        <DiagnosticComponent centers={centers} loading={false} />
       </div>
       <FooterComponent />
     </div>

@@ -1,10 +1,23 @@
 const Center = require("../../../models/DiagnosticCenter");
 
 //
+let searchedCenter;
+
 
 //--------- main med-aid get set delete update for disease------------------------
 const getCenter = async (req, res) => {
+  //searchedCenter = req.query.centerName;
   const centers = await Center.find();
+
+  res.json(centers);
+};
+
+
+const getSpecificCenter = async (req, res) => {
+  searchedCenter = req.query.centerName;
+  const centers = await Center.find({
+    name: { $regex: req.query.centerName, $options: "i" },
+  });
 
   res.json(centers);
 };
@@ -75,6 +88,7 @@ const deleteCenter = async (req, res) => {
 
 module.exports = {
   getCenter,
+  getSpecificCenter,
   setCenter,
   putCenter,
   deleteCenter,

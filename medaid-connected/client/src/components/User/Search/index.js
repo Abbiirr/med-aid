@@ -68,16 +68,6 @@ const Index = () =>{
     console.log(symptomOptions);
     
 
-    // const aquaticCreatures = [
-    //     { label: 'Fever', value: 'Fever' },
-    //     { label: 'sneezing', value: 'sneezing' },
-    //     { label: 'Cough', value: 'Cough' },
-    //     { label: 'Headache', value: 'Headache' },
-    //     { label: 'Vomiting', value: 'Vomiting' },
-    //     { label: 'Nausea', value: 'Nausea' },
-    //     { label: 'Cramp', value: 'Cramp' },
-    // ];
-
     const aquaticCreatures = symptomOptions
 
     const history= useHistory()
@@ -89,6 +79,8 @@ const Index = () =>{
     // }, [option]);
 
     const [selectedOptions, setSelectedOptions] = useState([])
+
+    //let s = ''
 
     const onSubmit = (e) =>{
         e.preventDefault()

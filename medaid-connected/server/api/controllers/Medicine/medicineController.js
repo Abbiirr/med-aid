@@ -1,10 +1,21 @@
 const Medicine = require("../../../models/Medicine");
 
 //
+let searchedMedicine;
 
 //--------- main med-aid get set delete update for disease------------------------
 const getMedicines = async (req, res) => {
+  //searchedMedicine = req.query.medicineName;
   const medicines = await Medicine.find();
+
+  res.json(medicines);
+};
+
+const getSpecificMedicine = async (req, res) => {
+  searchedMedicine = req.query.medicineName;
+  const medicines = await Medicine.find({
+    name: { $regex: searchedMedicine, $options: "i" }
+  });
 
   res.json(medicines);
 };
@@ -68,6 +79,7 @@ const deleteMedicine = async (req, res) => {
 
 module.exports = {
   getMedicines,
+  getSpecificMedicine,
   setMedicine,
   putMedicine,
   deleteMedicine,
