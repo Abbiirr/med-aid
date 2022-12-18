@@ -1,7 +1,7 @@
 const Medicine = require("../../../models/Medicine");
 
 //
-let searchedMedicine;
+//let searchedMedicine;
 
 //--------- main med-aid get set delete update for disease------------------------
 const getMedicines = async (req, res) => {
