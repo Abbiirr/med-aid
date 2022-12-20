@@ -12,9 +12,10 @@ import FooterComponent from "../../components/User/Footer/index";
 const Index = () => {
   //use a variable to store the search query
   const [medicines, setMedicines] = useState([]);
+  const [q, setQ] = useState("");
 
   const location = useLocation();
-  const value = queryString.parse(location.search);
+  //const value = queryString.parse(location.search);
 
   useEffect(() => {
     const searchMedicines = async () => {
@@ -33,7 +34,26 @@ const Index = () => {
   return (
     <div>
       <NavbarComponent />
-
+      {/* -----------------Search Component----------------- */}
+      <div className="search-wrapper">
+        <label htmlFor="search-form">
+          <input
+            type="search"
+            name="search-form"
+            id="search-form"
+            className="search-input"
+            placeholder="Search for..."
+            value={q}
+            /*
+                                // set the value of our useState q
+                                //  anytime the user types in the search box
+                                */
+            onChange={(e) => setQ(e.target.value)}
+          />
+          <span className="sr-only">Search Medicines here</span>
+        </label>
+      </div>
+      {/* -----------------Search Component----------------- */}
       <div className="search-result-index">
         <div className="container">
           <div className="row">
