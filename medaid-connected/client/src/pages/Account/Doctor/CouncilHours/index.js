@@ -74,7 +74,7 @@ const CouncilHourUpdate = () => {
           headers: { authorization: token },
         }
       );
-      if (response.status === 200) {
+      if (response.status === 204) {
         setLoading(false);
         // responsestep(5);
       }
