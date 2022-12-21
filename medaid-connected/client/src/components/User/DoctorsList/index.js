@@ -1,7 +1,7 @@
 import React, { useState, createRef } from "react";
 import "./style.scss";
 import Skeleton from "react-loading-skeleton";
-import DoctorShowComponent from "../Model/DoctorShow/index";
+import DoctorShowComponent from "../../doctorSearchPage/DoctorShow/doctorShowSide";
 import { Images } from "../../../utils/Images";
 
 const Index = ({ doctors, loading }) => {
