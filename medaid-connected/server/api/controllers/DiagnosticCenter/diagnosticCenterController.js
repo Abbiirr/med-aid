@@ -16,7 +16,7 @@ const getCenter = async (req, res) => {
 const getSpecificCenter = async (req, res) => {
   searchedCenter = req.query.centerName;
   const centers = await Center.find({
-    name: { $regex: searchedCenter, $options: "i" },
+    name: { $in: searchedCenter },
   });
 
   res.json(centers);

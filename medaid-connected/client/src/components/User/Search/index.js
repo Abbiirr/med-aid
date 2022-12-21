@@ -65,7 +65,7 @@ const Index = () =>{
         })
     })
 
-    console.log(symptomOptions);
+    //console.log(symptomOptions);
     
 
     const aquaticCreatures = symptomOptions

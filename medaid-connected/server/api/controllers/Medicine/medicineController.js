@@ -14,7 +14,7 @@ const getMedicines = async (req, res) => {
 const getSpecificMedicine = async (req, res) => {
   searchedMedicine = req.query.medicineName;
   const medicines = await Medicine.find({
-    name: { $regex: searchedMedicine, $options: "i" }
+    name: { $in: searchedMedicine}
   });
 
   res.json(medicines);
