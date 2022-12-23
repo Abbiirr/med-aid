@@ -28,7 +28,7 @@ class DateInput extends React.Component {
         <DatePicker
           selected={this.state.startDate}
           onChange={this.handleChange}
-          customInput={<CustomInput placeholderText="Get Appointment" />}
+          customInput={<CustomInput />}
           placeholderText="Get Appointment"
         />
       </div>
