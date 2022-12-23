@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import DatePicker from "react-datepicker";
 import "./style.scss";
 import Icon from "react-icons-kit";
 import jwt_decode from "jwt-decode";
@@ -8,6 +9,8 @@ import AlertModal from "../../User/Model/Alert/AuthCheck/index";
 import axios from "axios";
 import { Images } from "../../../utils/Images";
 import { apiURL } from "../../../utils/apiURL";
+
+import DateInput from "../../Reusable/DateInput";
 
 //import doctorlist and use doctor
 //use that variable to get the query and use it[] in getDoctors
@@ -220,13 +223,14 @@ const Index = ({ show, doctor }) => {
                     </div> */}
 
           <div className="my-3 text-center">
-            <button
+            {/* <button
               type="button"
               className="btn shadow-none"
               onClick={handleAppointment}
             >
               Get Appointment
-            </button>
+            </button> */}
+            <DateInput placeholderText={"Get Appointment"}></DateInput>
           </div>
         </div>
       </div>
