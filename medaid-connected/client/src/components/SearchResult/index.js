@@ -26,7 +26,7 @@ const Index = () => {
     const searchDoctors = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/v1/patient/findDoctors?symptoms=${symptoms}`
+         `http://localhost:4000/api/v1/patient/findDoctors?symptoms=${symptoms}` 
         );
         setDoctors(response.data);
       } catch (error) {
@@ -34,7 +34,7 @@ const Index = () => {
       }
     };
     searchDoctors();
-  }, []);
+  }, [symptoms]);
 
 
   return (

@@ -3,6 +3,7 @@ import axios from "axios";
 import { apiURL } from "../../utils/apiURL";
 import queryString from "query-string";
 import { useLocation } from "react-router";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 import NavbarComponent from "../../components/User/Navbar/index";
 import SearchComponent from "../../components/User/Search/index";
@@ -36,12 +37,30 @@ const Index = () => {
     searchDoctors();
   }, []);
 
+  let sortBy;
+  const handleChange = () => {
+    //load page
+  };
+
   return (
     <div>
       <NavbarComponent />
-
       <div className="search-result-index">
         <div className="container">
+          <FormControl sx={{ marginTop: 5, width: 200}}>
+            <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={sortBy}
+              label="sort by"
+              onChange={handleChange}
+            >
+              <MenuItem value={"default"}>Default</MenuItem>
+              <MenuItem value={"location"}>Location</MenuItem>
+              <MenuItem value={"Experience"}>Experience</MenuItem>
+            </Select>
+          </FormControl>
           <div className="row">
             <div className="col-12 py-4"></div>
             <div className="col-12 py-4 py-lg-5 text-center">

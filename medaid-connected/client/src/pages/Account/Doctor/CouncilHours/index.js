@@ -58,14 +58,16 @@ const CouncilHourUpdate = () => {
     getValues,
     formState: { errors },
   } = useForm({ mode: "onTouched" });
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
+    console.log("Is loading before setting true? : ", isLoading)
     try {
       console.log(id);
       console.log(data);
 
-      setLoading(true);
+      setIsLoading(true);
+      console.log("Is loading after setting true? : ", isLoading);
       const token = `token ${localStorage.getItem("token")}`;
       const response = await axios.post(
         `${apiURL}/doctor/profile/${id}/councils/update`,
@@ -75,12 +77,13 @@ const CouncilHourUpdate = () => {
         }
       );
       if (response.status === 204) {
-        setLoading(false);
+        setIsLoading(false);
         // responsestep(5);
+        console.log("Is loading after setting false? : ", isLoading);
       }
     } catch (error) {
       if (error) {
-        setLoading(false);
+        setIsLoading(false);
         console.log(error.response);
       }
     }
@@ -182,6 +185,7 @@ const CouncilHourUpdate = () => {
               type="submit"
               className="btn shadow-none"
               disabled={isLoading}
+              onClick={onSubmit}
             >
               {isLoading ? <span>Please Wait...</span> : <span>Add</span>}
             </button>

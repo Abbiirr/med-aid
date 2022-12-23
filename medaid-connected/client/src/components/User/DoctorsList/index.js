@@ -3,6 +3,7 @@ import "./style.scss";
 import Skeleton from "react-loading-skeleton";
 import DoctorShowComponent from "../../doctorSearchPage/DoctorShow/doctorShowSide";
 import { Images } from "../../../utils/Images";
+import axios from "axios";
 
 const Index = ({ doctors, loading }) => {
   const [show, setShow] = useState(false);
@@ -10,14 +11,17 @@ const Index = ({ doctors, loading }) => {
   const [staticArr] = useState([...Array(16).keys()]);
   const cardBody = createRef();
 
-  //console.log(doctors[0])
+  //console.log(doctors[0].image.toString())
 
   const closeShow = () => setShow(false);
+
+  
 
   // Show Doctor Info
   const showDoctorInfo = (data) => {
     setShow(true);
     setDoctor(data);
+    console.log(data.image)
   };
 
   // Check Loading
@@ -59,9 +63,12 @@ const Index = ({ doctors, loading }) => {
                     onClick={() => showDoctorInfo(doctor)}
                   >
                     <div className="img-box rounded-circle">
-                      {doctor.image ? (
+                      {
+                      doctor.image ? (
                         <img
-                          src={doctor.image}
+                          // src={doctor.image}
+                          src={Images.Doctor}
+                          //src=""
                           className="img-fluid"
                           alt="doctor"
                         />
