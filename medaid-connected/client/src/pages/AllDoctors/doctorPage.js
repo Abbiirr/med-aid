@@ -47,7 +47,7 @@ const Index = () => {
       <NavbarComponent />
       <div className="search-result-index">
         <div className="container">
-          <FormControl sx={{ marginTop: 5, width: 200}}>
+          <FormControl sx={{ marginTop: 5, width: 200, zIndex:0}}>
             <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
             <Select
               labelId="demo-simple-select-label"
