@@ -18,6 +18,8 @@ import AllDoctors from "./pages/AllDoctors/doctorPage";
 import Symptoms from "./pages/Symptoms/symptoms";
 import Medicine from "./pages/medicine/medicinePage";
 import DiagnosticCenter from "./pages/DiagnosticCenter/diagnosticPage";
+import Appointments from "./pages/Appointments/appointmentPage";
+
 
 // //Account
 import DoctorAccountMaster from "./pages/Account/Doctor/Master/index";
@@ -47,6 +49,7 @@ function App() {
             <Route exact path="/symptoms" component={Symptoms} />
             <Route exact path="/medicine" component={Medicine} />
             <Route exact path="/diagnostic" component={DiagnosticCenter} />
+            <Route exact path="/appointment" component={Appointments} />
 
             {/* Doctor Master */}
             <PrivateRoute path="/doctor" role="doctor">
