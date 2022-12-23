@@ -26,7 +26,7 @@ const setMedicine = async (req, res) => {
 
     const check = await Medicine.findOne({ name: name }).exec();
 
-    if (check)
+    if (false)
       return res.status(208).json({
         status: false,
         message: "This medicine already exists.",

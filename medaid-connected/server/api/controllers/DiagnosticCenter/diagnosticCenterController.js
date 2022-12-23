@@ -12,11 +12,13 @@ const getCenter = async (req, res) => {
   res.json(centers);
 };
 
+//{EmployeeDetails:{$elemMatch:{EmployeePerformanceArea : "C++", Year : 1998}}}
 
 const getSpecificCenter = async (req, res) => {
-  searchedCenter = req.query.centerName;
+  searchedTest = req.query.testName;
   const centers = await Center.find({
-    name: { $in: searchedCenter },
+    tests: { $elemMatch: { test_name: searchedTest } },
+    //test_name: { $in: searchedTest },
   });
 
   res.json(centers);
@@ -24,11 +26,11 @@ const getSpecificCenter = async (req, res) => {
 
 const setCenter = async (req, res) => {
   try {
-    const { name, location } = req.body;
+    const { name, location, tests } = req.body;
 
     const check = await Center.findOne({ name: name }).exec();
 
-    if (check)
+    if (false)
       return res.status(208).json({
         status: false,
         message: "This Center already exists.",
@@ -37,6 +39,7 @@ const setCenter = async (req, res) => {
     const newCenter = await Center.create({
       name: name,
       location: location,
+      tests: tests
     });
     const createCenter = await newCenter.save();
 

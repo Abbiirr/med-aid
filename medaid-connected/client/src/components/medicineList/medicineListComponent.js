@@ -1,8 +1,9 @@
 import React, { useState, createRef } from "react";
 import "./style.scss";
 import Skeleton from "react-loading-skeleton";
+import { Images } from "../../utils/Images";
 
-const Index = ({ medicines, loading }) => {
+const Index = ({ medicines, loading, message }) => {
   const [staticArr] = useState([...Array(16).keys()]);
   const cardBody = createRef();
 
@@ -42,8 +43,17 @@ const Index = ({ medicines, loading }) => {
                 <div className="card medicine-card">
                   <div className="card-body">
                     <div className="content">
-                      <h6>{medicine.name}</h6>
-                      <p className="text-capitalize">{medicine.price}</p>
+                      <img
+                        src={Images.Medicine}
+                        alt=""
+                      />
+                      <h5>----</h5>
+                      <h6>
+                        <b>{medicine.name}</b>
+                      </h6>
+                      <p className="text-capitalize">
+                        Price: {medicine.price} tk/piece
+                      </p>
 
                       {/* <p className="text-capitalize">{medicine._id}</p> */}
                     </div>

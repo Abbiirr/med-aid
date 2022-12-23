@@ -13,6 +13,8 @@ import Unlock from '../assets/static/unlock.png'
 import PeopleSearch from '../assets/static/people_search.png'
 import Service from '../assets/static/service.png'
 import Doctor from '../assets/static/doctor.jpg'
+import Medicine from '../assets/static/medicine.jpg'
+import Center from "../assets/static/center.jpg";
 
 export const Images = {
     Logo,
@@ -29,5 +31,7 @@ export const Images = {
     Unlock,
     PeopleSearch,
     Service,
-    Doctor
+    Doctor, 
+    Medicine,
+    Center
 } 

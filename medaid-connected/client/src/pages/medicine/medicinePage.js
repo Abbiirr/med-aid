@@ -16,7 +16,7 @@ const Index = () => {
   const [allMedicines, setAllmedicines] = useState([]);
   const [q, setQ] = useState("");
   const [searchInput, setSearchInput] = useState("");
-    
+  const [message, setMessage] = useState("");
 
   const location = useLocation();
   //const value = queryString.parse(location.search);
@@ -29,6 +29,7 @@ const Index = () => {
         );
         setMedicines(response.data);
         setAllmedicines(response.data);
+        setMessage("");
       } catch (error) {
         if (error) console.log("error");
       }
@@ -50,7 +51,11 @@ const Index = () => {
         `http://localhost:4000/api/v1/medicine/findMedicine?medicineName=${searchInput}`
       );
       console.log(response);
-      setMedicines(response.data);
+      let temp = response.data;
+      temp = [...temp].sort((a, b) => a.price - b.price);
+      //setMedicines(response.data);
+      setMedicines(temp)
+      setMessage("Sorted By Price")
     } catch (error) {
       if (error) console.log("error");
     }
@@ -72,33 +77,34 @@ const Index = () => {
     <div>
       <NavbarComponent />
       <section className="garamond">
-          <div className="navy georgia ma0 grow">
-              <h2 className="f2">Search your medicine</h2>
-          </div>
-          <div className="pa2">
-              {/* <input 
+        <div className="navy georgia ma0 grow">
+          <h2 className="f2">Search your medicine</h2>
+        </div>
+        <div className="pa2">
+          {/* <input 
               className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
               type = "search" 
               placeholder = "Search Medicine" 
               onChange = {handleChange}
               value={searchInput}
               /> */}
-              <Select
-                  onChange={(item) => setSearchInput(item.value)}
-                  maxMenuHeight={175}
-                  classNamePrefix="custom-select"
-                  options={medicineOptions}
-                  //options={symptoms}
-                  //isMulti
-                  //isClearable={true}
-                  isSearchable={true}
-                  placeholder="Your medicine"
-                  // have to make this field required to make the search work
-              />
-              <button onClick={submitSearch} type="submit">Search</button>
-          </div>
-
-      </section> 
+          <Select
+            onChange={(item) => setSearchInput(item.value)}
+            maxMenuHeight={175}
+            classNamePrefix="custom-select"
+            options={medicineOptions}
+            //options={symptoms}
+            //isMulti
+            //isClearable={true}
+            isSearchable={true}
+            placeholder="Your medicine"
+            // have to make this field required to make the search work
+          />
+          <button onClick={submitSearch} type="submit">
+            Search
+          </button>
+        </div>
+      </section>
       <div className="search-result-index">
         <div className="container">
           <div className="row">
@@ -107,12 +113,19 @@ const Index = () => {
               <h3 className="font-weight-bold mb-0">
                 Found {medicines ? medicines.length : null} medicines.
               </h3>
+              <h6 className="font-weight-bold mb-0">
+                {message ? message : null}
+              </h6>
             </div>
           </div>
         </div>
 
         {/* Results */}
-        <MedicinesListComponent medicines={medicines} loading={false} />
+        <MedicinesListComponent
+          medicines={medicines}
+          loading={false}
+          message={message}
+        />
       </div>
       <FooterComponent />
     </div>
