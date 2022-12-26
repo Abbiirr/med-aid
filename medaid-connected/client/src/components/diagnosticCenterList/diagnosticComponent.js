@@ -3,7 +3,7 @@ import "./style.scss";
 import Skeleton from "react-loading-skeleton";
 import { Images } from "../../utils/Images";
 
-const Index = ({ centers, loading, message }) => {
+const Index = ({ centers, loading, searched, testName }) => {
   const [staticArr] = useState([...Array(16).keys()]);
   const cardBody = createRef();
 
@@ -35,6 +35,17 @@ const Index = ({ centers, loading, message }) => {
     );
   }
 
+  // search the test_name with price from the centers and show it in the list
+  // centers.map((center) => {
+  //   center.tests.map((test) => {
+  //     if (test.test_name === test_name) {
+  //       console.log(test.test_name);
+  //       console.log(test.price);
+  //     }
+  //   });
+  // });
+
+
   return (
     <div className="centers-list-component">
       <div className="container">
@@ -47,9 +58,22 @@ const Index = ({ centers, loading, message }) => {
                     <div className="content">
                       <img src={Images.Center} alt="" />
                       <h5>----</h5>
-                      <h6><b>Center Name : {center.name}</b></h6>
-                      <p className="text-capitalize">Situated at : {center.location}</p>
-                      {/* <p className="text-capitalize">{medicine._id}</p> */}
+                      <h6>
+                        <b>Center Name : {center.name}</b>
+                      </h6>
+                      <p className="text-capitalize">
+                        Situated at : {center.location}
+                      </p>
+                      {searched ? (
+                        <div>
+                          <p>
+                            <b>Test Name : {testName}</b>
+                          </p>
+                          <p>
+                            <b>Price : {center.tests[0].test_cost}</b>  
+                          </p>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>

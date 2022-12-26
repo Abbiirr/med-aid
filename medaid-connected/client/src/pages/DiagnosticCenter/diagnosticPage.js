@@ -20,6 +20,8 @@ const Index = () => {
   const [q, setQ] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [message, setMessage] = useState("");
+  const [searchTest, setSearchTest] = useState("");
+  const [searched, setSearched] = useState(false);
     
 
   const location = useLocation();
@@ -64,7 +66,20 @@ const Index = () => {
         `http://localhost:4000/api/v1/diagnosticCenter/findCenter?testName=${searchInput}`
       );
       console.log("Test based center : ", response.data);
-      setCenters(response.data);
+
+      //---sorting based on searched test price
+      let temp =response.data
+      temp.sort((a, b) => {
+        let testA = a.tests.find((test) => test.test_name === searchInput);
+        let testB = b.tests.find((test) => test.test_name === searchInput);
+        return testA.test_cost - testB.test_cost;
+      });
+      //---end of sorting based on searched test price
+      setCenters(temp);
+      setSearchTest(searchInput);
+      setSearched(true);
+      console.log("test-price based center : ", temp)
+      //setCenters(response.data);
       setMessage("Search results for " + searchInput);
     } catch (error) {
       if (error) console.log("error");
@@ -140,7 +155,7 @@ const Index = () => {
         </div>
 
         {/* Results */}
-        <DiagnosticCenterListComponent centers={centers} loading={false} message={message}/>
+        <DiagnosticCenterListComponent centers={centers} loading={false} searched={searched} testName={searchTest}/>
       </div>
       <FooterComponent />
     </div>
