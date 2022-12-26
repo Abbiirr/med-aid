@@ -4,6 +4,7 @@ import { apiURL } from "../../utils/apiURL";
 import queryString from "query-string";
 import { useLocation } from "react-router";
 import Select from 'react-select'
+import "./style.scss";
 
 import NavbarComponent from "../../components/User/Navbar/index";
 //import SearchComponent from "../../components/User/SearchForMedicine/index";
@@ -81,13 +82,6 @@ const Index = () => {
           <h2 className="f2">Search your medicine</h2>
         </div>
         <div className="pa2">
-          {/* <input 
-              className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
-              type = "search" 
-              placeholder = "Search Medicine" 
-              onChange = {handleChange}
-              value={searchInput}
-              /> */}
           <Select
             onChange={(item) => setSearchInput(item.value)}
             maxMenuHeight={175}
@@ -100,7 +94,7 @@ const Index = () => {
             placeholder="Your medicine"
             // have to make this field required to make the search work
           />
-          <button onClick={submitSearch} type="submit">
+          <button onClick={submitSearch} type="submit" className="btn">
             Search
           </button>
         </div>
