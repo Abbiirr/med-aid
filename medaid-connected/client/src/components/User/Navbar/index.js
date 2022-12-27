@@ -40,7 +40,7 @@ function Index() {
                       <p>
                         <h2>
                           <span>
-                            <b>Med</b>
+                            <b style={{ color: "red" }}>Med</b>
                           </span>
                           Aid
                         </h2>

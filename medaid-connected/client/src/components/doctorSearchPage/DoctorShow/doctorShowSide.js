@@ -10,8 +10,10 @@ import axios from "axios";
 import { Images } from "../../../utils/Images";
 import { apiURL } from "../../../utils/apiURL";
 
+
 import DateInput from "../../Reusable/DateInput";
 
+const MyContext = React.createContext();
 //import doctorlist and use doctor
 //use that variable to get the query and use it[] in getDoctors
 const Index = ({ show, doctor }) => {
@@ -230,6 +232,10 @@ const Index = ({ show, doctor }) => {
             >
               Get Appointment
             </button> */}
+            {/* <MyContext.Consumer>
+              <DateInput />
+              {(value) => console.log("Date value from DateInput", value)}
+            </MyContext.Consumer> */}
             <DateInput placeholderText={"Get Appointment"}></DateInput>
           </div>
         </div>

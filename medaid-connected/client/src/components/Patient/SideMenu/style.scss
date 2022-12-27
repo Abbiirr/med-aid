@@ -53,10 +53,13 @@
   // Body
   .body {
     padding: 15px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 
     .btn {
       margin-top: 0;
-      text-align: center;
+      text-align: left;
       border-radius: 5px;
       padding-top: 8px;
       padding-left: 15px;
@@ -74,9 +77,20 @@
         font-size: 14px;
         font-weight: 500;
         margin-bottom: 0;
+        text-align: center;
         text-transform: capitalize;
         font-family: "Roboto", sans-serif;
       }
+
+      span {
+        font-size: 14px;
+        font-weight: 500;
+        margin-left: 80px;
+        text-align: center;
+        text-transform: capitalize;
+        font-family: "Roboto", sans-serif;
+      }
+
     }
 
     .is-Active {

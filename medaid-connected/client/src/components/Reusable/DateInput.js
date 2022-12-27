@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 
 // import "./styles.css";
 
+const MyContext = React.createContext();
+
 class DateInput extends React.Component {
   constructor(props) {
     super(props);
@@ -20,18 +22,34 @@ class DateInput extends React.Component {
     this.setState({
       startDate: date,
     });
+    console.log("Inside DateInput : ", date);
   }
+
+  // render() {
+  //   return (
+  //     <div>
+  //       <DatePicker
+  //         selected={this.state.startDate}
+  //         onChange={this.handleChange}
+  //         customInput={<CustomInput />}
+  //         placeholderText="Get Appointment"
+  //       />
+  //     </div>
+  //   );
+  // }
 
   render() {
     return (
-      <div>
-        <DatePicker
-          selected={this.state.startDate}
-          onChange={this.handleChange}
-          customInput={<CustomInput />}
-          placeholderText="Get Appointment"
-        />
-      </div>
+      <MyContext.Provider value={this.state.startDate}>
+        <div>
+          <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleChange}
+            customInput={<CustomInput />}
+            placeholderText="Get Appointment"
+          />
+        </div>
+      </MyContext.Provider>
     );
   }
 }

@@ -49,8 +49,8 @@ const Index = () =>{
 
     const options = [
         { value: 'Specialist', label: 'Specialist' },
-        { value: 'Medicine', label: 'Medicine' },
-        { value: 'Diagnostic', label: 'Diagnostic' }
+        // { value: 'Medicine', label: 'Medicine' },
+        // { value: 'Diagnostic', label: 'Diagnostic' }
     ]
 
     //const symptomOptions = symptoms;
