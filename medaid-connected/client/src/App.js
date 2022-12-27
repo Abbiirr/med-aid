@@ -18,8 +18,8 @@ import AllDoctors from "./pages/AllDoctors/doctorPage";
 import Symptoms from "./pages/Symptoms/symptoms";
 import Medicine from "./pages/medicine/medicinePage";
 import DiagnosticCenter from "./pages/DiagnosticCenter/diagnosticPage";
+import MapPage from "./pages/MapPage/mapPage";
 import Appointments from "./pages/Appointments/appointmentPage";
-
 
 // //Account
 import DoctorAccountMaster from "./pages/Account/Doctor/Master/index";
@@ -28,7 +28,6 @@ import AdminMaster from "./pages/Account/Admin/Master/index";
 import PrivateRoute from "./components/PrivateRoute/index";
 
 import FourOFour from "./pages/FourOFour/index";
-
 
 function App() {
   return (
@@ -50,6 +49,7 @@ function App() {
             <Route exact path="/medicine" component={Medicine} />
             <Route exact path="/diagnostic" component={DiagnosticCenter} />
             <Route exact path="/appointment" component={Appointments} />
+            <Route exact path="/map" component={MapPage} />
 
             {/* Doctor Master */}
             <PrivateRoute path="/doctor" role="doctor">
