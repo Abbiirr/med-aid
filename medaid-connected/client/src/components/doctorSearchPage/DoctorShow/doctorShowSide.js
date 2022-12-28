@@ -43,41 +43,76 @@ const Index = ({ show, doctor }) => {
 
   //----------------------------------------------------------------
 
-  const getCouncilHours = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
+  useEffect(() => {
+    const getCouncilHours = async () => {
+      try {
+        const response = await axios.get(
+          `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
 
-        // header
-      );
+          // header
+        );
 
-      //console.log(response.data.requests[0].schedule);
-      // day = response.data.requests[0].schedule.day;
-      // startTime = response.data.requests[0].schedule.startTime;
-      // endTime = response.data.requests[0].schedule.endTime;
+        //console.log(response.data.requests[0].schedule);
+        // day = response.data.requests[0].schedule.day;
+        // startTime = response.data.requests[0].schedule.startTime;
+        // endTime = response.data.requests[0].schedule.endTime;
 
-      if (response.status === 200) {
-        console.log("Council hours are found ");
+        if (response.status === 200) {
+          console.log("Council hours are found ");
 
-        setCouncilHours(response.data.requests[0].schedule);
-        //setCouncilHours(response.data.results);
-        // console.log(councilHours);
-        // setLoading(false);
-        //console.log(councilHours);
-      }
-    } catch (error) {
-      if (error) {
-        // setLoading(false);
-        console.log("Council hours are not found ");
-        console.log(error.response);
+          setCouncilHours(response.data.requests[0].schedule);
+          //setCouncilHours(response.data.results);
+          // console.log(councilHours);
+          // setLoading(false);
+          //console.log(councilHours);
+        }
+      } catch (error) {
+        if (error) {
+          // setLoading(false);
+          console.log("Council hours are not found ");
+          console.log(error.response);
+        }
       }
     }
+    getCouncilHours();
   }, [thisDoctor.thisCouncilHourId]);
+
+  // const getCouncilHours = useCallback(async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
+
+  //       // header
+  //     );
+
+  //     //console.log(response.data.requests[0].schedule);
+  //     // day = response.data.requests[0].schedule.day;
+  //     // startTime = response.data.requests[0].schedule.startTime;
+  //     // endTime = response.data.requests[0].schedule.endTime;
+
+  //     if (response.status === 200) {
+  //       console.log("Council hours are found ");
+
+  //       setCouncilHours(response.data.requests[0].schedule);
+  //       //setCouncilHours(response.data.results);
+  //       // console.log(councilHours);
+  //       // setLoading(false);
+  //       //console.log(councilHours);
+  //     }
+  //   } catch (error) {
+  //     if (error) {
+  //       // setLoading(false);
+  //       console.log("Council hours are not found ");
+  //       console.log(error.response);
+  //     }
+  //   }
+  // }, [thisDoctor.thisCouncilHourId]);
   // getCouncilHours();
 
-  useEffect(() => {
-    getCouncilHours();
-  }, []);
+  // useEffect(() => {
+  //   getCouncilHours();
+  // }, []);
+
   // const [doctor, setDoctor] = useState();
   console.log(councilHours);
   // Role check
