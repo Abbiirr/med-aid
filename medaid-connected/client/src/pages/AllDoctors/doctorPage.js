@@ -3,7 +3,11 @@ import axios from "axios";
 import { apiURL } from "../../utils/apiURL";
 import queryString from "query-string";
 import { useLocation } from "react-router";
+
 import MainSelect from 'react-select';
+
+import jwt_decode from "jwt-decode";
+
 import {
   FormControl,
   InputLabel,
@@ -22,7 +26,40 @@ import FooterComponent from "../../components/User/Footer/index";
 const Index = () => {
   //use a variable to store the search query
   const [doctors, setDoctors] = useState([]);
+
   const [searchInput, setSearchInput] = useState("");
+
+
+  const location = useLocation();
+  const value = queryString.parse(location.search);
+  const symptoms = value.symptoms;
+  const [token, setToken] = useState(
+    localStorage.getItem("token") || undefined
+  );
+  var role;
+  const checkRole = (token) => {
+    const decode = jwt_decode(token);
+    role = decode.role;
+    const id = decode.id;
+    localStorage.setItem("id", id);
+
+    // if (role === "super_admin" || role === "admin" || role === "manager") {
+    //   return history.push("/admin");
+    // }
+    // if (role === "doctor") {
+    //   return history.push("/doctor");
+    // }
+
+    // if (role === "patient") {
+    //   return history.push("/patient");
+    // }
+    console.log(role);
+  };
+
+  if (token) {
+    checkRole(token);
+  }
+
   //console.log(symptoms)
 
   let specialtyOptions = []
@@ -85,6 +122,7 @@ const Index = () => {
             </Select>
           </FormControl>
 
+
           {/* <div style={{ display: "flex", float: "right" }}>
             <Button style={{ marginLeft: "auto" }}>
               Pending Doctor Approvals
@@ -112,6 +150,15 @@ const Index = () => {
               </button>
             </div>
           </section>
+
+          {role === "admin" ? (
+            <div style={{ display: "flex", float: "right" }}>
+              <Button style={{ marginLeft: "auto" }}>
+                Pending Doctor Approvals
+              </Button>
+            </div>
+          ) : null}
+
 
           <div className="row">
             <div className="col-12 py-4"></div>
