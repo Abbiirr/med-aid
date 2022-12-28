@@ -84,6 +84,7 @@ const Index = () =>{
 
     const onSubmit = (e) =>{
         e.preventDefault()
+        console.log("Selected symptoms : ", selectedOptions)
         let s = ''
         for (let i = 0; i < selectedOptions.length; i++) {
             s = s + selectedOptions[i].value.toString() + ','

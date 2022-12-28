@@ -12,6 +12,11 @@ const findNearestDoctors = async (req, res, next) => {
   var symptomsArray = symptoms.split(",");
   console.log(symptomsArray);
 
+  //---trying a thing
+  diseaseArray = new Set();
+  specialtyArray = new Set();
+  //---
+
   //getting the diseases based on symptoms
   const diseases = await Disease.find({
     symptoms: { $in: symptomsArray },
