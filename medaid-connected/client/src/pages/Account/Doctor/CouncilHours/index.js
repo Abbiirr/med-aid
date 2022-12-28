@@ -92,7 +92,7 @@ const CouncilHourUpdate = () => {
   }, [id]);
   useEffect(() => {
     getCouncilIDs();
-  }, [councilIDs, getCouncilIDs]);
+  }, []);
 
   const convertTimeToNumber = (time) => {
     var [hour, minute] = time.split(":");
