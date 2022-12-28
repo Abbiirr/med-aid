@@ -8,6 +8,11 @@ import {
   ic_info_outline,
   ic_lock,
 } from "react-icons-kit/md";
+import { ic_article } from "react-icons-kit/md/ic_article";
+import { ic_chrome_reader_mode_twotone } from "react-icons-kit/md/ic_chrome_reader_mode_twotone";
+import { ic_date_range_outline } from "react-icons-kit/md/ic_date_range_outline";
+
+
 import axios from "axios";
 import { apiURL } from "../../../utils/apiURL";
 import { Images } from "../../../utils/Images";
@@ -84,7 +89,7 @@ const Index = ({ doctor, editdialog }) => {
           className="btn btn-block shadow-none"
           to="/doctor/"
         >
-          <Icon icon={ic_apps} size={20} />
+          <Icon icon={ic_chrome_reader_mode_twotone} size={20} />
           <span>dashboard</span>
         </NavLink>
         <NavLink
@@ -105,14 +110,22 @@ const Index = ({ doctor, editdialog }) => {
           <Icon icon={ic_info_outline} size={20} />
           <span>Requests</span>
         </NavLink>
-
+        <NavLink
+          exact
+          activeClassName="is-Active"
+          className="btn btn-block shadow-none"
+          to="/prescription"
+        >
+          <Icon icon={ic_article} size={20} />
+          <span>Prescription</span>
+        </NavLink>
         <NavLink
           exact
           activeClassName="is-Active"
           className="btn btn-block shadow-none"
           to="/doctor/councils"
         >
-          <Icon icon={ic_info_outline} size={20} />
+          <Icon icon={ic_date_range_outline} size={20} />
           <span>Council Hours</span>
         </NavLink>
 
