@@ -82,7 +82,7 @@ const Index = () => {
         console.log(specialtyOptions)
         console.log("All doctors: ", response.data);
         setDoctors(response.data);
-        //console.log("All doctors", doctors);
+        console.log("All doctors from state : ", doctors);
         
       } catch (error) {
         if (error) console.log("error");
