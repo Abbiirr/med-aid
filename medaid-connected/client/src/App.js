@@ -68,17 +68,17 @@ function App() {
             </Route> */}
 
             {/* Admin Master */}
-            <PrivateRoute exact path="/admin" role="super_admin">
+            {/* <PrivateRoute exact path="/admin" role="super_admin">
               <AdminMaster />
-            </PrivateRoute>
+            </PrivateRoute> */}
 
             <PrivateRoute exact path="/admin" role="admin">
               <AdminMaster />
             </PrivateRoute>
 
-            <PrivateRoute exact path="/admin" role="manager">
+            {/* <PrivateRoute exact path="/admin" role="manager">
               <AdminMaster />
-            </PrivateRoute>
+            </PrivateRoute> */}
             {/* <Route path="/admin" role="admin">
              <AdminMaster />
            </Route> */}
