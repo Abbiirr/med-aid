@@ -21,7 +21,6 @@ const CouncilHourUpdate = () => {
 
   var start;
   const [councilIDs, setCouncilIDs] = useState([]);
-  var data2 = [];
 
   const [token, setToken] = useState(
     localStorage.getItem("token") || undefined
@@ -62,11 +61,14 @@ const CouncilHourUpdate = () => {
 
         // header
       );
-      setCouncilIDs(response.data);
-      console.log(response.data);
+      // setCouncilIDs(response.data);  //does not work
+
+      // console.log(response.data.length);
+      for (var i = 0; i < response.data.length; i++) {
+        councilIDs.push(response.data[i]);
+      }
       console.log(councilIDs);
-      data2 = response.data;
-      console.log(data2);
+
       //console.log(response.data.requests[0].schedule);
       // day = response.data.requests[0].schedule.day;
       // startTime = response.data.requests[0].schedule.startTime;
@@ -74,12 +76,6 @@ const CouncilHourUpdate = () => {
 
       if (response.status === 200 || response.status === 304) {
         console.log("Council hours are found ");
-
-        // setCouncilHours(response.data.requests[0].schedule);
-        //setCouncilHours(response.data.results);
-        // console.log(councilHours);
-        // setLoading(false);
-        //console.log(councilHours);
       }
     } catch (error) {
       if (error) {
