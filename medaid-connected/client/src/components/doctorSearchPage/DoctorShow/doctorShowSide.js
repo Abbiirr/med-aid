@@ -75,7 +75,7 @@ const Index = ({ show, doctor }) => {
       }
     }
     getCouncilHours();
-  }, [thisDoctor.thisCouncilHourId]);
+  }, []);
 
   // const getCouncilHours = useCallback(async () => {
   //   try {

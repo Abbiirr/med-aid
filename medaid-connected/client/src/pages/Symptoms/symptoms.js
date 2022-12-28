@@ -101,7 +101,43 @@ function VerticalTabs() {
         </Tabs>
       </div>
 
-      <TabPanel value={value} index={0}>
+      <div>
+        {diseases.map((disease, i) => (
+        <TabPanel value={value} index={i}>
+          <List>
+            <ListItem alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar alt={disease.name} src="/static/images/avatar/1.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+
+                primary={disease.symptoms + " "}
+                secondary={
+                  <React.Fragment>
+                    <Typography
+
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+
+                      color="text.primary"
+                    >
+                      {disease.specialty}
+                    </Typography>
+                    {
+                      " Gonna write something "
+                    }
+                  </React.Fragment>
+                }
+              />
+            </ListItem>
+          </List>
+        </TabPanel>
+      ))
+      }        
+      </div>
+
+      {/* <TabPanel value={value} index={0}>
         <List>
           {diseases &&
             diseases.map((disease, i) => (
@@ -130,7 +166,7 @@ function VerticalTabs() {
               </ListItem>
             ))}
         </List>
-      </TabPanel>
+      </TabPanel> */}
 
       {/* <TabPanel value={value} index={0}>
         <List>
