@@ -21,6 +21,7 @@ const CouncilHourUpdate = () => {
 
   var start;
   const [councilIDs, setCouncilIDs] = useState([]);
+  const [councilHours, setCouncilHours] = useState([]);
 
   const [token, setToken] = useState(
     localStorage.getItem("token") || undefined
@@ -52,6 +53,13 @@ const CouncilHourUpdate = () => {
   //   checkRole(token);
   // }
   // checkRole(token);
+
+  function createData(day, startTime, endTime) {
+    return { day, startTime, endTime };
+  }
+
+  var rows = [];
+
   const getCouncilHours = async (councilHourID) => {
     try {
       const response = await axios.get(
@@ -59,20 +67,16 @@ const CouncilHourUpdate = () => {
 
         // header
       );
-      console.log(response.data.requests[0].schedule);
 
-      //console.log(response.data.requests[0].schedule);
-      // day = response.data.requests[0].schedule.day;
-      // startTime = response.data.requests[0].schedule.startTime;
-      // endTime = response.data.requests[0].schedule.endTime;
+      //don't touch this code block, please it might break :(
+      console.log(response.data.requests[0].schedule);
+      const schedule = response.data.requests[0].schedule;
+      console.log(schedule.day, schedule.startTime, schedule.endTime);
+      setCouncilHours((councilHours) => councilHours.concat(schedule));
+      councilHours.push(response.data.requests[0].schedule);
 
       if (response.status === 200 || response.status === 304) {
         console.log("Council hours are found ");
-
-        //setCouncilHours(response.data.results);
-        // console.log(councilHours);
-        // setLoading(false);
-        //console.log(councilHours);
       }
     } catch (error) {
       if (error) {
@@ -95,18 +99,10 @@ const CouncilHourUpdate = () => {
 
       // console.log(response.data.length);
       for (var i = 0; i < response.data.length; i++) {
-        councilIDs.push(response.data[i]);
+        await councilIDs.push(response.data[i]);
+        await getCouncilHours(councilIDs[i]);
       }
       console.log(councilIDs);
-      // console.log("Size of council array: " + councilIDs.length);
-      for (var i = 0; i < councilIDs.length; i++) {
-        getCouncilHours(councilIDs[i]);
-      }
-
-      //console.log(response.data.requests[0].schedule);
-      // day = response.data.requests[0].schedule.day;
-      // startTime = response.data.requests[0].schedule.startTime;
-      // endTime = response.data.requests[0].schedule.endTime;
 
       if (response.status === 200 || response.status === 304) {
         console.log("Council IDs are found ");
@@ -122,12 +118,10 @@ const CouncilHourUpdate = () => {
   }, [id]);
   useEffect(() => {
     getCouncilIDs();
-    setCouncilIDs(councilIDs);
-    console.log("Size of council array: " + councilIDs.length);
-  }, [councilIDs]);
-  console.log("Size of council array: " + councilIDs.length);
 
-  const [councilHour, setCouncilHour] = useState([]);
+    // console.log("Outside then: " + councilIDs.length);
+  }, [councilIDs]);
+  // console.log("Out of effect: " + councilIDs.length);
 
   const convertTimeToNumber = (time) => {
     var [hour, minute] = time.split(":");
@@ -205,22 +199,25 @@ const CouncilHourUpdate = () => {
       }
     }
   };
-
-  function createData(day, startTime, endTime) {
-    return { day, startTime, endTime };
-  }
-
-  const rows = [
-    createData("Monday", "8.00am", "12.00pm"),
-    createData("Tuesday", "8.00am", "12.00pm"),
-    createData("Wednesday", "8.00am", "12.00pm"),
-    createData("Wednesday", "3.00pm", "8.00pm"),
-    createData("Thursday", "8.00am", "12.00pm"),
-    createData("Friday", "8.00am", "12.00pm"),
-  ];
+  const updateRows = () => {
+    console.log("Updating rows");
+    for (var i = 0; i < councilHours.length; i++) {
+      rows.push(
+        createData(
+          councilHours[i].day,
+          councilHours[i].startTime,
+          councilHours[i].endTime
+        )
+      );
+    }
+  };
 
   return (
     <div>
+      <div>CouncilIDS {councilIDs.length}</div>
+      <div>CouncilHours {councilHours.length}</div>
+      {councilIDs.length > 0 ? updateRows() : null}
+      <div>Rows {rows.length}</div>
       <TableContainer component={Paper} sx={{ marginBottom: 10 }}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -252,7 +249,6 @@ const CouncilHourUpdate = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
       <div className="step">
         <div className="mb-4">
           <h6>Add Council hour</h6>
