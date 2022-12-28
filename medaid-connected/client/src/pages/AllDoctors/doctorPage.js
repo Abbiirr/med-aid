@@ -3,7 +3,11 @@ import axios from "axios";
 import { apiURL } from "../../utils/apiURL";
 import queryString from "query-string";
 import { useLocation } from "react-router";
+
+import MainSelect from 'react-select';
+
 import jwt_decode from "jwt-decode";
+
 import {
   FormControl,
   InputLabel,
@@ -22,6 +26,9 @@ import FooterComponent from "../../components/User/Footer/index";
 const Index = () => {
   //use a variable to store the search query
   const [doctors, setDoctors] = useState([]);
+
+  const [searchInput, setSearchInput] = useState("");
+
 
   const location = useLocation();
   const value = queryString.parse(location.search);
@@ -52,17 +59,31 @@ const Index = () => {
   if (token) {
     checkRole(token);
   }
+
   //console.log(symptoms)
+
+  let specialtyOptions = []
+
 
   useEffect(() => {
     //search doctors
-    console.log(symptoms);
+    //console.log(symptoms);
     const searchDoctors = async () => {
       try {
         const response = await axios.get(
           "http://localhost:4000/api/v1/doctor/getDoctors"
         );
+        response.data.forEach( function (item){
+          specialtyOptions.push({
+              label: item.specialist,
+              value: item.specialist
+          })
+        })
+        console.log(specialtyOptions)
+        console.log("All doctors: ", response.data);
         setDoctors(response.data);
+        //console.log("All doctors", doctors);
+        
       } catch (error) {
         if (error) console.log("error");
       }
@@ -73,19 +94,25 @@ const Index = () => {
   let sortBy;
   const handleChange = () => {
     //load page
+  }; 
+
+  const submitSearch = () => {
+
   };
+
 
   return (
     <div>
       <NavbarComponent />
       <div className="search-result-index">
         <div className="container">
+
           <FormControl sx={{ marginTop: 5, width: 200, zIndex: 0 }}>
             <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={sortBy}
+              value={"default"}
               label="sort by"
               onChange={handleChange}
             >
@@ -94,6 +121,36 @@ const Index = () => {
               <MenuItem value={"Experience"}>Experience</MenuItem>
             </Select>
           </FormControl>
+
+
+          {/* <div style={{ display: "flex", float: "right" }}>
+            <Button style={{ marginLeft: "auto" }}>
+              Pending Doctor Approvals
+            </Button>
+          </div> */}
+
+          <section className="garamond">
+            <div className="navy georgia ma0 grow">
+              <h2 className="f2">Search your doctors</h2>
+            </div>
+            <div className="pa2">
+              <MainSelect
+                onChange={(item) => setSearchInput(item.value)}
+                maxMenuHeight={175}
+                classNamePrefix="custom-select"
+                options={specialtyOptions}
+                //isMulti
+                //isClearable={true}
+                isSearchable={true}
+                placeholder="Your doctors"
+                // have to make this field required to make the search work
+              />
+              <button onClick={submitSearch} type="submit" className="btn">
+                Search
+              </button>
+            </div>
+          </section>
+
           {role === "admin" ? (
             <div style={{ display: "flex", float: "right" }}>
               <Button style={{ marginLeft: "auto" }}>
@@ -101,6 +158,7 @@ const Index = () => {
               </Button>
             </div>
           ) : null}
+
 
           <div className="row">
             <div className="col-12 py-4"></div>
@@ -110,10 +168,12 @@ const Index = () => {
               </h3>
             </div>
           </div>
+
         </div>
 
         {/* Results */}
         <DoctorsListComponent doctors={doctors} loading={false} />
+
       </div>
       <FooterComponent />
     </div>
