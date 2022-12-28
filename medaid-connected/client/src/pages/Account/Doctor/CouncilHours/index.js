@@ -52,6 +52,36 @@ const CouncilHourUpdate = () => {
   //   checkRole(token);
   // }
   // checkRole(token);
+  const getCouncilHours = async (councilHourID) => {
+    try {
+      const response = await axios.get(
+        `${apiURL}/doctor/councils/${councilHourID}`
+
+        // header
+      );
+      console.log(response.data.requests[0].schedule);
+
+      //console.log(response.data.requests[0].schedule);
+      // day = response.data.requests[0].schedule.day;
+      // startTime = response.data.requests[0].schedule.startTime;
+      // endTime = response.data.requests[0].schedule.endTime;
+
+      if (response.status === 200 || response.status === 304) {
+        console.log("Council hours are found ");
+
+        //setCouncilHours(response.data.results);
+        // console.log(councilHours);
+        // setLoading(false);
+        //console.log(councilHours);
+      }
+    } catch (error) {
+      if (error) {
+        // setLoading(false);
+        console.log("Council hours are not found ");
+        console.log(error.response);
+      }
+    }
+  };
 
   const getCouncilIDs = useCallback(async () => {
     try {
@@ -68,6 +98,10 @@ const CouncilHourUpdate = () => {
         councilIDs.push(response.data[i]);
       }
       console.log(councilIDs);
+      // console.log("Size of council array: " + councilIDs.length);
+      for (var i = 0; i < councilIDs.length; i++) {
+        getCouncilHours(councilIDs[i]);
+      }
 
       //console.log(response.data.requests[0].schedule);
       // day = response.data.requests[0].schedule.day;
@@ -75,12 +109,12 @@ const CouncilHourUpdate = () => {
       // endTime = response.data.requests[0].schedule.endTime;
 
       if (response.status === 200 || response.status === 304) {
-        console.log("Council hours are found ");
+        console.log("Council IDs are found ");
       }
     } catch (error) {
       if (error) {
         // setLoading(false);
-        console.log("Council hours are not found ");
+        console.log("Council IDs are not found ");
         console.log(error.response);
         // console.log("Response is: " + error.status);
       }
@@ -88,7 +122,12 @@ const CouncilHourUpdate = () => {
   }, [id]);
   useEffect(() => {
     getCouncilIDs();
-  }, []);
+    setCouncilIDs(councilIDs);
+    console.log("Size of council array: " + councilIDs.length);
+  }, [councilIDs]);
+  console.log("Size of council array: " + councilIDs.length);
+
+  const [councilHour, setCouncilHour] = useState([]);
 
   const convertTimeToNumber = (time) => {
     var [hour, minute] = time.split(":");
