@@ -1,5 +1,6 @@
 const Doctor = require("../../../models/Doctor");
 const Patient = require("../../../models/Patient");
+const Admin = require("../../../models/Admin");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Token = require("../../../models/Token");
@@ -15,7 +16,7 @@ const Register = async (req, res, next) => {
 
     // Doctor Check
     if (role === "doctor") {
-      isDoctor = true
+      isDoctor = true;
 
       const check = await Doctor.findOne({ email: email }).exec();
 
@@ -33,7 +34,7 @@ const Register = async (req, res, next) => {
         email: email,
         role: role,
         password: hashPassword,
-        verified: true
+        verified: true,
       });
 
       // Save information
@@ -45,7 +46,7 @@ const Register = async (req, res, next) => {
       // }).save();
       // const url = `http://localhost:4000/users/${saveAccount.id}/verify/${token.token}`;
       // await sendEmail(saveAccount.email, "Verify Email", url);
-  
+
       // res
       //   .status(201)
       //   .send({ message: "An Email sent to your account please verify" });
@@ -59,11 +60,11 @@ const Register = async (req, res, next) => {
 
     // Patient Check
     if (role === "patient") {
-      isDoctor = false
+      isDoctor = false;
 
       const check = await Patient.findOne({ email: email }).exec();
 
-      if (check){
+      if (check) {
         return res.status(208).json({
           status: false,
           message: "This email already used.",
@@ -78,7 +79,7 @@ const Register = async (req, res, next) => {
         email: email,
         role: role,
         password: hashPassword,
-        verified: true
+        verified: true,
       });
 
       // Save information
@@ -91,7 +92,52 @@ const Register = async (req, res, next) => {
       // const url = `http://localhost:3000/${saveAccount.id}/verify/${token.token}`;
       // console.log("running register")
       // await sendEmail(saveAccount.email, "Verify Email", url);
-  
+
+      // res
+      //   .status(201)
+      //   .send({ message: "An Email sent to your account please verify" });
+
+      if (saveAccount)
+        return res.status(201).json({
+          status: true,
+          message: "Successfully account created",
+        });
+    }
+
+    if (role === "admin") {
+      isDoctor = false;
+
+      const check = await Admin.findOne({ email: email }).exec();
+
+      if (check) {
+        return res.status(208).json({
+          status: false,
+          message: "This email already used.",
+        });
+      }
+
+      // Password Hash
+      let hashPassword = await bcrypt.hash(password, 10);
+
+      // Create account object
+      let newAccount = new Admin({
+        email: email,
+        role: role,
+        password: hashPassword,
+        verified: true,
+      });
+
+      // Save information
+      const saveAccount = await newAccount.save();
+
+      // const token = await new Token({
+      //   userId: saveAccount._id,
+      //   token: crypto.randomBytes(32).toString("hex"),
+      // }).save();
+      // const url = `http://localhost:3000/${saveAccount.id}/verify/${token.token}`;
+      // console.log("running register")
+      // await sendEmail(saveAccount.email, "Verify Email", url);
+
       // res
       //   .status(201)
       //   .send({ message: "An Email sent to your account please verify" });
@@ -115,7 +161,7 @@ const Login = async (req, res, next) => {
     // Doctor Check
     if (role === "doctor") {
       // Account find using email
-      isDoctor = true
+      isDoctor = true;
 
       let account = await Doctor.findOne({ email }).exec();
 
@@ -149,7 +195,7 @@ const Login = async (req, res, next) => {
           //     const url = `http://localhost:4000/users/${account.id}/verify/${token.token}`;
           //     await sendEmail(account.email, "Verify Email", url);
           //   }
-      
+
           //   return res
           //     .status(400)
           //     .send({ message: "An Email sent to your account please verify" });
@@ -163,10 +209,11 @@ const Login = async (req, res, next) => {
               token,
             });
           }
-      
-          //const emailtoken = account.generateAuthToken();
-          res.status(200).send({ data: token, message: "logged in successfully" });
 
+          //const emailtoken = account.generateAuthToken();
+          res
+            .status(200)
+            .send({ data: token, message: "logged in successfully" });
         }
 
         return res.status(404).json({
@@ -178,8 +225,7 @@ const Login = async (req, res, next) => {
 
     // Patient Check
     if (role === "patient") {
-
-      isDoctor = false
+      isDoctor = false;
       // Account find using email
       let account = await Patient.findOne({ email }).exec();
 
@@ -213,14 +259,14 @@ const Login = async (req, res, next) => {
           //     const url = `http://localhost:3000/users/${account._id}/verify/${token.token}`;
           //     await sendEmail(account.email, "Verify Email", url);
           //   }
-      
+
           //   return res
           //     .status(400)
           //     .send({ message: "An Email sent to your account please verify" });
           // }
 
           //---email verification end
-      
+
           if (updateToken) {
             return res.status(200).json({
               status: true,
@@ -229,8 +275,9 @@ const Login = async (req, res, next) => {
           }
 
           //const emailtoken = account.generateAuthToken();
-          res.status(200).send({ data: token, message: "logged in successfully" });
-          
+          res
+            .status(200)
+            .send({ data: token, message: "logged in successfully" });
         }
         res.status(404).json({
           status: false,
@@ -238,7 +285,6 @@ const Login = async (req, res, next) => {
         });
       }
     }
-
   } catch (error) {
     if (error) next(error);
   }
@@ -264,7 +310,7 @@ const Logout = async (req, res, next) => {
 
     // Doctor Logout
     if (decode.role === "doctor") {
-      isDoctor = true
+      isDoctor = true;
       // Find account using account id and role
       let account = await Doctor.findOne({
         $and: [{ _id: decode.id }, { role: decode.role }],
@@ -296,7 +342,7 @@ const Logout = async (req, res, next) => {
 
     // Patient Logout
     if (decode.role === "patient") {
-      isDoctor = false
+      isDoctor = false;
       // Find account using account id and role
       let account = await Patient.findOne({
         $and: [{ _id: decode.id }, { role: decode.role }],
@@ -336,7 +382,7 @@ const Logout = async (req, res, next) => {
 };
 
 const verifyToken = async (req, res) => {
-  if(isDoctor){
+  if (isDoctor) {
     try {
       const doctor = await Doctor.findOne({ _id: req.params.id });
       if (!doctor) return res.status(400).send({ message: "Invalid link" });
@@ -354,9 +400,8 @@ const verifyToken = async (req, res) => {
     } catch (error) {
       res.status(500).send({ message: "Internal Server Error" });
     }
-  }
-  else{
-    try{
+  } else {
+    try {
       const patient = await Patient.findOne({ _id: req.params.id });
       if (!patient) return res.status(400).send({ message: "Invalid link" });
 
@@ -381,5 +426,5 @@ module.exports = {
   Login,
   Reset,
   Logout,
-  verifyToken
+  verifyToken,
 };

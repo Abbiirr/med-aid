@@ -65,6 +65,34 @@ const Register = async (req, res, next) => {
           message: "Successfully account created",
         });
     }
+
+    if (role === "admin") {
+      const check = await Doctor.findOne({ email: email }).exec();
+
+      if (check)
+        return res.status(208).json({
+          status: false,
+          message: "This email already used.",
+        });
+
+      // Password Hash
+      const hashPassword = await bcrypt.hash(password, 10);
+
+      // Create account object
+      const newAccount = new Doctor({
+        email: email,
+        role: role,
+        password: hashPassword,
+      });
+
+      // Save information
+      const saveAccount = await newAccount.save();
+      if (saveAccount)
+        return res.status(201).json({
+          status: true,
+          message: "Successfully account created",
+        });
+    }
   } catch (error) {
     if (error) next(error);
   }
