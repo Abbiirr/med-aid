@@ -54,45 +54,54 @@ const CouncilHourUpdate = () => {
   // }
   // checkRole(token);
 
-  const getCouncilIDs = useCallback(async () => {
-    try {
-      console.log("id is " + id);
-      const response = await axios.get(
-        `${apiURL}/doctor/${id}/councils/`
-
-        // header
-      );
-      setCouncilIDs(response.data);
-      console.log(response.data);
-      console.log(councilIDs);
-      data2 = response.data;
-      console.log(data2);
-      //console.log(response.data.requests[0].schedule);
-      // day = response.data.requests[0].schedule.day;
-      // startTime = response.data.requests[0].schedule.startTime;
-      // endTime = response.data.requests[0].schedule.endTime;
-
-      if (response.status === 200 || response.status === 304) {
-        console.log("Council hours are found ");
-
-        // setCouncilHours(response.data.requests[0].schedule);
-        //setCouncilHours(response.data.results);
-        // console.log(councilHours);
-        // setLoading(false);
-        //console.log(councilHours);
-      }
-    } catch (error) {
-      if (error) {
-        // setLoading(false);
-        console.log("Council hours are not found ");
-        console.log(error.response);
-        // console.log("Response is: " + error.status);
-      }
-    }
-  }, [id]);
   useEffect(() => {
+
+    const getCouncilIDs = async () => {
+      try {
+        console.log("id is " + id);
+        const response = await axios.get(
+          `${apiURL}/doctor/${id}/councils/`
+
+          // header
+        );
+        setCouncilIDs(response.data);
+        console.log("Council id from response : ", response.data);
+        console.log("Council id from state: ", councilIDs);
+        data2 = response.data;
+        console.log("Council id from data2 array", data2);
+        //console.log(response.data.requests[0].schedule);
+        // day = response.data.requests[0].schedule.day;
+        // startTime = response.data.requests[0].schedule.startTime;
+        // endTime = response.data.requests[0].schedule.endTime;
+
+        if (response.status === 200 || response.status === 304) {
+          console.log("Council hours are found ");
+
+          // setCouncilHours(response.data.requests[0].schedule);
+          //setCouncilHours(response.data.results);
+          // console.log(councilHours);
+          // setLoading(false);
+          //console.log(councilHours);
+        }
+      } catch (error) {
+        if (error) {
+          // setLoading(false);
+          console.log("Council hours are not found ");
+          console.log(error.response);
+          // console.log("Response is: " + error.status);
+        }
+      }
+      //getCouncilIDs(); //ekhan theke call dile 3 ta array tei value pay but ekhane backend a call choltei thake
+    }
     getCouncilIDs();
   }, []);
+
+  }, [id]);
+
+  // useEffect(() => {
+  //   getCouncilIDs();
+  // }, []);
+  //councilIDs, getCouncilIDs;
 
   const convertTimeToNumber = (time) => {
     var [hour, minute] = time.split(":");

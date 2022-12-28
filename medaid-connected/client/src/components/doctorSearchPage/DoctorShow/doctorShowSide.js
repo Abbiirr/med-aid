@@ -44,6 +44,7 @@ const Index = ({ show, doctor }) => {
   //----------------------------------------------------------------
 
   useEffect(() => {
+    console.log("council hour id", thisDoctor.thisCouncilHourId);
     const getCouncilHours = async () => {
       try {
         const response = await axios.get(
@@ -114,6 +115,7 @@ const Index = ({ show, doctor }) => {
   // }, []);
 
   // const [doctor, setDoctor] = useState();
+  
   console.log(councilHours);
   // Role check
   const checkRole = (token) => {
@@ -270,7 +272,12 @@ const Index = ({ show, doctor }) => {
               <DateInput />
               {(value) => console.log("Date value from DateInput", value)}
             </MyContext.Consumer> */}
+            
+            {/*editing from here */}
             <DateInput placeholderText={"Get Appointment"}></DateInput>
+
+
+            {/*editing ends here */}
           </div>
         </div>
       </div>
