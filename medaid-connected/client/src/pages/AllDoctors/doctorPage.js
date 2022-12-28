@@ -3,6 +3,7 @@ import axios from "axios";
 import { apiURL } from "../../utils/apiURL";
 import queryString from "query-string";
 import { useLocation } from "react-router";
+import jwt_decode from "jwt-decode";
 import {
   FormControl,
   InputLabel,
@@ -25,6 +26,32 @@ const Index = () => {
   const location = useLocation();
   const value = queryString.parse(location.search);
   const symptoms = value.symptoms;
+  const [token, setToken] = useState(
+    localStorage.getItem("token") || undefined
+  );
+  var role;
+  const checkRole = (token) => {
+    const decode = jwt_decode(token);
+    role = decode.role;
+    const id = decode.id;
+    localStorage.setItem("id", id);
+
+    // if (role === "super_admin" || role === "admin" || role === "manager") {
+    //   return history.push("/admin");
+    // }
+    // if (role === "doctor") {
+    //   return history.push("/doctor");
+    // }
+
+    // if (role === "patient") {
+    //   return history.push("/patient");
+    // }
+    console.log(role);
+  };
+
+  if (token) {
+    checkRole(token);
+  }
   //console.log(symptoms)
 
   useEffect(() => {
@@ -67,11 +94,14 @@ const Index = () => {
               <MenuItem value={"Experience"}>Experience</MenuItem>
             </Select>
           </FormControl>
-          <div style={{ display: "flex", float: "right" }}>
-            <Button style={{ marginLeft: "auto" }}>
-              Pending Doctor Approvals
-            </Button>
-          </div>
+          {role === "admin" ? (
+            <div style={{ display: "flex", float: "right" }}>
+              <Button style={{ marginLeft: "auto" }}>
+                Pending Doctor Approvals
+              </Button>
+            </div>
+          ) : null}
+
           <div className="row">
             <div className="col-12 py-4"></div>
             <div className="col-12 py-4 py-lg-5 text-center">
