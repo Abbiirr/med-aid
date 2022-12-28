@@ -4,6 +4,14 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { apiURL } from "../../../../utils/apiURL";
 import "react-datetime/css/react-datetime.css";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 const CouncilHourUpdate = () => {
   const options = [];
@@ -61,7 +69,7 @@ const CouncilHourUpdate = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log("Is loading before setting true? : ", isLoading)
+    console.log("Is loading before setting true? : ", isLoading);
     try {
       console.log(id);
       console.log(data);
@@ -89,70 +97,115 @@ const CouncilHourUpdate = () => {
     }
   };
 
+  function createData(day, startTime, endTime) {
+    return { day, startTime, endTime };
+  }
+
+  const rows = [
+    createData("Monday", "8.00am", "12.00pm"),
+    createData("Tuesday", "8.00am", "12.00pm"),
+    createData("Wednesday", "8.00am", "12.00pm"),
+    createData("Wednesday", "3.00pm", "8.00pm"),
+    createData("Thursday", "8.00am", "12.00pm"),
+    createData("Friday", "8.00am", "12.00pm"),
+  ];
+
   return (
-    <div className="step">
-      <div className="mb-4">
-        <h6>Council hour</h6>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="row mb-2">
-          <div className="col-12 col-lg-4">
-            {errors.day && errors.day.message ? (
-              <p className="text-danger">{errors.day && errors.day.message}</p>
-            ) : (
-              <p>Day</p>
-            )}
-            <select
-              name="day"
-              {...register("day", {
-                required: "Day is required",
-              })}
-              className="form-control shadow-none"
-            >
-              <option value="saturday">Saturday</option>
-              <option value="sunday">Sunday</option>
-              <option value="monday">Monday</option>
-              <option value="tuesday">Tuesday</option>
-              <option value="wednesday">Wednesday</option>
-              <option value="thursday">Thursday</option>
-              <option value="friday">Friday</option>
-            </select>
-          </div>
+    <div>
+      <TableContainer component={Paper} sx={{ marginBottom: 10 }}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Day</TableCell>
+              <TableCell align="center">Start Time</TableCell>
+              <TableCell align="center">End Time</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow
+                key={row.day}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.day}
+                </TableCell>
+                <TableCell align="center">{row.startTime}</TableCell>
+                <TableCell align="center">{row.endTime}</TableCell>
+                <TableCell align="center">
+                  <Button variant="outlined" color="error" onClick> Remove </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-          <div className="col-12 col-lg-4">
-            {errors.startTime && errors.startTime.message ? (
-              <p className="text-danger">
-                {errors.startTime && errors.startTime.message}
-              </p>
-            ) : (
-              <p>Start time</p>
-            )}
-            <select
-              name="startTime"
-              {...register("startTime", {
-                required: "Start time is required",
-                onChange: () => {
-                  start = getValues("startTime");
-                  createTimeOptions(start);
-                },
-              })}
-              className="form-control shadow-none"
-            >
-              {options.map(({ value, label }, index) => (
-                <option value={value}>{label}</option>
-              ))}
-            </select>
-          </div>
+      <div className="step">
+        <div className="mb-4">
+          <h6>Add Council hour</h6>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="row mb-2">
+            <div className="col-12 col-lg-4">
+              {errors.day && errors.day.message ? (
+                <p className="text-danger">
+                  {errors.day && errors.day.message}
+                </p>
+              ) : (
+                <p>Day</p>
+              )}
+              <select
+                name="day"
+                {...register("day", {
+                  required: "Day is required",
+                })}
+                className="form-control shadow-none"
+              >
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+              </select>
+            </div>
 
-          <div className="col-12 col-lg-4">
-            {errors.endTime && errors.endTime.message ? (
-              <p className="text-danger">
-                {errors.endTime && errors.endTime.message}
-              </p>
-            ) : (
-              <p>End time</p>
-            )}
-            {/* <input
+            <div className="col-12 col-lg-4">
+              {errors.startTime && errors.startTime.message ? (
+                <p className="text-danger">
+                  {errors.startTime && errors.startTime.message}
+                </p>
+              ) : (
+                <p>Start time</p>
+              )}
+              <select
+                name="startTime"
+                {...register("startTime", {
+                  required: "Start time is required",
+                  onChange: () => {
+                    start = getValues("startTime");
+                    createTimeOptions(start);
+                  },
+                })}
+                className="form-control shadow-none"
+              >
+                {options.map(({ value, label }, index) => (
+                  <option value={value}>{label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="col-12 col-lg-4">
+              {errors.endTime && errors.endTime.message ? (
+                <p className="text-danger">
+                  {errors.endTime && errors.endTime.message}
+                </p>
+              ) : (
+                <p>End time</p>
+              )}
+              {/* <input
               type="time"
               name="endTime"
               {...register("endTime", {
@@ -160,38 +213,39 @@ const CouncilHourUpdate = () => {
               })}
               className="form-control shadow-none"
             /> */}
-            <select
-              name="endTime"
-              {...register("endTime", {
-                required: "End time is required",
-                validate: {
-                  positive: () =>
-                    convertTimeToNumber(getValues("endTime")) >
-                      convertTimeToNumber(getValues("startTime")) ||
-                    "End Time must be greater than Start Time",
-                },
-              })}
-              className="form-control shadow-none"
-            >
-              {options.map(({ value, label }, index) => (
-                <option value={value}>{label}</option>
-              ))}
-            </select>
-          </div>
-          {/* <DateTime timeConstraints={this.timeConstraints} /> */}
+              <select
+                name="endTime"
+                {...register("endTime", {
+                  required: "End time is required",
+                  validate: {
+                    positive: () =>
+                      convertTimeToNumber(getValues("endTime")) >
+                        convertTimeToNumber(getValues("startTime")) ||
+                      "End Time must be greater than Start Time",
+                  },
+                })}
+                className="form-control shadow-none"
+              >
+                {options.map(({ value, label }, index) => (
+                  <option value={value}>{label}</option>
+                ))}
+              </select>
+            </div>
+            {/* <DateTime timeConstraints={this.timeConstraints} /> */}
 
-          <div className="col-12 text-right mt-3">
-            <button
-              type="submit"
-              className="btn shadow-none"
-              disabled={isLoading}
-              onClick={onSubmit}
-            >
-              {isLoading ? <span>Please Wait...</span> : <span>Add</span>}
-            </button>
+            <div className="col-12 text-right mt-3">
+              <button
+                type="submit"
+                className="btn shadow-none"
+                disabled={isLoading}
+                onClick={onSubmit}
+              >
+                {isLoading ? <span>Please Wait...</span> : <span>Add</span>}
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
