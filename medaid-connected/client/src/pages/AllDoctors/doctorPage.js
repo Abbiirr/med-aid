@@ -3,7 +3,13 @@ import axios from "axios";
 import { apiURL } from "../../utils/apiURL";
 import queryString from "query-string";
 import { useLocation } from "react-router";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+} from "@mui/material";
 
 import NavbarComponent from "../../components/User/Navbar/index";
 import SearchComponent from "../../components/User/Search/index";
@@ -47,7 +53,7 @@ const Index = () => {
       <NavbarComponent />
       <div className="search-result-index">
         <div className="container">
-          <FormControl sx={{ marginTop: 5, width: 200, zIndex:0}}>
+          <FormControl sx={{ marginTop: 5, width: 200, zIndex: 0 }}>
             <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -61,6 +67,11 @@ const Index = () => {
               <MenuItem value={"Experience"}>Experience</MenuItem>
             </Select>
           </FormControl>
+          <div style={{ display: "flex", float: "right" }}>
+            <Button style={{ marginLeft: "auto" }}>
+              Pending Doctor Approvals
+            </Button>
+          </div>
           <div className="row">
             <div className="col-12 py-4"></div>
             <div className="col-12 py-4 py-lg-5 text-center">
