@@ -12,6 +12,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import jwt_decode from "jwt-decode";
 
 const CouncilHourUpdate = () => {
   const options = [];
@@ -19,6 +20,79 @@ const CouncilHourUpdate = () => {
   const splitTime = 15;
 
   var start;
+  const [councilIDs, setCouncilIDs] = useState([]);
+  var data2 = [];
+
+  const [token, setToken] = useState(
+    localStorage.getItem("token") || undefined
+  );
+
+  var role;
+  // var id;
+  const [id] = useState(localStorage.getItem("id"));
+  const checkRole = (token) => {
+    const decode = jwt_decode(token);
+    role = decode.role;
+    // id = decode.id;
+    // localStorage.setItem("id", id);
+
+    // if (role === "super_admin" || role === "admin" || role === "manager") {
+    //   return history.push("/admin");
+    // }
+    // if (role === "doctor") {
+    //   return history.push("/doctor");
+    // }
+
+    // if (role === "patient") {
+    //   return history.push("/patient");
+    // }
+    // console.log(role);
+  };
+
+  // if (token) {
+  //   checkRole(token);
+  // }
+  // checkRole(token);
+
+  const getCouncilIDs = useCallback(async () => {
+    try {
+      console.log("id is " + id);
+      const response = await axios.get(
+        `${apiURL}/doctor/${id}/councils/`
+
+        // header
+      );
+      setCouncilIDs(response.data);
+      console.log(response.data);
+      console.log(councilIDs);
+      data2 = response.data;
+      console.log(data2);
+      //console.log(response.data.requests[0].schedule);
+      // day = response.data.requests[0].schedule.day;
+      // startTime = response.data.requests[0].schedule.startTime;
+      // endTime = response.data.requests[0].schedule.endTime;
+
+      if (response.status === 200 || response.status === 304) {
+        console.log("Council hours are found ");
+
+        // setCouncilHours(response.data.requests[0].schedule);
+        //setCouncilHours(response.data.results);
+        // console.log(councilHours);
+        // setLoading(false);
+        //console.log(councilHours);
+      }
+    } catch (error) {
+      if (error) {
+        // setLoading(false);
+        console.log("Council hours are not found ");
+        console.log(error.response);
+        // console.log("Response is: " + error.status);
+      }
+    }
+  }, [id]);
+  useEffect(() => {
+    getCouncilIDs();
+  }, [councilIDs, getCouncilIDs]);
 
   const convertTimeToNumber = (time) => {
     var [hour, minute] = time.split(":");
@@ -56,7 +130,7 @@ const CouncilHourUpdate = () => {
   createTimeOptions("00:00");
 
   const [value, onChange] = useState("10:00");
-  const [id] = useState(localStorage.getItem("id"));
+
   const [header] = useState({
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
   });
@@ -133,7 +207,10 @@ const CouncilHourUpdate = () => {
                 <TableCell align="center">{row.startTime}</TableCell>
                 <TableCell align="center">{row.endTime}</TableCell>
                 <TableCell align="center">
-                  <Button variant="outlined" color="error" onClick> Remove </Button>
+                  <Button variant="outlined" color="error" onClick>
+                    {" "}
+                    Remove{" "}
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

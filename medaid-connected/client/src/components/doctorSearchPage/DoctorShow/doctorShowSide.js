@@ -10,7 +10,6 @@ import axios from "axios";
 import { Images } from "../../../utils/Images";
 import { apiURL } from "../../../utils/apiURL";
 
-
 import DateInput from "../../Reusable/DateInput";
 
 const MyContext = React.createContext();
@@ -78,7 +77,7 @@ const Index = ({ show, doctor }) => {
 
   useEffect(() => {
     getCouncilHours();
-  }, [thisDoctor.thisCouncilHourId, getCouncilHours]);
+  }, []);
   // const [doctor, setDoctor] = useState();
   console.log(councilHours);
   // Role check
