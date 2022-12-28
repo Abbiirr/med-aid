@@ -3,7 +3,7 @@ import axios from "axios";
 import { apiURL } from "../../utils/apiURL";
 import queryString from "query-string";
 import { useLocation } from "react-router";
-import Select from 'react-select'
+import Select from "react-select";
 import "./style.scss";
 
 import NavbarComponent from "../../components/User/Navbar/index";
