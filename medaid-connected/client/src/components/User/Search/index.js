@@ -136,7 +136,7 @@ const Index = () =>{
                                             className="btn0 shadow-none"
                                             onClick={reloadSearch}
                                         >
-                                            <Icon icon={redo} size={15} />
+                                            <Icon icon={redo} size={18} />
                                         </button>
                                     </div>
 

@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
+
 import DatePicker from "react-datepicker";
+import CustomInput from "../../Reusable/CustomInput";
+import "react-datepicker/dist/react-datepicker.css";
+
 import "./style.scss";
 import Icon from "react-icons-kit";
 import jwt_decode from "jwt-decode";
@@ -10,12 +14,23 @@ import axios from "axios";
 import { Images } from "../../../utils/Images";
 import { apiURL } from "../../../utils/apiURL";
 
-import DateInput from "../../Reusable/DateInput";
+// import DateInput from "../../Reusable/DateInput";
+import DateInput2 from "../../Reusable/DateInput";
+
 
 const MyContext = React.createContext();
 //import doctorlist and use doctor
 //use that variable to get the query and use it[] in getDoctors
 const Index = ({ show, doctor }) => {
+
+  const [startDate, setStartDate] = useState(null);
+  const [value, setValue] = useState(null);
+
+  function handleValueChange(newValue) {
+    setValue(newValue);
+    console.log("From DateInput inside show : ", value);
+  }
+
   //console.log(doctor);
   const [councilHours, setCouncilHours] = useState([]);
   let thisDoctor = {
@@ -76,6 +91,8 @@ const Index = ({ show, doctor }) => {
     }
     getCouncilHours();
   }, []);
+
+  //how to create a function that will make the user choose a date using DatePicker
 
   // const getCouncilHours = useCallback(async () => {
   //   try {
@@ -138,7 +155,9 @@ const Index = ({ show, doctor }) => {
   //------------ this portion is confusing-----
 
   // Handle appointment
-  const handleAppointment = () => {
+  const handleAppointment = (startDate) => {
+    setStartDate(startDate);
+    console.log("From DateInput inside show : ", startDate);
     if (token) {
       const patient = checkRole(token);
       if (patient) {
@@ -266,11 +285,26 @@ const Index = ({ show, doctor }) => {
             >
               Get Appointment
             </button> */}
-            {/* <MyContext.Consumer>
-              <DateInput />
-              {(value) => console.log("Date value from DateInput", value)}
-            </MyContext.Consumer> */}
-            <DateInput placeholderText={"Get Appointment"}></DateInput>
+
+            {/*editing this part */}
+
+            <div>
+              <DateInput2 onValueChange={handleAppointment} />
+            </div>
+
+            {/* <DateInput placeholderText={"Get Appointment"}></DateInput>  */}
+            {/* <div>
+              <DatePicker
+                selected={startDate}
+                onChange={({startDate}) => {
+                  setStartDate(startDate);
+                  console.log("New datepicker: ", startDate);
+                }}
+                customInput={<CustomInput />}
+                placeholderText="Get Appointment"
+              />
+            </div> */}
+            {/*edit ended*/}
           </div>
         </div>
       </div>
@@ -287,5 +321,7 @@ const Index = ({ show, doctor }) => {
     </div>
   );
 };
+
+
 
 export default Index;
