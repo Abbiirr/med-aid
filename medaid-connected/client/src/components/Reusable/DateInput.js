@@ -21,20 +21,21 @@ const DateInput = ({ handleValueChange }) => {
   //   // this.props.handleValueChange(this.state.startDate);
 
   // }
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(null);
   // this.handleValueChange = handleValueChange;
   // this.handleChange = this.handleChange.bind(this);
 
-  const handleChange = (date) => {
-    this.setState({
-      startDate: date,
-    });
+  const startValue = null;
+  // const handleChange = (date) => {
+  //   this.setState({
+  //     startDate: date,
+  //   });
 
-    // var date = this.state.startDate;
-    // (date) => handleValueChange(date);
-    // this.handleValueChange(String(date));
-    // this.props.handleValueChange(String(date));
-  };
+  // var date = this.state.startDate;
+  // (date) => handleValueChange(date);
+  // this.handleValueChange(String(date));
+  // this.props.handleValueChange(String(date));
+  // };
   // console.log("Inside DateInput : ", date);
 
   return (
@@ -43,8 +44,17 @@ const DateInput = ({ handleValueChange }) => {
         selected={value}
         maxDate={new Date().setDate(new Date().getDate() + 7)}
         minDate={new Date()}
-        onChange={(date) => handleValueChange(date.toString())}
-        // customInput={<CustomInput />}
+        onChange={(date) => {
+          // const d = new Date(date).toLocaleDateString("fr-FR");
+          // console.log("Inside dateInput: " + date);
+          setValue(new Date(date));
+          //since useState hooks are async, the next console log might be a bit late on updating,
+          //but alls good if the button shows the correct date
+          // console.log("Inside dateInput2: " + value);
+          handleValueChange(date.toString());
+        }}
+        // onChange={(date) => handleValueChange(date.toString())}
+        customInput={<CustomInput />}
         placeholderText="Get Appointment"
       />
       {/* <button onClick={() => console.log(value)}>Generate value</button> */}

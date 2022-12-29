@@ -223,7 +223,7 @@ const Index = ({ show, doctor }) => {
     setStartDate(newValue);
     const date2 = new Date(newValue);
     console.log("From DateInput inside show : " + date2.getDay());
-    console.log("From DateInput inside show : " + newValue);
+    // console.log("From DateInput inside show : " + newValue);
     document.getElementById("get-appointment").disabled = false;
   };
 
@@ -332,6 +332,7 @@ const Index = ({ show, doctor }) => {
               type="button"
               className="btn shadow-none"
               onClick={handleAppointment}
+              disabled={startDate == null ? true : false}
             >
               Get Appointment
             </button>
