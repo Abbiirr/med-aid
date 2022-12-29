@@ -332,6 +332,7 @@ const Index = ({ show, doctor }) => {
               type="button"
               className="btn shadow-none"
               onClick={handleAppointment}
+              disabled={startDate == null ? true : false}
             >
               Get Appointment
             </button>
