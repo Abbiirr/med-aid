@@ -30,9 +30,10 @@ const Index = () => {
   const [searchInput, setSearchInput] = useState("");
 
 
-  const location = useLocation();
-  const value = queryString.parse(location.search);
-  const symptoms = value.symptoms;
+  // const location = useLocation();
+  // const value = queryString.parse(location.search);
+  // const symptoms = value.symptoms;
+
   const [token, setToken] = useState(
     localStorage.getItem("token") || undefined
   );
@@ -53,7 +54,7 @@ const Index = () => {
     // if (role === "patient") {
     //   return history.push("/patient");
     // }
-    console.log(role);
+    //console.log(role);
   };
 
   if (token) {
@@ -80,9 +81,9 @@ const Index = () => {
           })
         })
         console.log(specialtyOptions)
-        console.log("All doctors: ", response.data);
+        //console.log("All doctors: ", response.data);
         setDoctors(response.data);
-        console.log("All doctors from state : ", doctors);
+        //console.log("All doctors from state : ", doctors);
         
       } catch (error) {
         if (error) console.log("error");
@@ -106,7 +107,6 @@ const Index = () => {
       <NavbarComponent />
       <div className="search-result-index">
         <div className="container">
-
           <FormControl sx={{ marginTop: 5, width: 200, zIndex: 0 }}>
             <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
             <Select
@@ -122,25 +122,24 @@ const Index = () => {
             </Select>
           </FormControl>
 
-
           {/* <div style={{ display: "flex", float: "right" }}>
             <Button style={{ marginLeft: "auto" }}>
               Pending Doctor Approvals
             </Button>
           </div> */}
-
+          
           <section className="garamond">
             <div className="navy georgia ma0 grow">
               <h2 className="f2">Search your doctors</h2>
             </div>
             <div className="pa2">
               <MainSelect
-                onChange={(item) => setSearchInput(item.value)}
+                onChange={(item) => setSearchInput(item)}
                 maxMenuHeight={175}
-                classNamePrefix="custom-select"
                 options={specialtyOptions}
+                classNamePrefix="custom-select"
                 //isMulti
-                //isClearable={true}
+                isClearable={true}
                 isSearchable={true}
                 placeholder="Your doctors"
                 // have to make this field required to make the search work
@@ -159,7 +158,6 @@ const Index = () => {
             </div>
           ) : null}
 
-
           <div className="row">
             <div className="col-12 py-4"></div>
             <div className="col-12 py-4 py-lg-5 text-center">
@@ -168,12 +166,10 @@ const Index = () => {
               </h3>
             </div>
           </div>
-
         </div>
 
         {/* Results */}
         <DoctorsListComponent doctors={doctors} loading={false} />
-
       </div>
       <FooterComponent />
     </div>

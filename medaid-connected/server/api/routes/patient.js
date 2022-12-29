@@ -4,6 +4,9 @@ const Authenticate = require('../middleware/Permission')
 const ProfileController = require('../controllers/Patient/ProfileController')
 const AppointmentController = require('../controllers/Patient/AppointmentController')
 const searchDoctorsController = require('../controllers/Patient/SearchDoctor')
+const patientController = require('../controllers/Patient/PatientFind')
+
+router.get('/profile', patientController.findPatient)
 
 router.get('/me', Authenticate.isPatient, ProfileController.Me)
 router.post('/profile/:id/update/photo', Authenticate.isPatient, ProfileController.updatePhoto)

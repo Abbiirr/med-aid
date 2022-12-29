@@ -1,30 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
 import Select from "react-select";
 
 import "./style.scss";
+import { list } from "react-icons-kit/icomoon";
+// import { NULL } from "node-sass";
 
 const CreatePrescription = (props) => {
 
   const [patientID, setPatientID] = useState("");
   const [doctorID, setDoctorID] = useState("");
   const [instructions, setInstructions] = useState("");
-
+  const [medicines, setMedicines] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
+  const [patients, setPatients] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState("");
+
   var doctorName = props.props.name;
+  var listOfAppointments = props.props.appointments
+
+  useEffect(() => {
+    const searchMedicines = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/v1/medicine`
+        );
+        setMedicines(response.data);
+        //console.log(medicines)
+      } catch (error) {
+        if (error) console.log("error");
+      }
+    };
+
+    const searchPatients = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/api/v1/patient/profile`
+        );
+        setPatients(response.data);
+        //console.log("patients : ", patients);
+      } catch (error) {
+        if (error) console.log("error");
+      }
+    };
+
+    searchPatients();
+    searchMedicines();
+  }, []);
+
+const patientOptions = [];
+
+patients.forEach(function (item) {
+  if(item.name !== null){
+    patientOptions.push({
+      label: item.name,
+      value: item.name,
+    });
+  }
+});
+
+//console.log("patient options : ", patientOptions);
+
+
 
   //setDoctorID(props.props.name.toString());
-  //console.log("doctor : ", typeof props.props.name);
+  //console.log("doctor : ", props.props);
 
-  const options = [
-    { value: "napa", label: "napa" },
-    { value: 'ace', label: 'ace' },
-    { value: 'montair', label: 'montair' },
-    { value: 'finix', label: 'finix' }
-  ];
+  const medArray = medicines.map((item) => item.name);
+  const uniqueMedArray = [...new Set(medArray)];
+  //console.log(uniqueMedArray);
+
+  const options = [];
+
+  uniqueMedArray.forEach(function (item) {
+    options.push({
+      label: item,
+      value: item,
+    }); 
+  });
+
 
   let i = 0;
   let arrOfoptions = [];
@@ -41,11 +98,11 @@ const CreatePrescription = (props) => {
     setDoctorID(props.props.name.toString());
     console.log("doctor : ", doctorName);
 
-    console.log("all info", patientID, arrOfoptions, instructions);
+    console.log("all info", selectedPatient, arrOfoptions, instructions);
     
     const response = axios
       .post("http://localhost:4000/api/v1/prescription", {
-        patientID,
+        selectedPatient,
         doctorName,
         arrOfoptions,
         instructions,
@@ -67,9 +124,21 @@ const CreatePrescription = (props) => {
         <input
           type="text"
           id="patientID"
-          value={patientID}
-          onChange={(event) => setPatientID(event.target.value)}
+          value={selectedPatient}
+          onChange={(event) => setSelectedPatient(event.target.value)}
         />
+        {/* <Select
+          // onChange={(item) => setSelectedOptions(item.value)}
+          onChange={(item) => setSelectedPatient(item.value)}
+          maxMenuHeight={175}
+          classNamePrefix="custom-select"
+          options={patientOptions}
+          //options={symptoms}
+          // isMulti
+          isClearable={true}
+          isSearchable={true}
+          placeholder="Select Patient"
+        /> */}
         <br />
         <label htmlFor="medication">Medicines :</label>
         <Select

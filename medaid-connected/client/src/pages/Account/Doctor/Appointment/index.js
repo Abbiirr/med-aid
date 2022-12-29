@@ -89,6 +89,11 @@ const Index = () => {
                       Take Council
                     </button>
                   </div>
+                  <div className="ml-auto">
+                    <button type="button" className="btn shadow-sm">
+                      Give Prescription
+                    </button>
+                  </div>
                 </div>
               ))}
           </div>

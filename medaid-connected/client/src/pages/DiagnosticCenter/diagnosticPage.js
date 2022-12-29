@@ -132,7 +132,7 @@ const Index = () => {
                   //isMulti
                   //isClearable={true}
                   isSearchable={true}
-                  placeholder="Your tests??"
+                  placeholder="Search Your tests"
                   // have to make this field required to make the search work
               />
               <button onClick={submitSearch} type="submit" className="btn">Search</button>
