@@ -12,11 +12,11 @@ const getPrescription= async (req, res) => {
 const setPrescription = async (req, res) => {
 
     const prescription = await prescription_schema.create({
-        patient_id: req.body.patient_id,
-        doctor_id: req.body.doctor_id,
-        medicines: [req.body.medicines],
-        //instructions: [req.body.instructions]
-    })
+      patient_id: req.body.patientID,
+      doctor_id: req.body.doctorName,
+      medicines: req.body.arrOfoptions,
+      instructions: req.body.instructions,
+    });
 
     console.log(req.body);
     res.json(prescription);

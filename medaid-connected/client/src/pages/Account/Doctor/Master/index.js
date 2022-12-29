@@ -7,6 +7,7 @@ import Icon from "react-icons-kit";
 import { ic_dehaze } from "react-icons-kit/md";
 import { Images } from "../../../../utils/Images";
 
+import PrescriptionComponent from "../../../../components/Prescription/prescriptionForm";
 
 import SideMenuComponent from "../../../../components/Doctor/SideMenu/index";
 import ProfileUpdateModal from "../../../../components/Doctor/Model/ProfileUpdate/index";
@@ -232,6 +233,13 @@ const Master = () => {
               exact
               path="/doctor/councils"
               component={CouncilHourUpdate}
+            />
+            <Route
+              exact
+              path="/doctor/prescription"
+              component={() => (
+                <PrescriptionComponent props={doctor} />
+              )}
             />
           </Switch>
           {/* <CouncilHourUpdate id={id} /> */}

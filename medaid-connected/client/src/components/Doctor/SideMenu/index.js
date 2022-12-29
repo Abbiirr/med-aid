@@ -114,7 +114,7 @@ const Index = ({ doctor, editdialog }) => {
           exact
           activeClassName="is-Active"
           className="btn btn-block shadow-none"
-          to="/prescription"
+          to="/doctor/prescription"
         >
           <Icon icon={ic_article} size={20} />
           <span>Prescription</span>

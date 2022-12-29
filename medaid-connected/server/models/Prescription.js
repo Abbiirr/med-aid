@@ -12,11 +12,11 @@ const prescriptionSchema = new Schema({
             type: String,
         }
       ],
-      instructions: [
-        {
-          type: String,
-        },
-      ],
+      instructions: 
+      {
+        type: String,
+      }
+      
 })
 
 
