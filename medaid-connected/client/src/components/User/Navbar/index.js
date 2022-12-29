@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link, NavLink } from "react-router-dom";
+
+import jwt_decode from "jwt-decode";
 import { SidebarData } from "./SidebarData";
 import "./style.scss";
 import { IconContext } from "react-icons";
@@ -23,6 +25,30 @@ function Index() {
       setToken(localStorage.getItem("token"));
     }
   }, []);
+
+  var role;
+  const checkRole = (token) => {
+    const decode = jwt_decode(token);
+    role = decode.role;
+    const id = decode.id;
+    localStorage.setItem("id", id);
+
+    // if (role === "super_admin" || role === "admin" || role === "manager") {
+    //   return history.push("/admin");
+    // }
+    // if (role === "doctor") {
+    //   return history.push("/doctor");
+    // }
+
+    // if (role === "patient") {
+    //   return history.push("/patient");
+    // }
+    //console.log(role);
+  };
+
+  if (token) {
+    checkRole(token);
+  }
 
   return (
     <>
@@ -53,6 +79,13 @@ function Index() {
           </Link>
           <div className="my-menu">
             <ul>
+              {role === "admin" ? (
+                <li>
+                  <NavLink activeClassName="is-Active" exact to="/upload-data">
+                    upload data
+                  </NavLink>
+                </li>
+              ) : null}
               <li>
                 <NavLink activeClassName="is-Active" exact to="/about-us">
                   about
