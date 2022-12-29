@@ -218,14 +218,12 @@ const Index = ({ show, doctor }) => {
   };
   createTimeOptions("00:00");
 
-  const handleValueChange1 = (newValue) => {
+  function handleValueChange(newValue) {
     setValue(newValue);
     setStartDate(newValue);
-    const date2 = new Date(newValue);
-    console.log("From DateInput inside show : " + date2.getDay());
-    console.log("From DateInput inside show : " + newValue);
+    console.log("From DateInput inside show : ", value);
     document.getElementById("get-appointment").disabled = false;
-  };
+  }
 
   function createData(day, startTime, endTime) {
     return { day, startTime, endTime };
@@ -302,8 +300,7 @@ const Index = ({ show, doctor }) => {
               {(value) => console.log("Date value from DateInput", value)}
             </MyContext.Consumer> */}
             <DateInput
-              // onChange={handleValueChange1}
-              handleValueChange={handleValueChange1}
+              onChange={handleValueChange}
               placeholderText={"Get Appointment"}
             ></DateInput>
 
@@ -370,6 +367,41 @@ const Index = ({ show, doctor }) => {
                 </TableBody>
               </Table>
             </TableContainer>
+            {/* <table className="table table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Start time</th>
+                  <th>End time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {thisDoctor.councilHour
+                  ? console.log(thisDoctor.councilHour._id)
+                  : console.log("Doctor not found")}
+                {/* {thisDoctor.councilHour &&
+                  thisDoctor.councilHour.map((item) => (
+                    <tr>
+                      <td key={item._id}>
+                        {item.schedule.day ? item.schedule.day : "nothing"}
+                      </td>
+                    </tr>
+                  ))} */}
+            {/* {
+                  ((item, i) => (
+                    <tr key={item._id}>
+                      <th>{item.schedule.day}</th>
+                      <th>{item.schedule.startTime}</th>
+                      <th>{item.schedule.endTime}</th>
+                    </tr>
+                  ))} */}
+            {/* <tr>
+                  <td>{councilHours.day}</td>
+                  <td>{councilHours.startTime}</td>
+                  <td>{councilHours.endTime}</td>
+                </tr>
+              </tbody>
+            </table> */}
           </div>
         </div>
       </div>
