@@ -22,8 +22,19 @@
 
 Clone the project then run
 
-``npm i``
-`` npm start``
+
+` cd medaid-connected/server`
+
+in another cmd shell:
+
+` cd medaid-connected/client`
+
+and in both shells type
+
+`npm i     `
+
+` npm start    `
+
 ## Technologies
 > Frontend
 - ReactJS
