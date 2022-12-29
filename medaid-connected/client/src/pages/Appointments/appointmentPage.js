@@ -10,6 +10,11 @@ import Paper from '@mui/material/Paper';
 import NavbarComponent from "../../components/User/Navbar/index";
 import FooterComponent from "../../components/User/Footer/index";
 import Alert from '@mui/material/Alert';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import ListItemButton from '@mui/material/ListItemButton';
 
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -97,10 +102,85 @@ function Index() {
     </Paper>
   );
 
+  function AppointmentList() {
+    return (
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' , marginRight: 10}}>
+        <ListItem alignItems="flex-start">
+          <Typography>
+            Your Appointments
+          </Typography>
+        </ListItem>
+        <ListItemButton alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          </ListItemAvatar>
+          <ListItemText
+            primary="Dr. Brunch"
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  13.01.2033 -- 2pm
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItemButton>
+        <Divider variant="inset" component="li" />
+        <ListItemButton alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          </ListItemAvatar>
+          <ListItemText
+            primary="Dr. Summer"
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  12.01.2033 -- 3pm
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItemButton>
+        <Divider variant="inset" component="li" />
+        <ListItemButton alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+          </ListItemAvatar>
+          <ListItemText
+            primary="Dr. Oui Oui"
+            secondary={
+              <React.Fragment>
+                <Typography
+                  sx={{ display: 'inline' }}
+                  component="span"
+                  variant="body2"
+                  color="text.primary"
+                >
+                  12.01.2033 -- 2pm
+                </Typography>
+              </React.Fragment>
+            }
+          />
+        </ListItemButton>
+      </List>
+    );
+  }
+
   return (
     <div>
       <NavbarComponent />
       <Grid container spacing={2} justifyContent="center" alignItems="center" minHeight={480}>
+      <Grid item>{AppointmentList()}</Grid>
       <Grid item>{customList(left)}</Grid>
       <Grid item>
         <Grid container direction="column" alignItems="center">
