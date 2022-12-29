@@ -4,6 +4,14 @@ import "./style.scss";
 import Icon from "react-icons-kit";
 import jwt_decode from "jwt-decode";
 import { ic_clear } from "react-icons-kit/md";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 import AppointmentModal from "../../User/Model/GetAppointment/index";
 import AlertModal from "../../User/Model/Alert/AuthCheck/index";
 import axios from "axios";
@@ -20,6 +28,7 @@ const Index = ({ show, doctor }) => {
   const [councilHours, setCouncilHours] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [value, setValue] = useState(null);
+  const [councilIDs, setCouncilIDs] = useState([]);
   let thisDoctor = {
     id: doctor._id,
     name: doctor.name,
@@ -45,78 +54,140 @@ const Index = ({ show, doctor }) => {
 
   //----------------------------------------------------------------
 
-  useEffect(() => {
-    const getCouncilHours = async () => {
-      try {
-        const response = await axios.get(
-          `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
+  const getCouncilHours = async (councilHourID) => {
+    try {
+      const response = await axios.get(
+        `${apiURL}/doctor/councils/${councilHourID}`
 
-          // header
-        );
+        // header
+      );
 
-        //console.log(response.data.requests[0].schedule);
-        // day = response.data.requests[0].schedule.day;
-        // startTime = response.data.requests[0].schedule.startTime;
-        // endTime = response.data.requests[0].schedule.endTime;
+      //don't touch this code block, please it might break :(
+      console.log(response.data.requests[0].schedule);
+      const schedule = response.data.requests[0].schedule;
+      console.log(schedule.day, schedule.startTime, schedule.endTime);
+      setCouncilHours((councilHours) => councilHours.concat(schedule));
+      councilHours.push(response.data.requests[0].schedule);
 
-        if (response.status === 200) {
-          console.log("Council hours are found ");
-
-          setCouncilHours(response.data.requests[0].schedule);
-          //setCouncilHours(response.data.results);
-          // console.log(councilHours);
-          // setLoading(false);
-          //console.log(councilHours);
-        }
-      } catch (error) {
-        if (error) {
-          // setLoading(false);
-          console.log("Council hours are not found ");
-          console.log(error.response);
-        }
+      if (response.status === 200 || response.status === 304) {
+        console.log("Council hours are found ");
       }
-    };
-    getCouncilHours();
-  }, []);
+    } catch (error) {
+      if (error) {
+        // setLoading(false);
+        console.log("Council hours are not found ");
+        console.log(error.response);
+      }
+    }
+  };
 
-  // const getCouncilHours = useCallback(async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
+  const getCouncilIDs = useCallback(async () => {
+    try {
+      console.log("id is " + id);
+      const response = await axios.get(
+        `${apiURL}/doctor/${id}/councils/`
 
-  //       // header
-  //     );
+        // header
+      );
+      // setCouncilIDs(response.data);  //does not work
 
-  //     //console.log(response.data.requests[0].schedule);
-  //     // day = response.data.requests[0].schedule.day;
-  //     // startTime = response.data.requests[0].schedule.startTime;
-  //     // endTime = response.data.requests[0].schedule.endTime;
+      // console.log(response.data.length);
+      for (var i = 0; i < response.data.length; i++) {
+        await councilIDs.push(response.data[i]);
+        await getCouncilHours(councilIDs[i]);
+      }
+      console.log(councilIDs);
 
-  //     if (response.status === 200) {
-  //       console.log("Council hours are found ");
+      if (response.status === 200 || response.status === 304) {
+        console.log("Council IDs are found ");
+      }
+    } catch (error) {
+      if (error) {
+        // setLoading(false);
+        console.log("Council IDs are not found ");
+        console.log(error.response);
+        // console.log("Response is: " + error.status);
+      }
+    }
+  }, [id]);
+  useEffect(() => {
+    getCouncilIDs();
 
-  //       setCouncilHours(response.data.requests[0].schedule);
-  //       //setCouncilHours(response.data.results);
-  //       // console.log(councilHours);
-  //       // setLoading(false);
-  //       //console.log(councilHours);
-  //     }
-  //   } catch (error) {
-  //     if (error) {
-  //       // setLoading(false);
-  //       console.log("Council hours are not found ");
-  //       console.log(error.response);
-  //     }
-  //   }
-  // }, [thisDoctor.thisCouncilHourId]);
-  // getCouncilHours();
+    // console.log("Outside then: " + councilIDs.length);
+  }, [councilIDs]);
 
   // useEffect(() => {
+  //   const getCouncilHours = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
+
+  //         // header
+  //       );
+
+  //       //console.log(response.data.requests[0].schedule);
+  //       // day = response.data.requests[0].schedule.day;
+  //       // startTime = response.data.requests[0].schedule.startTime;
+  //       // endTime = response.data.requests[0].schedule.endTime;
+
+  //       if (response.status === 200) {
+  //         console.log("Council hours are found ");
+
+  //         setCouncilHours(response.data.requests[0].schedule);
+  //         //setCouncilHours(response.data.results);
+  //         // console.log(councilHours);
+  //         // setLoading(false);
+  //         //console.log(councilHours);
+  //       }
+  //     } catch (error) {
+  //       if (error) {
+  //         // setLoading(false);
+  //         console.log("Council hours are not found ");
+  //         console.log(error.response);
+  //       }
+  //     }
+  //   };
   //   getCouncilHours();
   // }, []);
 
-  // const [doctor, setDoctor] = useState();
-  console.log(councilHours);
+  // // const getCouncilHours = useCallback(async () => {
+  // //   try {
+  // //     const response = await axios.get(
+  // //       `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
+
+  // //       // header
+  // //     );
+
+  // //     //console.log(response.data.requests[0].schedule);
+  // //     // day = response.data.requests[0].schedule.day;
+  // //     // startTime = response.data.requests[0].schedule.startTime;
+  // //     // endTime = response.data.requests[0].schedule.endTime;
+
+  // //     if (response.status === 200) {
+  // //       console.log("Council hours are found ");
+
+  // //       setCouncilHours(response.data.requests[0].schedule);
+  // //       //setCouncilHours(response.data.results);
+  // //       // console.log(councilHours);
+  // //       // setLoading(false);
+  // //       //console.log(councilHours);
+  // //     }
+  // //   } catch (error) {
+  // //     if (error) {
+  // //       // setLoading(false);
+  // //       console.log("Council hours are not found ");
+  // //       console.log(error.response);
+  // //     }
+  // //   }
+  // // }, [thisDoctor.thisCouncilHourId]);
+  // // getCouncilHours();
+
+  // // useEffect(() => {
+  // //   getCouncilHours();
+  // // }, []);
+
+  // // const [doctor, setDoctor] = useState();
+  // console.log(councilHours);
   // Role check
   const checkRole = (token) => {
     const decode = jwt_decode(token);
@@ -178,6 +249,25 @@ const Index = ({ show, doctor }) => {
     document.getElementById("get-appointment").disabled = false;
   }
 
+  function createData(day, startTime, endTime) {
+    return { day, startTime, endTime };
+  }
+
+  var rows = [];
+
+  const updateRows = () => {
+    console.log("Updating rows");
+    for (var i = 0; i < councilHours.length; i++) {
+      rows.push(
+        createData(
+          councilHours[i].day,
+          councilHours[i].startTime,
+          councilHours[i].endTime
+        )
+      );
+    }
+  };
+
   return (
     <div className="doctor-show shadow">
       <div className="info-container p-3">
@@ -221,45 +311,6 @@ const Index = ({ show, doctor }) => {
             <h6 className="mb-0">Current Hospital</h6>
             <p>{thisDoctor.currentHospital}</p>
           </div>
-          {/* Schedule */}
-          <div className="mt-3">
-            <h6 className="mb-2">Councilling Schedule</h6>
-            <table className="table table-sm table-bordered">
-              <thead>
-                <tr>
-                  <th>Day</th>
-                  <th>Start time</th>
-                  <th>End time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {thisDoctor.councilHour
-                  ? console.log(thisDoctor.councilHour._id)
-                  : console.log("Doctor not found")}
-                {/* {thisDoctor.councilHour &&
-                  thisDoctor.councilHour.map((item) => (
-                    <tr>
-                      <td key={item._id}>
-                        {item.schedule.day ? item.schedule.day : "nothing"}
-                      </td>
-                    </tr>
-                  ))} */}
-                {/* {
-                  ((item, i) => (
-                    <tr key={item._id}>
-                      <th>{item.schedule.day}</th>
-                      <th>{item.schedule.startTime}</th>
-                      <th>{item.schedule.endTime}</th>
-                    </tr>
-                  ))} */}
-                <tr>
-                  <td>{councilHours.day}</td>
-                  <td>{councilHours.startTime}</td>
-                  <td>{councilHours.endTime}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
           {/* ////////////////// Council Fee goes to here /////////////////// */}
           {/* <div className="mt-3">
@@ -285,6 +336,76 @@ const Index = ({ show, doctor }) => {
             >
               Get Appointment
             </button>
+          </div>
+
+          {/* Schedule */}
+          <div className="mt-3">
+            <h6 className="mb-2">Councilling Schedule</h6>
+            {councilIDs.length > 0 ? updateRows() : null}
+            <TableContainer
+              component={Paper}
+              sx={{ marginBottom: 10 }}
+              style={{ width: "auto", tableLayout: "auto" }}
+            >
+              <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Day</TableCell>
+                    <TableCell align="center">Start Time</TableCell>
+                    <TableCell align="center">End Time</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow
+                      key={row.day}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.day}
+                      </TableCell>
+                      <TableCell align="center">{row.startTime}</TableCell>
+                      <TableCell align="center">{row.endTime}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {/* <table className="table table-sm table-bordered">
+              <thead>
+                <tr>
+                  <th>Day</th>
+                  <th>Start time</th>
+                  <th>End time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {thisDoctor.councilHour
+                  ? console.log(thisDoctor.councilHour._id)
+                  : console.log("Doctor not found")}
+                {/* {thisDoctor.councilHour &&
+                  thisDoctor.councilHour.map((item) => (
+                    <tr>
+                      <td key={item._id}>
+                        {item.schedule.day ? item.schedule.day : "nothing"}
+                      </td>
+                    </tr>
+                  ))} */}
+            {/* {
+                  ((item, i) => (
+                    <tr key={item._id}>
+                      <th>{item.schedule.day}</th>
+                      <th>{item.schedule.startTime}</th>
+                      <th>{item.schedule.endTime}</th>
+                    </tr>
+                  ))} */}
+            {/* <tr>
+                  <td>{councilHours.day}</td>
+                  <td>{councilHours.startTime}</td>
+                  <td>{councilHours.endTime}</td>
+                </tr>
+              </tbody>
+            </table> */}
           </div>
         </div>
       </div>
