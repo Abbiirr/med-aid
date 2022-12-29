@@ -43,6 +43,8 @@ class DateInput extends React.Component {
       <MyContext.Provider value={this.state.startDate}>
         <div>
           <DatePicker
+            maxDate={new Date().setDate(new Date().getDate() + 7)}
+            minDate={new Date()}
             selected={this.state.startDate}
             onChange={this.handleChange}
             customInput={<CustomInput />}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useForm } from "react";
 import DatePicker from "react-datepicker";
 import "./style.scss";
 import Icon from "react-icons-kit";
@@ -25,6 +25,12 @@ const MyContext = React.createContext();
 //use that variable to get the query and use it[] in getDoctors
 const Index = ({ show, doctor }) => {
   //console.log(doctor);
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   getValues,
+  //   formState: { errors },
+  // } = useForm({ mode: "onTouched" });
   const [councilHours, setCouncilHours] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [value, setValue] = useState(null);
@@ -116,77 +122,6 @@ const Index = ({ show, doctor }) => {
     // console.log("Outside then: " + councilIDs.length);
   }, [councilIDs]);
 
-  // useEffect(() => {
-  //   const getCouncilHours = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
-
-  //         // header
-  //       );
-
-  //       //console.log(response.data.requests[0].schedule);
-  //       // day = response.data.requests[0].schedule.day;
-  //       // startTime = response.data.requests[0].schedule.startTime;
-  //       // endTime = response.data.requests[0].schedule.endTime;
-
-  //       if (response.status === 200) {
-  //         console.log("Council hours are found ");
-
-  //         setCouncilHours(response.data.requests[0].schedule);
-  //         //setCouncilHours(response.data.results);
-  //         // console.log(councilHours);
-  //         // setLoading(false);
-  //         //console.log(councilHours);
-  //       }
-  //     } catch (error) {
-  //       if (error) {
-  //         // setLoading(false);
-  //         console.log("Council hours are not found ");
-  //         console.log(error.response);
-  //       }
-  //     }
-  //   };
-  //   getCouncilHours();
-  // }, []);
-
-  // // const getCouncilHours = useCallback(async () => {
-  // //   try {
-  // //     const response = await axios.get(
-  // //       `${apiURL}/doctor/councils/${thisDoctor.thisCouncilHourId}`
-
-  // //       // header
-  // //     );
-
-  // //     //console.log(response.data.requests[0].schedule);
-  // //     // day = response.data.requests[0].schedule.day;
-  // //     // startTime = response.data.requests[0].schedule.startTime;
-  // //     // endTime = response.data.requests[0].schedule.endTime;
-
-  // //     if (response.status === 200) {
-  // //       console.log("Council hours are found ");
-
-  // //       setCouncilHours(response.data.requests[0].schedule);
-  // //       //setCouncilHours(response.data.results);
-  // //       // console.log(councilHours);
-  // //       // setLoading(false);
-  // //       //console.log(councilHours);
-  // //     }
-  // //   } catch (error) {
-  // //     if (error) {
-  // //       // setLoading(false);
-  // //       console.log("Council hours are not found ");
-  // //       console.log(error.response);
-  // //     }
-  // //   }
-  // // }, [thisDoctor.thisCouncilHourId]);
-  // // getCouncilHours();
-
-  // // useEffect(() => {
-  // //   getCouncilHours();
-  // // }, []);
-
-  // // const [doctor, setDoctor] = useState();
   // console.log(councilHours);
   // Role check
   const checkRole = (token) => {
@@ -241,6 +176,47 @@ const Index = ({ show, doctor }) => {
       />
     );
   }
+
+  const options = [];
+  // obj = {};
+  const splitTime = 15;
+
+  var start;
+
+  const convertTimeToNumber = (time) => {
+    var [hour, minute] = time.split(":");
+    var value = parseInt(hour) * 60 + parseInt(minute);
+    console.log(value);
+    return value;
+  };
+
+  const createTimeOptions = (start) => {
+    convertTimeToNumber(start);
+    for (var i = 0; i < 96 - 0; i++) {
+      var obj = {};
+
+      var time = i * splitTime;
+      var [hour, minute] = [Math.floor(time / 60), time % 60];
+      var amOrPm = "AM";
+
+      if (hour < 10) hour = "0" + hour;
+      if (minute < 10) minute = "0" + minute;
+      // if(hour<10 && minute<10)
+      obj["value"] = `${hour}:${minute}`;
+
+      //checking if am or pm
+      if (hour >= 12) amOrPm = "PM";
+
+      //if pm transform to 12 hr format
+      if (amOrPm === "PM") hour = hour % 12;
+      if (hour == 0) hour = 12;
+
+      obj["label"] = `${hour}:${minute} ${amOrPm}`;
+
+      options.push(obj);
+    }
+  };
+  createTimeOptions("00:00");
 
   function handleValueChange(newValue) {
     setValue(newValue);
@@ -327,6 +303,26 @@ const Index = ({ show, doctor }) => {
               onChange={handleValueChange}
               placeholderText={"Get Appointment"}
             ></DateInput>
+
+            {/* <div className="col-12 col-lg-4">
+              <select id="time-slot" className="form-control shadow-none">
+                <option value="saturday">Select Time Slot</option>
+              </select>
+            </div> */}
+
+            <div className="col-12 col-lg-4">
+              <p>Start time</p>
+
+              <select
+                name="startTime"
+                id="start-time"
+                className="form-control shadow-none"
+              >
+                {options.map(({ value, label }, index) => (
+                  <option value={value}>{label}</option>
+                ))}
+              </select>
+            </div>
 
             <button
               id="get-appointment"
