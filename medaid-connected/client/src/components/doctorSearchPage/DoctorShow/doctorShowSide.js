@@ -18,6 +18,8 @@ const MyContext = React.createContext();
 const Index = ({ show, doctor }) => {
   //console.log(doctor);
   const [councilHours, setCouncilHours] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [value, setValue] = useState(null);
   let thisDoctor = {
     id: doctor._id,
     name: doctor.name,
@@ -73,7 +75,7 @@ const Index = ({ show, doctor }) => {
           console.log(error.response);
         }
       }
-    }
+    };
     getCouncilHours();
   }, []);
 
@@ -169,6 +171,13 @@ const Index = ({ show, doctor }) => {
     );
   }
 
+  function handleValueChange(newValue) {
+    setValue(newValue);
+    setStartDate(newValue);
+    console.log("From DateInput inside show : ", value);
+    document.getElementById("get-appointment").disabled = false;
+  }
+
   return (
     <div className="doctor-show shadow">
       <div className="info-container p-3">
@@ -259,18 +268,23 @@ const Index = ({ show, doctor }) => {
                     </div> */}
 
           <div className="my-3 text-center">
-            {/* <button
+            {/* <MyContext.Consumer>
+              <DateInput />
+              {(value) => console.log("Date value from DateInput", value)}
+            </MyContext.Consumer> */}
+            <DateInput
+              onChange={handleValueChange}
+              placeholderText={"Get Appointment"}
+            ></DateInput>
+
+            <button
+              id="get-appointment"
               type="button"
               className="btn shadow-none"
               onClick={handleAppointment}
             >
               Get Appointment
-            </button> */}
-            {/* <MyContext.Consumer>
-              <DateInput />
-              {(value) => console.log("Date value from DateInput", value)}
-            </MyContext.Consumer> */}
-            <DateInput placeholderText={"Get Appointment"}></DateInput>
+            </button>
           </div>
         </div>
       </div>
