@@ -1,0 +1,85 @@
+@import "../../App.scss";
+
+    // .container .garamond{
+    //     margin: 50px;
+    //     text-align: center;
+    //     color: coral;
+    //     margin-bottom: 50px;
+
+    //     .pa2 .custom-select__control {
+    //         margin-top: 50px;
+    //         width: 50%;
+    //         margin: auto;
+    //         border-radius: 25px;
+    //         box-shadow: none;
+    //         height: 45px;
+    //         font-size: 14px;
+    //         padding-left: 15px;
+    //         border-right: 1px solid #dfdfdf;
+    //     }
+
+    //     .pa2 .btn {
+    //         margin-top: 20px;
+    //         border: 1px solid black;
+    //         height: 45px;
+    //         width: 70px;
+    //         border: 0;
+    //         background: whitesmoke;
+    //         border-radius: 10px;
+    //     }
+    // }
+
+    .card {
+        width: 100%;
+        margin: auto;
+        background: none;
+        border-radius: 25px;
+
+        form {
+            .form-control {
+                border: 0;
+                height: 45px;
+                font-size: 14px;
+                padding-left: 15px;
+                border-top-left-radius: 25px;
+                border-bottom-left-radius: 25px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border-right: 1px solid #dfdfdf;
+            }
+
+            .form-control-error {
+                border: 1px solid brown;
+                border-right: 1px solid #dfdfdf;
+            }
+
+            .custom-select__control {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .custom-aselect__control {
+                border:0px;
+                box-shadow: none;
+            }
+
+            .btn {
+                border: 0;
+                height: 45px;
+                border: 0;
+                background: $primary-color;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                border-top-right-radius: 25px;
+                border-bottom-right-radius: 25px;
+            }
+        }
+
+        @media (min-width: 576px) {
+            width: 500px;
+        }
+
+        @media (min-width: 768px) {
+            width: 600px;
+        }
+    }
