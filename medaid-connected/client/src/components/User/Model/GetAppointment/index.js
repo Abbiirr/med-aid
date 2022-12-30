@@ -174,7 +174,7 @@ const GetAppointment = ({ hidemodal, doctor, schedule }) => {
                           {errors.weight && errors.weight.message}
                         </small>
                       ) : (
-                        <small>Weight</small>
+                        <small>Weight (KG)</small>
                       )}
 
                       <input
@@ -200,7 +200,7 @@ const GetAppointment = ({ hidemodal, doctor, schedule }) => {
                           {errors.height && errors.height.message}
                         </small>
                       ) : (
-                        <small>Height</small>
+                        <small>Height (in cm)</small>
                       )}
 
                       <input

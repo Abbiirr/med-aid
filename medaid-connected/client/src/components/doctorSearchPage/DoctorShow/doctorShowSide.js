@@ -208,8 +208,9 @@ const Index = ({ show, doctor }) => {
   };
 
   const createTimeOptions = (start) => {
-    convertTimeToNumber(start);
-    for (var i = 0; i < 96 - 0; i++) {
+    const startT = convertTimeToNumber(start);
+    console.log("start time ", start)
+    for (var i = startT; i < 96 - 0; i++) {
       var obj = {};
 
       var time = i * splitTime;

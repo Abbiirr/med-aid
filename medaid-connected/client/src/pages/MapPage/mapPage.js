@@ -16,10 +16,14 @@ const distanceToMouse = (pt, mp) => {
 };
 
 const points = [
-  { id: 1, title: "Round Pond", lat: 51.506, lng: -0.184 },
-  { id: 2, title: "The Long Water", lat: 51.508, lng: -0.175 },
-  { id: 3, title: "The Serpentine", lat: 51.505, lng: -0.164 },
+  { id: 1, title: "Popular Medical Center", lat: 23.739316132485936, lng: 90.38226770352782 },
+  { id: 2, title: "Apollo Hospital", lat: 23.820008651572735, lng: 90.4525850998742 },
+  { id: 3, title: "Medinova Medical Center", lat: 23.741637827086095, lng: 90.37508581768606 },
 ];
+
+//23.739316132485936, 90.38226770352782
+//23.820008651572735, 90.4525850998742
+//23.741637827086095, 90.37508581768606
 
 export default function Map() {
   return (
@@ -31,7 +35,8 @@ export default function Map() {
           language: "en",
           region: "US",
         }}
-        defaultCenter={{ lat: 51.506, lng: -0.169 }}
+        //center 23.948376516259003, 90.37921708900197
+        defaultCenter={{ lat: 23.948376516259003, lng: 90.37921708900197 }}
         defaultZoom={15}
         distanceToMouse={distanceToMouse}
       >
