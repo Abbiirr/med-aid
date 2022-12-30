@@ -187,7 +187,7 @@ const CouncilHourUpdate = () => {
           headers: { authorization: token },
         }
       );
-      if (response.status === 204) {
+      if (response.status === 204 || response.status === 200) {
         setIsLoading(false);
         // responsestep(5);
         console.log("Is loading after setting false? : ", isLoading);
@@ -344,6 +344,7 @@ const CouncilHourUpdate = () => {
             <div className="col-12 text-right mt-3">
               <button
                 type="submit"
+                id="submit-btn"
                 className="btn shadow-none"
                 disabled={isLoading}
                 onClick={onSubmit}
