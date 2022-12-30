@@ -72,7 +72,7 @@ const Index = ({ show, doctor }) => {
         // header
       );
 
-      
+
 
       //don't touch this code block, please it might break :(
       console.log(response.data.requests[0].schedule);
@@ -322,9 +322,9 @@ const Index = ({ show, doctor }) => {
             <DateInput
               // onChange={handleValueChange1}
               handleValueChange={handleValueChange1}
-              placeholderText={"Get Appointment"}
+              placeholderText={"Select a Date"}
             ></DateInput>
-
+            <br />
             {/* <div className="col-12 col-lg-4">
               <select id="time-slot" className="form-control shadow-none">
                 <option value="saturday">Select Time Slot</option>

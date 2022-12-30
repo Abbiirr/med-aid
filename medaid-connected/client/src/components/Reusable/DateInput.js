@@ -55,7 +55,7 @@ const DateInput = ({ handleValueChange }) => {
         }}
         // onChange={(date) => handleValueChange(date.toString())}
         customInput={<CustomInput />}
-        placeholderText="Get Appointment"
+        placeholderText="Select a Date"
       />
       {/* <button onClick={() => console.log(value)}>Generate value</button> */}
     </div>
