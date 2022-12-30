@@ -20,10 +20,18 @@ const councilSchema = new Schema({
             type:String,
             trim:true,
             required:true
-        }
+        },
+        slots: [
+            {
+                type: String
+            }
+        ]
     }
 })
 
 
 const Council = model('Council' , councilSchema);
 module.exports = Council;
+
+
+// how to make slot array of appointment id
