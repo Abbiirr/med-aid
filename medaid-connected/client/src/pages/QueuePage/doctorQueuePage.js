@@ -15,7 +15,7 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import ListItemButton from "@mui/material/ListItemButton";
-import { apiURL } from "../../../../utils/apiURL";
+import { apiURL } from "../../utils/apiURL";
 import axios from "axios";
 
 function not(a, b) {
@@ -36,6 +36,7 @@ function Index() {
         // header
       );
       setRemainingTime(response.data);
+      console.log("remaining time is found ");
       console.log(response.data);
 
       if (response.status === 200 || response.status === 304) {
@@ -49,7 +50,7 @@ function Index() {
       }
     }
   };
-  getRemainingTime();
+
   const [checked, setChecked] = React.useState([]);
   const [left, setLeft] = React.useState([0, 1, 2, 3]);
   const [right, setRight] = React.useState([4, 5, 6, 7]);
@@ -71,6 +72,7 @@ function Index() {
   };
 
   const handleAllRight = () => {
+    getRemainingTime();
     setRight(right.concat(left));
     setLeft([]);
   };
