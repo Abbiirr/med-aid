@@ -153,7 +153,7 @@ const Index = ({ show, doctor }) => {
     setStartDate(newValue);
     const date2 = new Date(newValue);
     setDate(date2.getDate());
-    console.log("From DateInput inside show : " + date2.getDay());
+    console.log("From DateInput inside show : " + date2.getDate());
     // console.log("From DateInput inside show : " + newValue);
     document.getElementById("get-appointment").disabled = false;
   };
@@ -391,7 +391,7 @@ const Index = ({ show, doctor }) => {
       {showAppointment.status ? (
         <AppointmentModal
           doctor={showAppointment.doctorId}
-          schedule={(date, startTime)}
+          schedule={{ date, startTime }}
           hidemodal={() =>
             setShowAppointment({ status: false, doctorId: null })
           }

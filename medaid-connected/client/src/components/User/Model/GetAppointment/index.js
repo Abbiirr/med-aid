@@ -8,6 +8,7 @@ import { apiURL } from "../../../../utils/apiURL";
 import SuccessAppointment from "../Alert/SuccessAppointment/index";
 
 const GetAppointment = ({ hidemodal, doctor, schedule }) => {
+  console.log(schedule);
   const {
     register,
     handleSubmit,
