@@ -37,6 +37,8 @@ const Index = ({ show, doctor }) => {
   const [councilIDs, setCouncilIDs] = useState([]);
   const [date, setDate] = useState(null);
   const [startTime, setStartTime] = useState(null);
+  const [councilStartTime, setCouncilStartTime] = useState(null);
+  const [councilEndTime, setCouncilEndTime] = useState(null);
   let thisDoctor = {
     id: doctor._id,
     name: doctor.name,
@@ -207,14 +209,17 @@ const Index = ({ show, doctor }) => {
     return value;
   };
 
-  const createTimeOptions = (start) => {
-    const startT = convertTimeToNumber(start);
-    console.log("start time ", start)
-    for (var i = startT; i < 96 - 0; i++) {
+  const createTimeOptions = (start, end) => {
+    const startT = convertTimeToNumber(start) / 15;
+    const endT = Math.ceil(convertTimeToNumber(end) / 15);
+
+    console.log(endT);
+    // convertTimeToNumber(end);
+    for (var i = startT; i < 96 - endT + startT; i++) {
       var obj = {};
 
       var time = i * splitTime;
-      var [hour, minute] = [Math.floor(time / 60), time % 60];
+      var [hour, minute] = [Math.floor(time / 60), Math.ceil(time % 60)];
       var amOrPm = "AM";
 
       if (hour < 10) hour = "0" + hour;
@@ -234,7 +239,7 @@ const Index = ({ show, doctor }) => {
       options.push(obj);
     }
   };
-  createTimeOptions("00:00");
+  // createTimeOptions("00:00");
 
   function createData(day, startTime, endTime) {
     return { day, startTime, endTime };
@@ -245,6 +250,9 @@ const Index = ({ show, doctor }) => {
   const updateRows = () => {
     console.log("Updating rows");
     for (var i = 0; i < councilHours.length; i++) {
+      // setCouncilStartTime(councilHours[i].startTime);
+      // setCouncilEndTime(councilHours[i].endTime);
+      createTimeOptions(councilHours[i].startTime, councilHours[i].endTime);
       rows.push(
         createData(
           councilHours[i].day,
@@ -322,24 +330,6 @@ const Index = ({ show, doctor }) => {
               </select>
             </div> */}
 
-            <div className="col-12 col-lg-4">
-              <p>Start time</p>
-
-              <select
-                name="startTime"
-                id="start-time"
-                className="form-control shadow-none"
-                onChange={(e) => {
-                  setStartTime(e.target.value);
-                  console.log("Start time", startTime);
-                }}
-              >
-                {options.map(({ value, label }, index) => (
-                  <option value={value}>{label}</option>
-                ))}
-              </select>
-            </div>
-
             <button
               id="get-appointment"
               type="button"
@@ -384,6 +374,23 @@ const Index = ({ show, doctor }) => {
                 </TableBody>
               </Table>
             </TableContainer>
+          </div>
+          <div className="col-12 col-lg-4">
+            <p>Start time</p>
+
+            <select
+              name="startTime"
+              id="start-time"
+              className="form-control shadow-none"
+              onChange={(e) => {
+                setStartTime(e.target.value);
+                console.log("Start time", startTime);
+              }}
+            >
+              {options.map(({ value, label }, index) => (
+                <option value={value}>{label}</option>
+              ))}
+            </select>
           </div>
         </div>
       </div>

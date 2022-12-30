@@ -37,7 +37,8 @@ const GetAppointment = ({ hidemodal, doctor, schedule }) => {
       let appointmentData = data;
       appointmentData.doctorId = doctor;
       appointmentData.patientId = patient._id;
-      appointmentData.schedule = schedule;
+      appointmentData.schedule.day = schedule.date;
+      appointmentData.schedule.startTime = schedule.startTime;
       console.log("doctor id is" + doctor);
       console.log("doctor id is " + schedule);
 
