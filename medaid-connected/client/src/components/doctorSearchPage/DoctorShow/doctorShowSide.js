@@ -35,7 +35,7 @@ const Index = ({ show, doctor }) => {
   const [startDate, setStartDate] = useState(null);
   const [value, setValue] = useState(null);
   const [councilIDs, setCouncilIDs] = useState([]);
-  const [date, setDate] = useState(null);
+  const [day, setDay] = useState(null);
   const [startTime, setStartTime] = useState(null);
   const [councilStartTime, setCouncilStartTime] = useState(null);
   const [councilEndTime, setCouncilEndTime] = useState(null);
@@ -59,7 +59,7 @@ const Index = ({ show, doctor }) => {
   });
 
   //---fetching council time data
-  let day;
+  // let day;
   // let startTime;
   let endTime;
 
@@ -154,9 +154,9 @@ const Index = ({ show, doctor }) => {
   const handleValueChange1 = (newValue) => {
     setValue(newValue);
     setStartDate(newValue);
-    const date2 = new Date(newValue);
-    setDate(date2.getDate());
-    console.log("From DateInput inside show : " + date2.getDate());
+    const day2 = new Date(newValue);
+    setDay(day2.getDate());
+    console.log("From DateInput inside show : " + day2.getDate());
     // console.log("From DateInput inside show : " + newValue);
     document.getElementById("get-appointment").disabled = false;
   };
@@ -170,7 +170,7 @@ const Index = ({ show, doctor }) => {
         setShowAppointment({
           status: true,
           doctorId: id,
-          schedule: { date, startTime },
+          schedule: { day, startTime },
         });
       } else {
         setAuth({
@@ -247,8 +247,12 @@ const Index = ({ show, doctor }) => {
   }
 
   var rows = [];
+  var appSchedule = {
+    day: null,
+    startTime: null,
+  };
 
-  const updateRows = () => {
+  const updayRows = () => {
     console.log("Updating rows");
     for (var i = 0; i < councilHours.length; i++) {
       // setCouncilStartTime(councilHours[i].startTime);
@@ -345,7 +349,7 @@ const Index = ({ show, doctor }) => {
           {/* Schedule */}
           <div className="mt-3">
             <h6 className="mb-2">Councilling Schedule</h6>
-            {councilIDs.length > 0 ? updateRows() : null}
+            {councilIDs.length > 0 ? updayRows() : null}
             <TableContainer
               component={Paper}
               sx={{ marginBottom: 10 }}
@@ -397,10 +401,11 @@ const Index = ({ show, doctor }) => {
       </div>
 
       {/* Appointment Modal */}
+      {(appSchedule = { day, startTime }) ? console.log(appSchedule) : null}
       {showAppointment.status ? (
         <AppointmentModal
           doctor={showAppointment.doctorId}
-          schedule={{ date, startTime }}
+          schedule={appSchedule}
           hidemodal={() =>
             setShowAppointment({ status: false, doctorId: null })
           }

@@ -24,78 +24,21 @@ import FooterComponent from "../../components/User/Footer/index";
 //http://localhost:4000/api/v1/patient/findDoctors?symptoms=sneezing
 
 const Index = () => {
-  const [waitTime, setWaitTime] = useState(null);
-  //use a variable to store the search query
-  const [doctors, setDoctors] = useState([]);
+  const [waitTime, setWaitTime] = useState(20);
 
-  const [searchInput, setSearchInput] = useState("");
-
-  // const location = useLocation();
-  // const value = queryString.parse(location.search);
-  // const symptoms = value.symptoms;
-
-  const [token, setToken] = useState(
-    localStorage.getItem("token") || undefined
-  );
-  var role;
-  const checkRole = (token) => {
-    const decode = jwt_decode(token);
-    role = decode.role;
-    const id = decode.id;
-    localStorage.setItem("id", id);
-
-    // if (role === "super_admin" || role === "admin" || role === "manager") {
-    //   return history.push("/admin");
-    // }
-    // if (role === "doctor") {
-    //   return history.push("/doctor");
-    // }
-
-    // if (role === "patient") {
-    //   return history.push("/patient");
-    // }
-    //console.log(role);
-  };
-
-  if (token) {
-    checkRole(token);
+  useEffect(() => {}, []);
+  {
+    console.log("reload time");
   }
 
-  //console.log(symptoms)
+  setTimeout(function () {
+    setWaitTime(waitTime - 1);
+    // window.location.reload(1);
+    console.log("reloaded");
+  }, 1000);
 
-  let specialtyOptions = [];
-
-  useEffect(() => {
-    //search doctors
-    //console.log(symptoms);
-    const searchDoctors = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:4000/api/v1/doctor/getDoctors"
-        );
-        response.data.forEach(function (item) {
-          specialtyOptions.push({
-            label: item.specialist,
-            value: item.specialist,
-          });
-        });
-        console.log(specialtyOptions);
-        //console.log("All doctors: ", response.data);
-        setDoctors(response.data);
-        //console.log("All doctors from state : ", doctors);
-      } catch (error) {
-        if (error) console.log("error");
-      }
-    };
-    searchDoctors();
-  }, []);
-
-  let sortBy;
-  const handleChange = () => {
-    //load page
-  };
-
-  const submitSearch = () => {};
+  //   setWaitTime(20);
+  console.log(waitTime);
 
   return (
     <div>

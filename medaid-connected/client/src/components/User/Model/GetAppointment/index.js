@@ -8,7 +8,7 @@ import { apiURL } from "../../../../utils/apiURL";
 import SuccessAppointment from "../Alert/SuccessAppointment/index";
 
 const GetAppointment = ({ hidemodal, doctor, schedule }) => {
-  console.log(schedule);
+  console.log("schedule is" + schedule.day);
   const {
     register,
     handleSubmit,
@@ -35,12 +35,17 @@ const GetAppointment = ({ hidemodal, doctor, schedule }) => {
   const onSubmit = async (data) => {
     try {
       let appointmentData = data;
+      await console.log("appointmet data is" + appointmentData);
+      await console.log(appointmentData);
       appointmentData.doctorId = doctor;
       appointmentData.patientId = patient._id;
-      appointmentData.schedule.day = schedule.date;
-      appointmentData.schedule.startTime = schedule.startTime;
-      console.log("doctor id is" + doctor);
+
+      // appointmentData.schedule.startTime = schedule.startTime;
+
       console.log("doctor id is " + schedule);
+      var dayD = schedule.day.toString();
+      console.log(typeof dayD);
+      // appointmentData.schedule.day = "10-19-2022";
 
       setLoading(true);
       console.log(data);

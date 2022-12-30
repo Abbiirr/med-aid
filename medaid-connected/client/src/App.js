@@ -23,6 +23,7 @@ import Appointments from "./pages/Appointments/appointmentPage";
 
 import Prescription from "./components/Prescription/prescriptionForm";
 import DynamicQueue from "./pages/QueuePage/queuePage";
+import DoctorDynamicQueue from "./pages/QueuePage/doctorQueuePage";
 
 // //Account
 import DoctorAccountMaster from "./pages/Account/Doctor/Master/index";
@@ -55,6 +56,11 @@ function App() {
             <Route exact path="/prescription" component={Prescription} />
             <Route exact path="/map" component={MapPage} />
             <Route exact path="/dynamicQueue" component={DynamicQueue} />
+            <Route
+              exact
+              path="/doctorDynamicQueue"
+              component={DoctorDynamicQueue}
+            />
 
             {/* Doctor Master */}
             <PrivateRoute path="/doctor" role="doctor">
