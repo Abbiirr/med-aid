@@ -31,6 +31,8 @@ const diseaseRoute = require("./api/routes/disease");
 const prescriptionRoute = require("./api/routes/prescription");
 const diagnosticCenterRoute = require("./api/routes/diagnosticCenter");
 const councilsRoute = require("./api/routes/councilHourRoutes");
+const queueRoute = require("./api/routes/queue");
+const remainingTimeRoute = require("./api/routes/remainingTime");
 
 // API URL's
 app.use("/api/v1/auth", authRoute);
@@ -43,6 +45,8 @@ app.use("/api/v1/disease", diseaseRoute);
 app.use("/api/v1/prescription", prescriptionRoute);
 app.use("/api/v1/diagnosticCenter", diagnosticCenterRoute);
 app.use("/api/v1/councils", councilsRoute);
+app.use("/api/v1/queue", queueRoute);
+app.use("/api/v1/time", remainingTimeRoute)
 
 app.get("/", (req, res) => {
   res.send("Hello I am node.js application");
