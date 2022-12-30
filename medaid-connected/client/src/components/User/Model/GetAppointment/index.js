@@ -7,7 +7,7 @@ import { ic_clear } from "react-icons-kit/md";
 import { apiURL } from "../../../../utils/apiURL";
 import SuccessAppointment from "../Alert/SuccessAppointment/index";
 
-const GetAppointment = ({ hidemodal, doctor }) => {
+const GetAppointment = ({ hidemodal, doctor, schedule }) => {
   const {
     register,
     handleSubmit,
@@ -36,9 +36,12 @@ const GetAppointment = ({ hidemodal, doctor }) => {
       let appointmentData = data;
       appointmentData.doctorId = doctor;
       appointmentData.patientId = patient._id;
+      appointmentData.schedule = schedule;
       console.log("doctor id is" + doctor);
+      console.log("doctor id is " + schedule);
 
       setLoading(true);
+      console.log(data);
       const response = await axios.post(
         `${apiURL}/patient/appointment/request`,
         appointmentData,

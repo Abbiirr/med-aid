@@ -35,6 +35,8 @@ const Index = ({ show, doctor }) => {
   const [startDate, setStartDate] = useState(null);
   const [value, setValue] = useState(null);
   const [councilIDs, setCouncilIDs] = useState([]);
+  const [date, setDate] = useState(null);
+  const [startTime, setStartTime] = useState(null);
   let thisDoctor = {
     id: doctor._id,
     name: doctor.name,
@@ -51,11 +53,12 @@ const Index = ({ show, doctor }) => {
   const [showAppointment, setShowAppointment] = useState({
     status: false,
     doctorId: null,
+    schedule: null,
   });
 
   //---fetching council time data
   let day;
-  let startTime;
+  // let startTime;
   let endTime;
 
   //----------------------------------------------------------------
@@ -145,13 +148,27 @@ const Index = ({ show, doctor }) => {
 
   //------------ this portion is confusing-----
 
+  const handleValueChange1 = (newValue) => {
+    setValue(newValue);
+    setStartDate(newValue);
+    const date2 = new Date(newValue);
+    setDate(date2.getDate());
+    console.log("From DateInput inside show : " + date2.getDay());
+    // console.log("From DateInput inside show : " + newValue);
+    document.getElementById("get-appointment").disabled = false;
+  };
+
   // Handle appointment
   const handleAppointment = () => {
     if (token) {
       const patient = checkRole(token);
       if (patient) {
         console.log(id);
-        setShowAppointment({ status: true, doctorId: id });
+        setShowAppointment({
+          status: true,
+          doctorId: id,
+          schedule: { date, startTime },
+        });
       } else {
         setAuth({
           message:
@@ -217,15 +234,6 @@ const Index = ({ show, doctor }) => {
     }
   };
   createTimeOptions("00:00");
-
-  const handleValueChange1 = (newValue) => {
-    setValue(newValue);
-    setStartDate(newValue);
-    const date2 = new Date(newValue);
-    console.log("From DateInput inside show : " + date2.getDay());
-    // console.log("From DateInput inside show : " + newValue);
-    document.getElementById("get-appointment").disabled = false;
-  };
 
   function createData(day, startTime, endTime) {
     return { day, startTime, endTime };
@@ -320,6 +328,10 @@ const Index = ({ show, doctor }) => {
                 name="startTime"
                 id="start-time"
                 className="form-control shadow-none"
+                onChange={(e) => {
+                  setStartTime(e.target.value);
+                  console.log("Start time", startTime);
+                }}
               >
                 {options.map(({ value, label }, index) => (
                   <option value={value}>{label}</option>
@@ -379,6 +391,7 @@ const Index = ({ show, doctor }) => {
       {showAppointment.status ? (
         <AppointmentModal
           doctor={showAppointment.doctorId}
+          schedule={(date, startTime)}
           hidemodal={() =>
             setShowAppointment({ status: false, doctorId: null })
           }
