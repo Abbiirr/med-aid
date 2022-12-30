@@ -69,9 +69,10 @@ const Index = ({ show, doctor }) => {
     try {
       const response = await axios.get(
         `${apiURL}/doctor/councils/${councilHourID}`
-
         // header
       );
+
+      
 
       //don't touch this code block, please it might break :(
       console.log(response.data.requests[0].schedule);

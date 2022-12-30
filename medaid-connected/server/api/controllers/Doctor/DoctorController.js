@@ -53,7 +53,7 @@ const Me = async (req, res, next) => {
 const updateCouncils = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { day, startTime, endTime } = req.body;
+    const { day, startTime, endTime, slots } = req.body;
 
     await CheckId(id);
 
@@ -65,9 +65,10 @@ const updateCouncils = async (req, res, next) => {
         message: "Doctor not found",
       });
     }
+    
     const newCouncil = new Council({
       doctor: doctor._id,
-      schedule: { day: day, startTime: startTime, endTime: endTime },
+      schedule: { day: day, startTime: startTime, endTime: endTime, slots: slots },
     });
 
     let council = await newCouncil.save();
