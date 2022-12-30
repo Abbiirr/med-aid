@@ -36,6 +36,12 @@ export const SidebarData = [
     cName: "nav-text",
   },
   {
+    title: "Map",
+    path: "/map",
+    icon: <AiIcons.AiOutlineSchedule />,
+    cName: "nav-text",
+  },
+  {
     title: "Settings",
     path: "/settings",
     icon: <AiIcons.AiFillSetting />,
