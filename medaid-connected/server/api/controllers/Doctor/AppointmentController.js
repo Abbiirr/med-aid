@@ -27,6 +27,7 @@ const AppointmentRequests = async (req, res, next) => {
     }
 }
 
+
 // Already approved Appointments
 const ApprovedAppointments = async (req, res, next) => {
     try {

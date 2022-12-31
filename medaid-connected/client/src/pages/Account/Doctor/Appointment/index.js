@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import "./style.scss";
 import axios from "axios";
 import { apiURL } from "../../../../utils/apiURL";
+import PrescriptionComponent from "../../../../components/Prescription/prescriptionForm"
 
 import DataLoader from "../../../../components/DataLoader/index";
 
@@ -90,7 +91,11 @@ const Index = () => {
                     </button>
                   </div>
                   <div className="ml-auto">
-                    <button type="button" className="btn shadow-sm">
+                    <button
+                      type="button"
+                      className="btn shadow-sm"
+                      onClick={() => <PrescriptionComponent />}
+                    >
                       Give Prescription
                     </button>
                   </div>
