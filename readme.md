@@ -16,7 +16,9 @@
 
 - Search for doctors based on your symptoms
 - Search for medicines, diagnostic tests, alternative medicine
-- 
+- Live patient queue Monitoring
+- Taking appointments
+- Location of diagnostic centers (MAP API)
 
 ## To run
 
@@ -43,6 +45,4 @@ and in both shells type
 - ExpressJS
 > Database
 - MongoDB
-> Testing
-- Jest
 
